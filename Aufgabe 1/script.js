@@ -1,6 +1,6 @@
 "use strict";
-var randompoem;
-(function (randompoem) {
+var GameOfThronesPoem;
+(function (GameOfThronesPoem) {
     let noun = ["Daenerys Targaryen ", "Jon Snow ", "Arya Stark ", "Sansa Stark ", "Eddard Stark ", "Joffrey Baratheon "];
     let verb = ["kauft", "benutzt", "vergisst", "sucht", "liebt", "hasst"];
     let object = [" Schwerter", " Tröne", " Riesen", " Kronen", " Kriege", " Drachen"];
@@ -18,5 +18,5 @@ var randompoem;
         _object.splice(randomNumberobject, 1);
         return satzbau;
     }
-})(randompoem || (randompoem = {}));
+})(GameOfThronesPoem || (GameOfThronesPoem = {}));
 //# sourceMappingURL=script.js.map

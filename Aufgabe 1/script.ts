@@ -1,4 +1,4 @@
-namespace randompoem {
+namespace GameOfThronesPoem {
 let noun: string [] = ["Daenerys Targaryen ", "Jon Snow ", "Arya Stark ", "Sansa Stark ", "Eddard Stark ", "Joffrey Baratheon "];
 let verb: string [] = ["kauft", "benutzt", "vergisst", "sucht", "liebt", "hasst"];
 let object: string [] = [" Schwerter", " Tröne", " Riesen", " Kronen", " Kriege", " Drachen"];
