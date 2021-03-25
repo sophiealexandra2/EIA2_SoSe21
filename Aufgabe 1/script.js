@@ -1,35 +1,23 @@
 "use strict";
 var randompoem;
 (function (randompoem) {
-    let n = ["Daenerys Targaryen ", "Jon Snow ", "Arya Stark ", "Sansa Stark ", "Eddard Stark ", "Joffrey Baratheon "];
-    let v = ["kauft ", "benutzt ", "vergisst ", "sucht ", "liebt ", "hasst "];
-    let o = ["Schwerter ", "Tröne ", "Familie Baratheon ", "Kronen ", "Kriege ", "Drachen "];
+    let noun = ["Daenerys Targaryen ", "Jon Snow ", "Arya Stark ", "Sansa Stark ", "Eddard Stark ", "Joffrey Baratheon "];
+    let verb = ["kauft", "benutzt", "vergisst", "sucht", "liebt", "hasst"];
+    let object = [" Schwerter", " Tröne", " Riesen", " Kronen", " Kriege", " Drachen"];
     //console.log(n);
-    for (let a = Array.length; a >= 0; a--) {
-        let x = getVerse(n, v, o);
-        console.log(x);
+    for (let i = 6; i >= 1; i--) {
+        let finalsentence = getVerse(noun, verb, object);
+        console.log(finalsentence);
     }
-    function getVerse(_n, _v, _o) {
-        let satzbau = "";
-        let randomNrn = Math.floor(Math.random() * Math.floor(_n.length));
-        _n.splice(randomNrn, 1);
-        let randomNrv = Math.floor(Math.random() * Math.floor(_v.length));
-        _n.splice(randomNrv, 1);
-        let randomNro = Math.floor(Math.random() * Math.floor(_o.length));
-        _o.splice(randomNro, 1);
-        satzbau = _n[randomNrn] + _v[randomNrv] + _o[randomNro];
+    function getVerse(_noun, _verb, _object) {
+        let randomNumbernoun = Math.floor(Math.random() * _noun.length);
+        let randomNumberverb = Math.floor(Math.random() * _noun.length);
+        let randomNumberobject = Math.floor(Math.random() * _noun.length);
+        let satzbau = _noun[randomNumbernoun] + _verb[randomNumberverb] + _object[randomNumberobject];
+        _noun.splice(randomNumbernoun, 1);
+        _verb.splice(randomNumberverb, 1);
+        _object.splice(randomNumberobject, 1);
         return satzbau;
     }
 })(randompoem || (randompoem = {}));
-//
-//namespace Cows {
-//let nums: number[] = [2, 6, 5];
-//let results: string[] = [];
-//for (let i: number = 0; i < nums.length; i++) {
-//let result: string = createCall("m", nums[i]);
-//results.push(result);
-//}
-//console.log(randomNrn;
-//   _Array1.splice(_Array1.indexOf());
-//   return "Alohomora";
 //# sourceMappingURL=script.js.map
