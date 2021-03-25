@@ -1,33 +1,33 @@
+namespace randompoem {
+let n: string [] = ["Daenerys Targaryen ", "Jon Snow ", "Arya Stark ", "Sansa Stark ", "Eddard Stark ", "Joffrey Baratheon "];
+let v: string [] = ["kauft ", "benutzt ", "vergisst ", "sucht ", "liebt ", "hasst "];
+let o: string [] = ["Schwerter ", "Tröne ", "Familie Baratheon ", "Kronen ", "Kriege ", "Drachen "];
 
-let namen: string [] = ["Harry", "Hermine", "Hagrid", "Ron", "Name5", "Name6"];
-let verben: string [] = ["zaubert", "läuft", "braut", "Name4", "Name5", "Name6"];
-let objekte: string [] = ["Name1", "läuft", "braut", "Name4", "Name5", "Name6"];
+//console.log(n);
 
-//console.log(namen);
-
-
-
-
-function schleife (_arrayname: string[]) {
-    for (let i: number = _arrayname.length; i >= 1; i--)
-{
-//console.log(i);
-getVerse(namen, verben, objekte);
-//console.log(getVerse([], [], []));
-}}
-schleife (namen);
+for (let a: number = Array.length ; a >= 0; a--) {
+    let x: string = getVerse(n, v, o);
+    console.log(x);
+}
 
 
 
-function getVerse (_Array1: string[], _Array2: string[], _Array3: string[]): string {
+function getVerse (_n: string[], _v: string[], _o: string[]): string {
     let satzbau: string = "";
-    let randomNumber: number = Math.floor (Math.random() * _Array1.length);
-    console.log(randomNumber);
-    _Array1.splice(_Array1.indexOf());
 
+    let randomNrn: number = Math.floor(Math.random() * Math.floor(_n.length));
+    _n.splice(randomNrn, 1);
 
+    let randomNrv: number = Math.floor(Math.random() * Math.floor(_v.length));
+    _n.splice(randomNrv, 1);
 
-    return "Alohomora";
+    let randomNro: number = Math.floor(Math.random() * Math.floor(_o.length));
+    _o.splice(randomNro, 1);
+    satzbau = _n[randomNrn] + _v[randomNrv] + _o[randomNro];
+
+    return satzbau;
+
+}   
 }
 
 
@@ -40,3 +40,9 @@ function getVerse (_Array1: string[], _Array2: string[], _Array3: string[]): str
 //let result: string = createCall("m", nums[i]);
 //results.push(result);
 //}
+//console.log(randomNrn;
+ //   _Array1.splice(_Array1.indexOf());
+
+
+
+ //   return "Alohomora";

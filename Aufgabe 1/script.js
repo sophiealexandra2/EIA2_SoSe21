@@ -1,23 +1,26 @@
 "use strict";
-let namen = ["Harry", "Hermine", "Hagrid", "Ron", "Name5", "Name6"];
-let verben = ["zaubert", "läuft", "braut", "Name4", "Name5", "Name6"];
-let objekte = ["Name1", "läuft", "braut", "Name4", "Name5", "Name6"];
-//console.log(namen);
-function schleife(_arrayname) {
-    for (let i = _arrayname.length; i >= 1; i--) {
-        //console.log(i);
-        getVerse(namen, verben, objekte);
-        //console.log(getVerse([], [], []));
+var randompoem;
+(function (randompoem) {
+    let n = ["Daenerys Targaryen ", "Jon Snow ", "Arya Stark ", "Sansa Stark ", "Eddard Stark ", "Joffrey Baratheon "];
+    let v = ["kauft ", "benutzt ", "vergisst ", "sucht ", "liebt ", "hasst "];
+    let o = ["Schwerter ", "Tröne ", "Familie Baratheon ", "Kronen ", "Kriege ", "Drachen "];
+    //console.log(n);
+    for (let a = Array.length; a >= 0; a--) {
+        let x = getVerse(n, v, o);
+        console.log(x);
     }
-}
-schleife(namen);
-function getVerse(_Array1, _Array2, _Array3) {
-    let satzbau = "";
-    let randomNumber = Math.floor(Math.random() * _Array1.length);
-    console.log(randomNumber);
-    _Array1.splice(_Array1.indexOf());
-    return "Alohomora";
-}
+    function getVerse(_n, _v, _o) {
+        let satzbau = "";
+        let randomNrn = Math.floor(Math.random() * Math.floor(_n.length));
+        _n.splice(randomNrn, 1);
+        let randomNrv = Math.floor(Math.random() * Math.floor(_v.length));
+        _n.splice(randomNrv, 1);
+        let randomNro = Math.floor(Math.random() * Math.floor(_o.length));
+        _o.splice(randomNro, 1);
+        satzbau = _n[randomNrn] + _v[randomNrv] + _o[randomNro];
+        return satzbau;
+    }
+})(randompoem || (randompoem = {}));
 //
 //namespace Cows {
 //let nums: number[] = [2, 6, 5];
@@ -26,4 +29,7 @@ function getVerse(_Array1, _Array2, _Array3) {
 //let result: string = createCall("m", nums[i]);
 //results.push(result);
 //}
+//console.log(randomNrn;
+//   _Array1.splice(_Array1.indexOf());
+//   return "Alohomora";
 //# sourceMappingURL=script.js.map
