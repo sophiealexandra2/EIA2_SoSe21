@@ -1,0 +1,37 @@
+span {
+    position: fixed;
+    height: 100px;
+    width: 200px;
+    border: thick solid black;
+    background-color: rgb(151, 151, 151);
+
+}
+.div0 {
+    left: 100px;
+    border: thick solid black;
+    position: absolute;
+    height: 550px;
+    width: 500px;
+}
+
+button {
+left: 640px;
+position: fixed;
+
+
+
+}
+.div1 {
+    left: 900px;
+    border: thick solid black;
+    position: absolute;
+    height: 550px;
+    width: 500px;
+}
+
+h1 {
+    border-style: solid;
+    border: black;
+    left: 635px;
+    position: relative;
+}
