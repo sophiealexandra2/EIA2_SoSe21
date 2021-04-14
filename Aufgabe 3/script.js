@@ -3,10 +3,12 @@ var Events;
 (function (Events) {
     window.addEventListener("load", handleLoad);
     function handleLoad(_event) {
-        let body = document.querySelector("body");
-        body.addEventListener("mousemove", setInfoBox);
-        body.addEventListener("click", logInfo);
-        body.addEventListener("keyup", logInfo);
+        document.addEventListener("mousemove", setInfoBox);
+        document.addEventListener("click", logInfo);
+        document.addEventListener("keyup", logInfo);
+        document.body.addEventListener("click", logInfo);
+        document.addEventListener("click", setInfoBox);
+        document.body.addEventListener("keyup", logInfo);
     }
     function setInfoBox(_event) {
         let x = _event.clientX;
@@ -19,8 +21,7 @@ var Events;
     }
     //Button leider nicht hinbekommen...
     function button(_event) {
-        let button = document.querySelector("button");
-        document.getElementsByName("button");
+        document.querySelector("button");
         addEventListener("click", logInfo);
         console.log("Du hast den Button geklickt");
     }

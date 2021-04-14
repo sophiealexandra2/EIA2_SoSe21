@@ -3,10 +3,14 @@ namespace Events {
     
     function handleLoad(_event: Event): void {
     
-        let body: HTMLElement = <HTMLElement>document.querySelector("body");
-        body.addEventListener("mousemove", setInfoBox);
-        body.addEventListener("click", logInfo);
-        body.addEventListener("keyup", logInfo);
+        document.addEventListener("mousemove", setInfoBox);
+        document.addEventListener("click", logInfo);
+
+        document.addEventListener("keyup", logInfo);
+        document.body.addEventListener("click", logInfo);
+
+        document.addEventListener("click", setInfoBox);
+        document.body.addEventListener("keyup", logInfo);
     }
     
     function setInfoBox(_event: MouseEvent): void {
@@ -23,8 +27,7 @@ namespace Events {
     }
 //Button leider nicht hinbekommen...
     function button (_event: Event): void {
-        let button: InnerHTML = <HTMLElement>document.querySelector("button");
-        document.getElementsByName("button");
+        document.querySelector("button");
         addEventListener("click", logInfo);
         console.log("Du hast den Button geklickt");
         
