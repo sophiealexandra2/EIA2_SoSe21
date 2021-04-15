@@ -2,41 +2,28 @@ namespace Events {
     window.addEventListener("load", handleLoad);
     
     function handleLoad(_event: Event): void {
-    
-        document.addEventListener("mousemove", setInfoBox);
-        document.addEventListener("click", logInfo);
-
-        document.addEventListener("keyup", logInfo);
-        document.body.addEventListener("click", logInfo);
-
-        document.addEventListener("click", setInfoBox);
-        document.body.addEventListener("keyup", logInfo);
+        let body: HTMLElement = <HTMLElement>document.querySelector("body");
+        body.addEventListener("mousemove", setInfoBox);
+        body.addEventListener("click", logInfo);
+        body.addEventListener("keyup", logInfo);
     }
     
     function setInfoBox(_event: MouseEvent): void {
-    let x: number = _event.clientX;
-    let y: number = _event.clientY;
-    let body: HTMLElement = <HTMLElement>_event.target;
-    let mouseCursorSpan: HTMLSpanElement = <HTMLElement>document.querySelector("span");
+    let x: number = _event.offsetX;
+    let y: number = _event.offsetY;
     
-
-    mouseCursorSpan.style.left = x + "px";
-    mouseCursorSpan.style.top = y + "px";
-    body.appendChild(mouseCursorSpan);
-
+    let body: HTMLElement = <HTMLElement>_event.target;
+    let span: HTMLSpanElement = <HTMLElement>document.querySelector("span");
+    body.appendChild(span);
+    span.style.left = x + "px";
+    span.style.top = y + "px";
     }
-//Button leider nicht hinbekommen...
-    function button (_event: Event): void {
-        document.querySelector("button");
-        addEventListener("click", logInfo);
-        console.log("Du hast den Button geklickt");
-        
-    }
+    
     function logInfo(_event: Event): void {
-        console.log(_event.type);
-        console.log(_event.target);
-        console.log(_event.currentTarget);
-        console.log(_event.composedPath());
-        console.log(_event.eventPhase);
-        
-    }}
+        console.log("Event started: " + _event.type);
+        console.log("Target: " + _event.target);
+        console.log("Current Target: " + _event.currentTarget);
+        console.log("Eventphase = " + _event.eventPhase);
+        console.log("Path: " + _event.composedPath());
+        }
+    }
