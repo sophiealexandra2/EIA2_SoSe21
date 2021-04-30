@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to: Memory Game</title>
+    <script src="../Memory Umsetzung/script.js" defer></script>
+    <link type="text/css" rel="stylesheet" href="../Memory Umsetzung/styles.css">
+
+    
+</head>
+<div id="Restart">
+
+    <img src="../Memory Umsetzung/assets/refresh.png" alt="Refresh Button">
+</div>
+
+<body>
+    
+    <section id="game">
+        <h2>Willkommen zu deinem Memory Game! <br> Bitte wähle deine gewünschten Einstellung für dein Memory Game</h2>
+        <div id="playerbox"></div>
+    </section>
+
+    <form>
+        <fieldset class="formular visible">
+			<legend> </legend> 
+			Wähle deine Kartenanzahl
+			<input class="stepper" type="number" name="Stepper" step="1" min="5" max="25" value="5" />
+			<hr />
+			Wähle deine Kartengröße
+			<input class="slider" type="range" name="Slider" min="100" max="200" step="10" value="100">
+			<hr />
+			Wähle deine Hintergrund-Farbe für dein Spiel
+			<input class="backgroundColor" type="color" name="BGColor" placeholder="red" id="bGcolor" value="#ff1088">
+			<hr />
+			Wähle die Farbe für deine Karten-Rückseite (bedeckt)
+			<input class="backsideColor" type="color" name="BSColor" placeholder="red" id="bScolor" value="#ff5220">
+			<hr />
+			Wähle deine Schriftfarbe
+			<input class="fontColor" type="color" name="FColor" placeholder="red" id="font-color" value="#000000">
+			<hr />
+            Wähle deine Schrift-Art			
+            <input type="radio" name="Radiogroup" value="'Helvetica'" id="radio1" />
+			<label for="radio1">Helvetica</label>
+			<input type="radio" name="Radiogroup" value="'Arial'" id="radio2" />
+			<label for="radio2">Arial</label>
+			<input type="radio" name="Radiogroup" value="'Times New Roman', Times, serif" id="radio3" />
+			<label for="radio3">Times New Roman</label>
+			<hr />
+			<button type="button" class="start">Los geht's!</button>
+		</fieldset>
+		</form>
+
+</body>
+</html>
