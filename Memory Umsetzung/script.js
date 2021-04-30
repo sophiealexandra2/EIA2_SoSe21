@@ -19,7 +19,8 @@ var Aufgabe3_MemorySettings;
     let cardsOpenArray = [];
     let checkRest = [];
     let formData;
-    let size;
+    let sizeofCards;
+    //Wert wird anscheinend nicht gelesen aber Memory funktioniert? Also Schriftfarbe etc. wird gelesen und verändert sich...
     let backgroundColor;
     let backsideColor;
     let fontColor;
@@ -36,8 +37,8 @@ var Aufgabe3_MemorySettings;
         cardArray.push(card);
         checkRest.push(card);
         card.addEventListener("click", handleLoad);
-        card.style.width = size + "px";
-        card.style.height = size + "px";
+        card.style.width = sizeofCards + "px";
+        card.style.height = sizeofCards + "px";
         if (backgroundColor) {
             card.style.backgroundColor = backgroundColor.toString();
         }
@@ -112,7 +113,7 @@ var Aufgabe3_MemorySettings;
         let form = document.querySelector(".formular");
         form.style.visibility = "hidden";
         formData = new FormData(document.forms[0]);
-        size = Number(formData.get("Slider"));
+        sizeofCards = Number(formData.get("Slider"));
         backgroundColor = formData.get("BGColor");
         backsideColor = formData.get("BSColor");
         fontColor = formData.get("FColor");

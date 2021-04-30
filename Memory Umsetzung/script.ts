@@ -9,7 +9,7 @@ namespace Aufgabe3_MemorySettings {
         let startMemory: HTMLElement = <HTMLElement>document.querySelector(".start");
         startMemory.addEventListener("click", createGame);
     }
-        //Variablen deklarieren
+     //Variablen deklarieren
     let numberofPairs: number;
     let cardContent: string[] = ["Typescript", "Javascript", "Variablen", "Objekte", "Interface", "DOM", "CSS", "DIV", "ID's", "For-Schleife", "If Else Schleife", "Footer", "C++", "H1", "H2", "GetElement byID", "Splice", "AppendChild", "Global", "Lokal", "Debugger", "Console", "HTML", "Node.js", "Visual Studio Code"];
     let cardArray: HTMLElement[] = [];
@@ -17,11 +17,13 @@ namespace Aufgabe3_MemorySettings {
     let cardsOpenArray: HTMLElement[] = [];
     let checkRest: HTMLElement[] = [];
     let formData: FormData;
-    let size: number;
-    let backgroundColor: FormDataEntryValue | null; 
-    let backsideColor: FormDataEntryValue | null;
-    let fontColor: FormDataEntryValue | null;
-    let fontFamily: FormDataEntryValue | null;
+    let sizeofCards: number;
+
+    //Wert wird anscheinend nicht gelesen aber Memory funktioniert? Also Schriftfarbe etc. wird gelesen und verändert sich...
+    let backgroundColor: FormDataEntryValue; 
+    let backsideColor: FormDataEntryValue;
+    let fontColor: FormDataEntryValue;
+    let fontFamily: FormDataEntryValue;
        
     let gewinner: HTMLElement = document.createElement("h3"); //Variable um die Gewinner Message zu realisieren, kreiere hier auch direkt dann eine Überschrift
     gewinner.id = "gewinner";
@@ -39,8 +41,8 @@ namespace Aufgabe3_MemorySettings {
             cardArray.push(card);
             checkRest.push(card);
             card.addEventListener("click", handleLoad);
-            card.style.width = size + "px";
-            card.style.height = size + "px";
+            card.style.width = sizeofCards + "px";
+            card.style.height = sizeofCards + "px";
             if (backgroundColor) { 
             card.style.backgroundColor = backgroundColor.toString();
             }
@@ -118,7 +120,7 @@ namespace Aufgabe3_MemorySettings {
             form.style.visibility = "hidden";
 
             formData = new FormData(document.forms[0]); 
-            size = Number(formData.get("Slider")); 
+            sizeofCards = Number(formData.get("Slider")); 
             backgroundColor = formData.get("BGColor"); 
             backsideColor = formData.get("BSColor"); 
             fontColor = formData.get("FColor"); 
