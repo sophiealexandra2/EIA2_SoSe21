@@ -15,11 +15,11 @@ var Aufgabe3_MemorySettings;
     let numberofPairs;
     let cardContent = ["Typescript", "Javascript", "Variablen", "Objekte", "Interface", "DOM", "CSS", "DIV", "ID's", "For-Schleife", "If Else Schleife", "Footer", "C++", "H1", "H2", "GetElement byID", "Splice", "AppendChild", "Global", "Lokal", "Debugger", "Console", "HTML", "Node.js", "Visual Studio Code"];
     let cardArray = [];
-    let cardsOpen = 0;
-    let cardsOpenArray = [];
     let checkRest = [];
     let formData;
     let sizeofCards;
+    let cardsOpen = 0;
+    let cardsOpenArray = [];
     //Wert wird anscheinend nicht gelesen aber Memory funktioniert? Also Schriftfarbe etc. wird gelesen und verändert sich...
     let backgroundColor;
     let backsideColor;

@@ -14,11 +14,12 @@ namespace Aufgabe3_MemorySettings {
     let numberofPairs: number;
     let cardContent: string[] = ["Typescript", "Javascript", "Variablen", "Objekte", "Interface", "DOM", "CSS", "DIV", "ID's", "For-Schleife", "If Else Schleife", "Footer", "C++", "H1", "H2", "GetElement byID", "Splice", "AppendChild", "Global", "Lokal", "Debugger", "Console", "HTML", "Node.js", "Visual Studio Code"];
     let cardArray: HTMLElement[] = [];
-    let cardsOpen: number = 0;
-    let cardsOpenArray: HTMLElement[] = [];
+
     let checkRest: HTMLElement[] = [];
     let formData: FormData;
     let sizeofCards: number;
+    let cardsOpen: number = 0;
+    let cardsOpenArray: HTMLElement[] = [];
 
     //Wert wird anscheinend nicht gelesen aber Memory funktioniert? Also Schriftfarbe etc. wird gelesen und verändert sich...
     let backgroundColor: FormDataEntryValue; 
