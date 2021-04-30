@@ -90,6 +90,7 @@ var Aufgabe3_MemorySettings;
         cardsOpen = 0;
         checkWin();
     }
+    //Gewinner Funktion wird erst sichtbar, wenn checkRest==0 ist 
     function checkWin() {
         if (checkRest.length == 0) {
             setTimeout(function () {
@@ -109,6 +110,7 @@ var Aufgabe3_MemorySettings;
         }
         return _array;
     }
+    //Gameboard wird kreiert, FormElement verschwindet (hidden), 2 Karten werden herausgesucht und amountofCards geshuffled
     function createGame(_event) {
         let form = document.querySelector(".formular");
         form.style.visibility = "hidden";

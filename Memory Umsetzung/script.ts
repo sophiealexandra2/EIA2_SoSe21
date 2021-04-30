@@ -1,4 +1,5 @@
 namespace Aufgabe3_MemorySettings {
+
     //Reload Button
     document.getElementById("Restart").addEventListener("click", function (): void {
         location.reload();
@@ -93,7 +94,7 @@ namespace Aufgabe3_MemorySettings {
             cardsOpen = 0;
             checkWin();
         }
-    
+    //Gewinner Funktion wird erst sichtbar, wenn checkRest==0 ist 
     function checkWin(): void {
             if (checkRest.length == 0) {
                 setTimeout(function(): void {
@@ -113,7 +114,7 @@ namespace Aufgabe3_MemorySettings {
             }
             return _array;
         }
-    
+    //Gameboard wird kreiert, FormElement verschwindet (hidden), 2 Karten werden herausgesucht und amountofCards geshuffled
     function createGame(_event: Event): void {
     
             let form: HTMLFormElement = <HTMLFormElement>document.querySelector(".formular");
@@ -126,7 +127,7 @@ namespace Aufgabe3_MemorySettings {
             fontColor = formData.get("FColor"); 
             fontFamily = formData.get("radio"); 
     
-            let pairOfCards: FormDataEntryValue | null = formData.get("Stepper"); 
+            let pairOfCards: FormDataEntryValue = formData.get("Stepper"); 
             if (pairOfCards) {
             numberofPairs = Number(pairOfCards);
             }
