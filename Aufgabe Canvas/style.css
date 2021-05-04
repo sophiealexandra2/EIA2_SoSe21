@@ -1,16 +1,13 @@
 #canvas {
 border: 5px solid black;
 background-size: 100%;
-
-
-
-
-
+left: 200px;
 }
 
 body {
 background-color: lightcyan;
-
+width: 1000px;
+height:1000px;
 
 
 
@@ -18,7 +15,8 @@ background-color: lightcyan;
 
 h1 {
 
-align-self: center;
+left: 130px;
+top: 50px;
 
 
 }
