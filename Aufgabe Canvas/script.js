@@ -11,7 +11,7 @@ function draw() {
     let ctx = canvas.getContext("2d");
     //color of the circles
     ctx.fillStyle = "lightblue";
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 40; i++) {
         //randomized X and Y positions
         let x = Math.random() * 500;
         let y = Math.random() * 500;

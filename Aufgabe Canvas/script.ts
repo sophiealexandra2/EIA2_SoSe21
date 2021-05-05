@@ -13,7 +13,7 @@ let ctx: CanvasRenderingContext2D = canvas.getContext("2d");
 //color of the circles
 ctx.fillStyle = "lightblue";
 
-for (let i: number = 0; i < 20; i++) { 
+for (let i: number = 0; i < 40; i++) { 
 //randomized X and Y positions
 let x: number = Math.random() * 500;
 let y: number = Math.random() * 500;
