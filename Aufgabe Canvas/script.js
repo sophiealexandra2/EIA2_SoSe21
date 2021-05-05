@@ -9,18 +9,21 @@ document.querySelector("refresh").addEventListener("click", function draw() {
 function draw() {
     let canvas = document.querySelector("canvas");
     let ctx = canvas.getContext("2d");
-    //color of the circles
-    ctx.fillStyle = "lightblue";
     for (let i = 0; i < 40; i++) {
         //randomized X and Y positions
         let x = Math.random() * 500;
         let y = Math.random() * 500;
+        let red = Math.floor(Math.random() * 255);
+        let green = Math.floor(Math.random() * 255);
+        let blue = Math.floor(Math.random() * 255);
         ctx.beginPath();
         //actual drawing:
-        ctx.arc(x, y, 40, 0, 2 * Math.PI, false);
-        ctx.fill();
+        ctx.arc(Math.floor(Math.random() * (700) + 1), Math.floor(Math.random() * (500) + 1), Math.floor(Math.random() * (80) + 1), 0, 3 * Math.PI);
         ctx.stroke();
         ctx.closePath();
-    }
+        //color of the circles
+        ctx.fillStyle = "rgb(" + red + ", " + green + "," + blue + ")";
+        ctx.fill();
+    } //End of circle function
 }
 //# sourceMappingURL=script.js.map
