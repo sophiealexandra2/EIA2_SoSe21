@@ -22,11 +22,11 @@ let green: number = Math.floor(Math.random() * 255);
 let blue: number = Math.floor(Math.random() * 255);
 
 ctx.beginPath();
-//actual drawing:
+//actual drawing and amount of circles, randomized
 ctx.arc(Math.floor (Math.random() * (700) + 1), Math.floor(Math.random() * (500) + 1), Math.floor(Math.random() * (80) + 1), 0 , 3 * Math.PI);
 ctx.stroke();
 ctx.closePath();
-//color of the circles
+//color of the circles, randomized
 ctx.fillStyle = "rgb(" + red + ", " + green + "," + blue + ")";
 ctx.fill();
 
