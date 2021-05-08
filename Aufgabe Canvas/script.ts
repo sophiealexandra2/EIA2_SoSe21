@@ -1,12 +1,9 @@
-
+namespace CanvasRandom {
 window.onload = function(): void {
 draw();
 };
+//Button to be fixed
 
-var button: HTMLElement = document.querySelector("refresh");
-document.querySelector("refresh").addEventListener("click", function draw(): void {
-  location.reload();
-  });
 
 function draw (): void {
 let canvas: HTMLCanvasElement = document.querySelector("canvas");
@@ -30,20 +27,15 @@ ctx.closePath();
 ctx.fillStyle = "rgb(" + red + ", " + green + "," + blue + ")";
 ctx.fill();
 
-} //End of circle function
+} 
+//End of circle function
+
+
+}//End of eventlistener load window
 
 
 
-
-
-
-
-}
-
-
-
-
-
+}//End of namespace
 
 
 
