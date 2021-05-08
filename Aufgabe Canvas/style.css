@@ -2,6 +2,7 @@
 border: 5px solid black;
 background-size: 100%;
 left: 200px;
+margin-right: 150px;
 }
 
 body {
@@ -22,7 +23,14 @@ text-align: center;
 
 
 #refresh {
+padding: 20px;
 text-align: center;
+background-color: deeppink;
+bottom: 150px;
 
+}
 
+#refresh:hover {
+
+background-color: hotpink;
 }
