@@ -10,15 +10,16 @@ window.onload = function(): void {
 
 
 function draw (): void {
-let canvas: HTMLCanvasElement = document.querySelector("canvas");
-let ctx: CanvasRenderingContext2D = canvas.getContext("2d");
+    let canvas: HTMLCanvasElement = document.querySelector("canvas");
+    let ctx: CanvasRenderingContext2D = canvas.getContext("2d");
+    let golden: number = 0.62;
+    let horizon: number = ctx.canvas.height * golden;
+   
 
-
-drawBackground();
 
 
 //Source for Gradient: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingctx2D/createRadialGradient
-function drawBackground(): void {
+    function drawBackground(): void {
   let backGround: CanvasGradient = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
   backGround.addColorStop(0, "#00BFFF");
   backGround.addColorStop(0.5, "white");
@@ -26,11 +27,49 @@ function drawBackground(): void {
   backGround.addColorStop(1, "white");
   ctx.fillStyle = backGround;
   ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-}//Ende DrawBackGround
+}
+    drawBackground();
+//Ende DrawBackGround
 
+//Anfang Mountains
+    function drawMountains(_position: Vector, _min: number, _max: number, _colorLow: string, _colorHigh: string): void {
+    console.log("Mountains");
+    let stepMin: number = 50;
+    let stepMax: number = 150;
+    let x: number = 0;
+
+    ctx.save();
+    ctx.translate(_position.x, _position.y);
+
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(0, -_max);
+
+
+    do {
+        x += stepMin + Math.random() * (stepMax - stepMin);
+        let y: number = - _min - Math.random() * (_max - _min);
+
+        ctx.lineTo(x, y);
+    } while ( x < ctx.canvas.width);
+
+    ctx.lineTo(x, 0);
+    ctx.closePath();
+
+    let gradient: CanvasGradient =  ctx.createLinearGradient( 0, 0, 0, -_max);
+    gradient.addColorStop(0, _colorLow);
+    gradient.addColorStop(0.7, _colorHigh);
+
+    ctx.fillStyle = gradient;
+    ctx.fill();
+
+    ctx.restore();
+}
+    drawMountains({ x: 0, y: horizon }, 35, 70, "grey", "white");
+    drawMountains({ x: 0, y: horizon }, 20, 60, "grey", "lightgrey");
 
 //Sonne - Jirkas Code, abgeändert also random weggemacht :)
-function drawSun(): void {
+    function drawSun(): void {
     let r1: number = 30;
     let r2: number = 180;
     let gradientSun: CanvasGradient = ctx.createRadialGradient(0, 0, r1, 0, 0, r2);
@@ -58,16 +97,16 @@ function drawSun(): void {
 
     ctx.restore();
 }
-drawSun();
+    drawSun();
 //Ende Sonnne
 
 
 //Biene Anfang
-var x: number = 70;
-var y: number = 50;
+    var x: number = 70;
+    var y: number = 50;
 
 
-let circle = function(x, y, radius, fillCircle) {
+    let circle: any = function( x: number, y: number, radius: number, fillCircle: boolean): void {
   ctx.beginPath();
   ctx.arc(x, y, radius, 0, Math.PI * 2, false);
   if (fillCircle) {
@@ -77,26 +116,29 @@ let circle = function(x, y, radius, fillCircle) {
   }
 };
 
-let drawBee = function(x, y): void {
+    let drawBee: any = function(x: number, y: number): void {
   ctx.lineWidth = 2;
   ctx.strokeStyle = "Black";
   ctx.fillStyle = "Gold";
   
-  circle(x, y, 8, true);
-  circle(x, y, 8, false);
-  circle(x - 5, y - 11, 5, false);
-  circle(x + 5, y - 11, 5, false);
-  circle(x - 2, y - 1, 2, false);
-  circle(x + 2, y - 1, 2, false);
+  circle(x, y, 7, true);
+  circle(x, y, 7, false);
+  circle(x - 5, y - 11, 3, false);
+  circle(x + 5, y - 11, 3, false);
+  circle(x - 2, y - 1, 1, false);
+  circle(x + 2, y - 1, 1, false);
 
  
 };
 
-drawBee (x, y);
+    drawBee (x, y);
 
+    
 //Ende Biene
 
 
+
+  
 
 
 //Blume Anfang
