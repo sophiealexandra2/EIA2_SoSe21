@@ -5,10 +5,6 @@ var CanvasRandom;
         draw();
     };
     //Button to be fixed
-    var button = document.querySelector("refresh");
-    document.querySelector("refresh").addEventListener("click", function draw() {
-        location.reload();
-    });
     function draw() {
         let canvas = document.querySelector("canvas");
         let ctx = canvas.getContext("2d");

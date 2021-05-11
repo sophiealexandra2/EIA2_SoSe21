@@ -1,0 +1,32 @@
+body {
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+width: 1080px;
+height: 700px;
+display: flex;
+text-align: center;
+background-color: rgb(125, 151, 151);
+
+
+}
+
+h1 {
+    text-align: center;
+    height: 40px;
+    
+    
+    }
+
+
+#canvas {
+
+border: 5px solid black;
+background-size: 100%;
+left: 200px;
+width: 65%;
+height: 80%;
+top: 5%;
+background-color: lightblue;
+
+
+}
+
