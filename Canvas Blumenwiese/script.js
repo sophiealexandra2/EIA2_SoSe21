@@ -8,7 +8,7 @@ var CanvasBlumenwiese;
         let canvas = document.querySelector("canvas");
         let ctx = canvas.getContext("2d");
         drawBackground();
-        //Source for Gradient: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createRadialGradient
+        //Source for Gradient: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingctx2D/createRadialGradient
         function drawBackground() {
             let backGround = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
             backGround.addColorStop(0, "#00BFFF");
@@ -18,7 +18,62 @@ var CanvasBlumenwiese;
             ctx.fillStyle = backGround;
             ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         } //Ende DrawBackGround
-    }
-})(CanvasBlumenwiese || (CanvasBlumenwiese = {}));
-//Ende namespace
+        //Sonne - Jirkas Code, abgeändert also random weggemacht :)
+        function drawSun() {
+            let r1 = 30;
+            let r2 = 180;
+            let gradientSun = ctx.createRadialGradient(0, 0, r1, 0, 0, r2);
+            gradientSun.addColorStop(0, "HSLA(60, 100%, 90%, 1)");
+            gradientSun.addColorStop(0.1, "HSLA(60, 100%, 90%, 0.5)");
+            gradientSun.addColorStop(1, "HSLA(60, 100%, 80%, 0)");
+            let X = ctx.canvas.width;
+            let Y = ctx.canvas.height / 2 - 100;
+            ctx.save();
+            if (X > 700) {
+                X = 700;
+            }
+            if (Y < 20) {
+                Y = 20;
+            }
+            else if (Y > 100) {
+                Y = 100;
+            }
+            ctx.translate(X, Y);
+            ctx.fillStyle = gradientSun;
+            ctx.arc(0, 0, r2, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.restore();
+        }
+        drawSun();
+        //Ende Sonnne
+        //Biene Anfang
+        var x = 70;
+        var y = 50;
+        let circle = function (x, y, radius, fillCircle) {
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+            if (fillCircle) {
+                ctx.fill();
+            }
+            else {
+                ctx.stroke();
+            }
+        };
+        let drawBee = function (x, y) {
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "Black";
+            ctx.fillStyle = "Gold";
+            circle(x, y, 8, true);
+            circle(x, y, 8, false);
+            circle(x - 5, y - 11, 5, false);
+            circle(x + 5, y - 11, 5, false);
+            circle(x - 2, y - 1, 2, false);
+            circle(x + 2, y - 1, 2, false);
+        };
+        drawBee(x, y);
+        //Ende Biene
+        //Blume Anfang
+        //Blume Ende
+    } //Ende onload function
+})(CanvasBlumenwiese || (CanvasBlumenwiese = {})); //Ende namesapce
 //# sourceMappingURL=script.js.map
