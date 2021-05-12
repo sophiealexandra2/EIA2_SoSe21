@@ -7,13 +7,11 @@ var CanvasBlumenwiese;
     function draw() {
         let canvas = document.querySelector("canvas");
         let ctx = canvas.getContext("2d");
-        let golden = 0.62;
-        let horizon = ctx.canvas.height * golden;
         let windowWidth = window.innerWidth;
         let windowHeight = window.innerHeight;
+        let mountainColors = ["#813945", "#7B3647", "#753146", "#663047"];
         canvas.width = windowWidth;
         canvas.height = windowHeight;
-        let mountainColors = ["#813945", "#7B3647", "#753146", "#663047"];
         function drawBackground() {
             let gradient = ctx.createLinearGradient(windowWidth / 2, 0, windowWidth / 2, windowHeight);
             gradient.addColorStop(0, "#303461");
@@ -31,7 +29,7 @@ var CanvasBlumenwiese;
             ctx.beginPath();
             ctx.moveTo(x, y);
             while (x < windowWidth) {
-                let dx = (Math.random() * 20) + 50; // 50-70
+                let dx = 20 + 50; // 50-70
                 let dy = (Math.random() - 0.5) * 100; // -50 - 50
                 x = x + dx;
                 y = y + dy;
@@ -63,7 +61,7 @@ var CanvasBlumenwiese;
             drawMountains();
         }
         drawScene();
-        //Sonne - Jirkas Code, abgeändert also random weggemacht :)
+        //Mond - Jirkas Code, abgeändert also random weggemacht :)
         function drawMoon() {
             let r1 = 30;
             let r2 = 180;
@@ -90,7 +88,7 @@ var CanvasBlumenwiese;
             ctx.restore();
         }
         drawMoon();
-        //Ende Sonnne
+        //Ende Mond
         //Biene Anfang
         let x = 120;
         let y = 500;
@@ -118,7 +116,47 @@ var CanvasBlumenwiese;
         drawBee(x, y);
         //Ende Biene
         //Blume Anfang
-        //Blume Ende
+        let petal = [[[0, 0], [0.5, -2], [0.7, -1], [1, 0], [0.7, 1], [0.3, 1], [0, 0]], [[0, 0], [1, 0]],];
+        function drawPetal(path, width, height) {
+            let i = 0;
+            do { // loop through paths
+                let p = path[i];
+                let j = 0;
+                ctx.moveTo(p[j][0] * width, p[j++][1] * height);
+                while (j < p.length - 1) {
+                    ctx.lineTo(p[j][0] * width, p[j++][1] * height);
+                }
+                if (p[j][0] === p[0][0] && p[j][1] === p[0][1]) {
+                    ctx.closePath();
+                }
+                else {
+                    ctx.lineTo(p[j][0] * width, p[j][1] * height);
+                }
+            } while (++i < path.length);
+        }
+        function drawPetals(x, y, count, startAt, petal, width, height) {
+            const step = (Math.PI * 2) / count;
+            ctx.setTransform(1, 0, 0, 1, x, y);
+            ctx.rotate(startAt);
+            for (var i = 0; i < count; i += 1) {
+                drawPetal(petal, width, height);
+                ctx.rotate(step);
+            }
+            ctx.setTransform(1, 0, 0, 1, 0, 0); // restore default
+        }
+        function drawFlower(col, lineWidth, fitScale, petalCount) {
+            ctx.strokeStyle = col;
+            ctx.lineWidth = lineWidth;
+            let size = Math.min(ctx.canvas.width, ctx.canvas.height) * fitScale * 0.4;
+            ctx.beginPath();
+            drawPetals(ctx.canvas.width / 2, ctx.canvas.height / 1.1, 5, -Math.PI / 2, petal, size, size * 0.2);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(ctx.canvas.width / 2, ctx.canvas.height / 1.1, size * 0.15, 0, Math.PI * 2);
+            ctx.fillStyle = col;
+            ctx.fill();
+        }
+        drawFlower("pink", 1.4, 0.25, 1);
     } //Ende onload function
 })(CanvasBlumenwiese || (CanvasBlumenwiese = {})); //Ende namesapce
 //# sourceMappingURL=script.js.map
