@@ -18,58 +18,75 @@ function draw (): void {
 
 
 
-//Source for Gradient: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingctx2D/createRadialGradient
+    let windowWidth = window.innerWidth;
+    let windowHeight = window.innerHeight;
+    
+    canvas.width = windowWidth;
+    canvas.height = windowHeight;
+    
+
+    let mountainColors = ["#813945", "#7B3647", "#753146", "#663047"];
+    
     function drawBackground(): void {
-  let backGround: CanvasGradient = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
-  backGround.addColorStop(0, "#00BFFF");
-  backGround.addColorStop(0.5, "white");
-  backGround.addColorStop(0.5, "#55DD00");
-  backGround.addColorStop(1, "white");
-  ctx.fillStyle = backGround;
-  ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-}
-    drawBackground();
-//Ende DrawBackGround
-
-//Anfang Mountains
-    function drawMountains(_position: Vector, _min: number, _max: number, _colorLow: string, _colorHigh: string): void {
-    console.log("Mountains");
-    let stepMin: number = 50;
-    let stepMax: number = 150;
-    let x: number = 0;
-
-    ctx.save();
-    ctx.translate(_position.x, _position.y);
-
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.lineTo(0, -_max);
-
-
-    do {
-        x += stepMin + Math.random() * (stepMax - stepMin);
-        let y: number = - _min - Math.random() * (_max - _min);
-
+      let gradient: CanvasGradient = ctx.createLinearGradient(windowWidth / 2, 0, windowWidth / 2, windowHeight);
+      gradient.addColorStop(0, "#303461");
+      gradient.addColorStop(0.3, "#85536E");
+      gradient.addColorStop(0.6, "#D46A4B");
+      gradient.addColorStop(0.9, "#EB7337");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, windowWidth, windowHeight);
+    }
+    
+    //only draws one mountain range (across the screen);
+    function drawMountain(mountainColor): void {
+      let x: number = 0;
+      let y: number = windowHeight * ((Math.random() * 0.2) + 0.7); // 0.4 - 0.6
+      ctx.strokeStyle = mountainColor;
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      while (x < windowWidth) {
+        let dx: number = (Math.random() * 20) + 50; // 50-70
+        let dy: number = (Math.random() - 0.5) * 100; // -50 - 50
+        x = x + dx;
+        y = y + dy;
+        if (y < 0 || y > windowHeight) { // if it goes over the top or under the bottom of the canvas
+          y = y - 2 * dy; // go in the other direction twice the distance (basically like just going the original direction the same amount once);
+        }
+        if (x > windowWidth) {
+          x = windowWidth;
+        }
         ctx.lineTo(x, y);
-    } while ( x < ctx.canvas.width);
+      }
+      // make a box around the bottom of the canvas
+      ctx.lineTo(windowWidth, y);
+      ctx.lineTo(windowWidth, windowHeight);
+      ctx.lineTo(0, windowHeight);
+      ctx.lineTo(0, windowHeight * 0.4);
+    
+      // fill in the colors
+      ctx.stroke();
+      ctx.fillStyle = mountainColor;
+      ctx.fill();
+    }
+    
+    function drawMountains (): void {
+      for (let i: number = 0; i < mountainColors.length; i++ ) {
+        drawMountain(mountainColors[i]);
+      }
+    }
+    
 
-    ctx.lineTo(x, 0);
-    ctx.closePath();
-
-    let gradient: CanvasGradient =  ctx.createLinearGradient( 0, 0, 0, -_max);
-    gradient.addColorStop(0, _colorLow);
-    gradient.addColorStop(0.7, _colorHigh);
-
-    ctx.fillStyle = gradient;
-    ctx.fill();
-
-    ctx.restore();
-}
-    drawMountains({ x: 0, y: horizon }, 35, 70, "grey", "white");
-    drawMountains({ x: 0, y: horizon }, 20, 60, "grey", "lightgrey");
-
+    
+    function drawScene() {
+      drawBackground();
+      drawMountains();
+    }
+    
+    drawScene();
+    
+  
 //Sonne - Jirkas Code, abgeändert also random weggemacht :)
-    function drawSun(): void {
+    function drawMoon(): void {
     let r1: number = 30;
     let r2: number = 180;
     let gradientSun: CanvasGradient = ctx.createRadialGradient(0, 0, r1, 0, 0, r2);
@@ -97,14 +114,14 @@ function draw (): void {
 
     ctx.restore();
 }
-    drawSun();
+    drawMoon();
 //Ende Sonnne
 
 
 //Biene Anfang
-    var x: number = 70;
-    var y: number = 50;
-
+    let x: number = 120;
+    let y: number = 500;
+    
 
     let circle: any = function( x: number, y: number, radius: number, fillCircle: boolean): void {
   ctx.beginPath();
@@ -142,6 +159,10 @@ function draw (): void {
 
 
 //Blume Anfang
+
+
+
+
 //Blume Ende
 
 }//Ende onload function
