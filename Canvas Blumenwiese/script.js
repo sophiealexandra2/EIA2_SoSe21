@@ -21,27 +21,26 @@ var CanvasBlumenwiese;
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, windowWidth, windowHeight);
         }
-        //only draws one mountain range (across the screen);
+        //Anfang Mountains
         function drawMountain(mountainColor) {
             let x = 0;
-            let y = windowHeight * ((Math.random() * 0.2) + 0.7); // 0.4 - 0.6
+            let y = windowHeight * ((Math.random() * 0.2) + 0.7);
             ctx.strokeStyle = mountainColor;
             ctx.beginPath();
             ctx.moveTo(x, y);
             while (x < windowWidth) {
-                let dx = 20 + 50; // 50-70
-                let dy = (Math.random() - 0.5) * 100; // -50 - 50
+                let dx = 20 + 50;
+                let dy = (Math.random() - 0.5) * 100;
                 x = x + dx;
                 y = y + dy;
-                if (y < 0 || y > windowHeight) { // if it goes over the top or under the bottom of the canvas
-                    y = y - 2 * dy; // go in the other direction twice the distance (basically like just going the original direction the same amount once);
+                if (y < 0 || y > windowHeight) {
+                    y = y - 2 * dy;
                 }
                 if (x > windowWidth) {
                     x = windowWidth;
                 }
                 ctx.lineTo(x, y);
             }
-            // make a box around the bottom of the canvas
             ctx.lineTo(windowWidth, y);
             ctx.lineTo(windowWidth, windowHeight);
             ctx.lineTo(0, windowHeight);
@@ -115,7 +114,7 @@ var CanvasBlumenwiese;
         };
         drawBee(x, y);
         //Ende Biene
-        //Anfang Tulpe - in Zusammenarbeit mit Julia
+        //Anfang Tulpe - in Zusammenarbeit mit Julia Dajcman
         function drawTulip() {
             let x = (Math.random() * canvas.width - 10);
             let y = (Math.random() * canvas.width - 10);
