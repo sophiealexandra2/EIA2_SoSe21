@@ -157,6 +157,69 @@ var CanvasBlumenwiese;
             ctx.fill();
         }
         drawFlower("pink", 1.4, 0.25, 1);
+        //Anfang Tulpe - in Zusammenarbeit mit Julia
+        function drawTulip() {
+            let x = (Math.random() * canvas.width - 10);
+            let y = (Math.random() * canvas.width - 10);
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.translate(x, y);
+            ctx.lineTo(0, 30);
+            ctx.strokeStyle = "green"; //Stängel
+            ctx.stroke();
+            ctx.beginPath();
+            moveTo(10, 20);
+            ctx.arc(0, 0, 9, 0, 1 * Math.PI);
+            ctx.fillStyle = "pink"; //Blumenkopf
+            ctx.strokeStyle = "pink";
+            ctx.fill();
+            ctx.stroke();
+            moveTo(0, 20);
+            ctx.lineTo(-10, -8);
+            ctx.lineTo(-3, 2);
+            ctx.lineTo(1, -8);
+            ctx.lineTo(4, 2);
+            ctx.lineTo(9, -8);
+            ctx.lineTo(9, 3);
+            ctx.closePath();
+            ctx.fillStyle = "pink";
+            ctx.fill();
+            ctx.stroke();
+            ctx.restore();
+        } //Ende neue Blume
+        function drawDaisy() {
+            let x = (Math.random() * canvas.width - 10);
+            let y = (Math.random() * canvas.width - 10);
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.translate(x, y);
+            ctx.quadraticCurveTo(10, 5, 10, 30);
+            ctx.strokeStyle = "green"; //Stängel
+            ctx.stroke();
+            ctx.beginPath();
+            moveTo(10, 20);
+            ctx.arc(0, 0, 6, 0, 2 * Math.PI);
+            ctx.fillStyle = "pink";
+            ctx.strokeStyle = "orange";
+            ctx.fill();
+            ctx.stroke();
+            for (let blossoms = 80; blossoms > 8; blossoms -= 8) {
+                ctx.beginPath();
+                moveTo(10, 20);
+                ctx.rotate(45 * Math.PI / 20);
+                ctx.arc(10, 0, 5, 0, 2 * Math.PI);
+                ctx.fillStyle = "orange";
+                ctx.strokeStyle = "orange";
+                ctx.fill();
+                ctx.stroke();
+            }
+            ctx.restore();
+        }
+        for (let i = 0; i < 10; i++) {
+            drawDaisy(), drawTulip();
+        }
     } //Ende onload function
 })(CanvasBlumenwiese || (CanvasBlumenwiese = {})); //Ende namesapce
 //# sourceMappingURL=script.js.map
