@@ -144,7 +144,7 @@ var CanvasBlumenwiese;
             ctx.fill();
             ctx.stroke();
             ctx.restore();
-        } //Ende neue Blume
+        }
         function drawDaisy() {
             let x = (Math.random() * canvas.width - 10);
             let y = (Math.random() * canvas.width - 10);
