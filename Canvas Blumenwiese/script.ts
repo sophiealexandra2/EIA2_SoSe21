@@ -150,54 +150,7 @@ function draw (): void {
 
 
 
-//Blume Anfang
 
-    let petal: any = [[[0, 0], [0.5, -2], [0.7, -1], [ 1, 0], [0.7, 1], [0.3, 1], [0, 0]], [[0, 0], [1, 0]], ];
-
-    function drawPetal(path, width, height) {
-  let i: number = 0;
-  do { // loop through paths
-    let p = path[i];
-    let j: number = 0;
-    ctx.moveTo(p[j][0] * width, p[j++][1] * height);
-    while (j < p.length - 1) {
-      ctx.lineTo(p[j][0] * width, p[j++][1] * height);
-    }
-    if (p[j][0] === p[0][0] && p[j][1] === p[0][1]) { 
-      ctx.closePath();
-    } else {
-      ctx.lineTo(p[j][0] * width, p[j][1] * height);
-    }
-  } while (++i < path.length);
-}
-
-    function drawPetals(x: number, y: number, count, startAt, petal, width, height) {
-  const step: number = (Math.PI * 2) / count;
-  ctx.setTransform(1, 0, 0, 1, x, y);
-  ctx.rotate(startAt);
-  for (var i: number = 0; i < count; i += 1) {
-    drawPetal(petal, width, height);
-    ctx.rotate(step);
-  }
-  ctx.setTransform(1, 0, 0, 1, 0, 0); // restore default
-}
-
-    function drawFlower(col, lineWidth, fitScale, petalCount) {
-  ctx.strokeStyle = col;
-  ctx.lineWidth = lineWidth;
-  let size = Math.min(ctx.canvas.width, ctx.canvas.height) * fitScale * 0.4;
-  ctx.beginPath();
-
-  drawPetals(ctx.canvas.width / 2, ctx.canvas.height / 1.1, 5, -Math.PI / 2, petal, size, size * 0.2);
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.arc(ctx.canvas.width / 2, ctx.canvas.height / 1.1 , size * 0.15, 0, Math.PI * 2);
-  ctx.fillStyle = col;
-  ctx.fill();
-}
-
-
-    drawFlower("pink", 1.4, 0.25, 1);
 
 //Anfang Tulpe - in Zusammenarbeit mit Julia
     function drawTulip (): void {
