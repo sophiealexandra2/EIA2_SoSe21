@@ -1,4 +1,5 @@
-namespace ClassesBlumenwiese {
+//Mit Hilfe von und in Zusammenarbeit mit Julia Dajcman
+namespace ClassesBlumenwiese { 
   
   class Vector {
     x: number;
@@ -7,7 +8,7 @@ namespace ClassesBlumenwiese {
   export let ctx: CanvasRenderingContext2D;
 
   export let canvas: HTMLCanvasElement = document.querySelector("canvas")!;
-  let mountainColors: any = ["#813945", "#7B3647", "#753146", "#663047"];
+  let mountainColors = ["#813945", "#7B3647", "#753146", "#663047"];
   let windowWidth: number = window.innerWidth;
   let windowHeight: number = window.innerHeight;
   canvas.width = windowWidth;
@@ -105,7 +106,7 @@ namespace ClassesBlumenwiese {
     ctx.fill();
   }
     var x: number = 0;
-    setInterval(function () { 
+    setInterval(function (): void { 
     drawCircle(x % 1300, 70);
     x++;
   },            25);
@@ -114,7 +115,7 @@ namespace ClassesBlumenwiese {
 
 //Anfang Biene
 
-  const circle = function (x, y, radius, fillCircle) {
+  const circle = function (x, y, radius, fillCircle): void {
   ctx.beginPath();
   ctx.arc(x, y, radius, 0, Math.PI * 2, false);
   if (fillCircle) {
@@ -138,10 +139,10 @@ namespace ClassesBlumenwiese {
 }
 
   function biene (coordinate) {
-  let offset = Math.random() * 4 - 2;
+  let offset: number = Math.random() * 4 - 2;
   coordinate += offset;
 
-  if (coordinate > 400){
+  if (coordinate > 400) {
       coordinate = 400;
   }
   if (coordinate < 0) {
@@ -154,7 +155,7 @@ namespace ClassesBlumenwiese {
   let x: number = 400;
   let y: number = 700;
 
-  setInterval(function () {
+  setInterval(function (): void {
  
 
   drawBee(x, y);

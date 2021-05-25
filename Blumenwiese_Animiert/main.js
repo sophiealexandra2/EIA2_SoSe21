@@ -1,4 +1,5 @@
 "use strict";
+//Mit Hilfe von und in Zusammenarbeit mit Julia Dajcman
 var ClassesBlumenwiese;
 (function (ClassesBlumenwiese) {
     class Vector {
