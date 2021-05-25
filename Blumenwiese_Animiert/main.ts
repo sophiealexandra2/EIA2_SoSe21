@@ -31,10 +31,6 @@ namespace ClassesBlumenwiese {
 
     drawBackground();
 
-    createPaths();
-
-    createBees(1);
-
     console.log(bees.length);
 
     window.setInterval(update, 20);
@@ -196,7 +192,7 @@ namespace ClassesBlumenwiese {
   x = biene(x);
   y = biene(y);
 
-},            80);
+},            40);
 
 
 

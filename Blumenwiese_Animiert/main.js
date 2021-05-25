@@ -16,8 +16,6 @@ var ClassesBlumenwiese;
             return;
         ClassesBlumenwiese.ctx = ClassesBlumenwiese.canvas.getContext("2d");
         drawBackground();
-        ClassesBlumenwiese.createPaths();
-        createBees(1);
         console.log(bees.length);
         window.setInterval(update, 20);
     }
@@ -148,7 +146,7 @@ var ClassesBlumenwiese;
         drawBee(x, y);
         x = biene(x);
         y = biene(y);
-    }, 80);
+    }, 40);
     //Mond - Jirkas Code, abgeändert also random weggemacht :)
     function drawMoon() {
         let r1 = 30;
