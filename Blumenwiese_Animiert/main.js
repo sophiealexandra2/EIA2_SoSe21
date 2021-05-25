@@ -5,7 +5,6 @@ var ClassesBlumenwiese;
     class Vector {
     }
     ClassesBlumenwiese.canvas = document.querySelector("canvas");
-    let mountainColors = ["#813945", "#7B3647", "#753146", "#663047"];
     let windowWidth = window.innerWidth;
     let windowHeight = window.innerHeight;
     ClassesBlumenwiese.canvas.width = windowWidth;
@@ -20,52 +19,42 @@ var ClassesBlumenwiese;
         drawBackground();
     }
     function drawBackground() {
-        console.log("Background");
         let gradient = ClassesBlumenwiese.ctx.createLinearGradient(0, 0, 0, ClassesBlumenwiese.ctx.canvas.height);
         gradient.addColorStop(0, "#303461");
         gradient.addColorStop(0.3, "#85536E");
-        gradient.addColorStop(0.6, "darkgreen");
+        gradient.addColorStop(0.6, "pink");
         gradient.addColorStop(0.9, "green");
         ClassesBlumenwiese.ctx.fillStyle = gradient;
         ClassesBlumenwiese.ctx.fillRect(0, 0, ClassesBlumenwiese.ctx.canvas.width, ClassesBlumenwiese.ctx.canvas.height);
         let mountainsPosition = { x: 0, y: (ClassesBlumenwiese.ctx.canvas.height * 0.5) };
-        drawMountains();
+        drawMountains(mountainsPosition, 75, 200, "grey", "white");
+        drawMountains(mountainsPosition, 50, 150, "grey", "lightgrey");
         drawMoon();
         drawFlowers();
         MovingCloud();
     }
-    function drawMountain(mountainColor) {
+    function drawMountains(_position, _min, _max, _colorLow, _colorHigh) {
+        let stepMin = 50;
+        let stepMax = 30;
         let x = 0;
-        let y = windowHeight * ((Math.random() * -0.3) + 0.7);
-        ClassesBlumenwiese.ctx.strokeStyle = mountainColor;
+        ClassesBlumenwiese.ctx.save();
+        ClassesBlumenwiese.ctx.translate(_position.x, _position.y);
         ClassesBlumenwiese.ctx.beginPath();
-        ClassesBlumenwiese.ctx.moveTo(x, y);
-        while (x < windowWidth) {
-            let dx = 20 + 50;
-            let dy = (Math.random() - 0.5) * 100;
-            x = x + dx;
-            y = y + dy;
-            if (y < 0 || y > windowHeight) {
-                y = y - 2 * dy;
-            }
-            if (x > windowWidth) {
-                x = windowWidth;
-            }
+        ClassesBlumenwiese.ctx.moveTo(0, 0);
+        ClassesBlumenwiese.ctx.lineTo(0, -_max);
+        do {
+            x += stepMin + Math.random() * (stepMax - stepMin);
+            let y = -_min - Math.random() * (_max - _min);
             ClassesBlumenwiese.ctx.lineTo(x, y);
-        }
-        ClassesBlumenwiese.ctx.lineTo(windowWidth, y);
-        ClassesBlumenwiese.ctx.lineTo(windowWidth, windowHeight);
-        ClassesBlumenwiese.ctx.lineTo(0, windowHeight);
-        ClassesBlumenwiese.ctx.lineTo(0, windowHeight * 0.4);
-        // fill in the colors
-        ClassesBlumenwiese.ctx.stroke();
-        ClassesBlumenwiese.ctx.fillStyle = mountainColor;
+        } while (x < ClassesBlumenwiese.ctx.canvas.width);
+        ClassesBlumenwiese.ctx.lineTo(x, 0);
+        ClassesBlumenwiese.ctx.closePath();
+        let gradient = ClassesBlumenwiese.ctx.createLinearGradient(0, 0, 0, -_max);
+        gradient.addColorStop(0, _colorLow);
+        gradient.addColorStop(0.7, _colorHigh);
+        ClassesBlumenwiese.ctx.fillStyle = gradient;
         ClassesBlumenwiese.ctx.fill();
-    }
-    function drawMountains() {
-        for (let i = 0; i < mountainColors.length; i++) {
-            drawMountain(mountainColors[i]);
-        }
+        ClassesBlumenwiese.ctx.restore();
     }
     //Anfang Cloud Moving
     function MovingCloud() {

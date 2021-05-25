@@ -6,9 +6,7 @@ namespace ClassesBlumenwiese {
     y: number;
 }
   export let ctx: CanvasRenderingContext2D;
-
   export let canvas: HTMLCanvasElement = document.querySelector("canvas")!;
-  let mountainColors = ["#813945", "#7B3647", "#753146", "#663047"];
   let windowWidth: number = window.innerWidth;
   let windowHeight: number = window.innerHeight;
   canvas.width = windowWidth;
@@ -30,61 +28,55 @@ namespace ClassesBlumenwiese {
 }
 
   function drawBackground(): void {
-    console.log("Background");
 
     let gradient: CanvasGradient = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
     gradient.addColorStop(0, "#303461");
     gradient.addColorStop(0.3, "#85536E");
-    gradient.addColorStop(0.6, "darkgreen");
+    gradient.addColorStop(0.6, "pink");
     gradient.addColorStop(0.9, "green");
 
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-
     let mountainsPosition: Vector = { x: 0, y: (ctx.canvas.height * 0.5) };
 
-    drawMountains();
+    drawMountains(mountainsPosition, 75, 200, "grey", "white");
+    drawMountains(mountainsPosition, 50, 150, "grey", "lightgrey");
     drawMoon();
     drawFlowers();
     MovingCloud();
 }
 
-  function drawMountain(mountainColor): void {
-  let x: number = 0;
-  let y: number = windowHeight * ((Math.random() * -0.3) + 0.7);
-  ctx.strokeStyle = mountainColor;
-  
-  ctx.beginPath();
-  ctx.moveTo(x, y);
-  while (x < windowWidth) {
-    let dx: number = 20 + 50;
-    let dy: number = (Math.random() - 0.5) * 100;
-    x = x + dx;
-    y = y + dy;
-    if (y < 0 || y > windowHeight) {
-      y = y - 2 * dy;
-    }
-    if (x > windowWidth) {
-      x = windowWidth;
-    }
-    ctx.lineTo(x, y);
-  }
-  ctx.lineTo(windowWidth, y);
-  ctx.lineTo(windowWidth, windowHeight);
-  ctx.lineTo(0, windowHeight);
-  ctx.lineTo(0, windowHeight * 0.4);
+  function drawMountains(_position: Vector, _min: number, _max: number, _colorLow: string, _colorHigh: string): void {
+    let stepMin: number = 50;
+    let stepMax: number = 30;
+    let x: number = 0;
 
-  // fill in the colors
-  ctx.stroke();
-  ctx.fillStyle = mountainColor;
-  ctx.fill();
+    ctx.save();
+    ctx.translate(_position.x, _position.y);
+
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(0, -_max);
+
+    do {
+        x += stepMin + Math.random() * (stepMax - stepMin);
+        let y: number = -_min - Math.random() * (_max - _min);
+
+        ctx.lineTo(x, y);
+    } while (x < ctx.canvas.width);
+
+    ctx.lineTo(x, 0);
+    ctx.closePath();
+    let gradient: CanvasGradient = ctx.createLinearGradient(0, 0, 0, -_max);
+    gradient.addColorStop(0, _colorLow);
+    gradient.addColorStop(0.7, _colorHigh);
+
+    ctx.fillStyle = gradient;
+    ctx.fill();
+
+    ctx.restore();
 }
-  function drawMountains(): void {
-  for (let i: number = 0; i < mountainColors.length; i++) {
-    drawMountain(mountainColors[i]);
-  }
-}
- 
+
 //Anfang Cloud Moving
 
   function MovingCloud (): void {
