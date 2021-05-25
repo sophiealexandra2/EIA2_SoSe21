@@ -15,8 +15,6 @@ namespace ClassesBlumenwiese {
   canvas.width = 1300;
   canvas.height = 700;
 
-  let bees: Bee[] = [];
-
   window.addEventListener("load", handleLoad);
 
 
@@ -26,12 +24,7 @@ namespace ClassesBlumenwiese {
         return;
     ctx = canvas.getContext("2d")!;
 
-    
-    
-
     drawBackground();
-
-    console.log(bees.length);
 
     window.setInterval(update, 20);
 }
@@ -51,32 +44,9 @@ namespace ClassesBlumenwiese {
     let mountainsPosition: Vector = { x: 0, y: (ctx.canvas.height * 0.5) };
 
     drawMountains();
-
     drawMoon();
-
     drawFlowers();
     MovingCloud();
-}
-
-  function createBees(_nBees: number): void {
-    console.log("Create bees");
-    for (let i: number = 0; i < _nBees; i++) {
-        let bee: Bee = new Bee(1.0);
-        bees.push(bee);
-    }
-}
-
-  function update(): void {
-    console.log("Update");
-    //ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-
-    for (let bee of bees) {
-        bee.fly(1 / 50);
-        bee.draw();
-    }
-
-    // ship.draw();
-    // handleCollisions();
 }
 
   function drawMountain(mountainColor): void {

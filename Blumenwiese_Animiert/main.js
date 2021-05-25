@@ -9,14 +9,12 @@ var ClassesBlumenwiese;
     ClassesBlumenwiese.canvas.height = windowHeight;
     ClassesBlumenwiese.canvas.width = 1300;
     ClassesBlumenwiese.canvas.height = 700;
-    let bees = [];
     window.addEventListener("load", handleLoad);
     function handleLoad() {
         if (!ClassesBlumenwiese.canvas)
             return;
         ClassesBlumenwiese.ctx = ClassesBlumenwiese.canvas.getContext("2d");
         drawBackground();
-        console.log(bees.length);
         window.setInterval(update, 20);
     }
     function drawBackground() {
@@ -33,23 +31,6 @@ var ClassesBlumenwiese;
         drawMoon();
         drawFlowers();
         MovingCloud();
-    }
-    function createBees(_nBees) {
-        console.log("Create bees");
-        for (let i = 0; i < _nBees; i++) {
-            let bee = new ClassesBlumenwiese.Bee(1.0);
-            bees.push(bee);
-        }
-    }
-    function update() {
-        console.log("Update");
-        //ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        for (let bee of bees) {
-            bee.fly(1 / 50);
-            bee.draw();
-        }
-        // ship.draw();
-        // handleCollisions();
     }
     function drawMountain(mountainColor) {
         let x = 0;
