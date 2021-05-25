@@ -1,6 +1,6 @@
 namespace ClassesBlumenwiese {
   
-  interface Vector {
+  class Vector {
     x: number;
     y: number;
 }
@@ -26,7 +26,6 @@ namespace ClassesBlumenwiese {
 
     drawBackground();
 
-    window.setInterval(update, 20);
 }
 
   function drawBackground(): void {

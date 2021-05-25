@@ -1,6 +1,8 @@
 "use strict";
 var ClassesBlumenwiese;
 (function (ClassesBlumenwiese) {
+    class Vector {
+    }
     ClassesBlumenwiese.canvas = document.querySelector("canvas");
     let mountainColors = ["#813945", "#7B3647", "#753146", "#663047"];
     let windowWidth = window.innerWidth;
@@ -15,7 +17,6 @@ var ClassesBlumenwiese;
             return;
         ClassesBlumenwiese.ctx = ClassesBlumenwiese.canvas.getContext("2d");
         drawBackground();
-        window.setInterval(update, 20);
     }
     function drawBackground() {
         console.log("Background");
