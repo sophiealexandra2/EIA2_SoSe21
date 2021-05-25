@@ -90,23 +90,22 @@ var ClassesBlumenwiese;
     function MovingCloud() {
         ClassesBlumenwiese.ctx.beginPath();
         ClassesBlumenwiese.ctx.stroke();
-        function drawCircle(x) {
+        function drawCircle(x, y) {
             ClassesBlumenwiese.ctx.beginPath();
-            ClassesBlumenwiese.ctx.arc(x, 50, 60, Math.PI * 0.5, Math.PI * 1.5); //Circle drawing
-            ClassesBlumenwiese.ctx.arc(x + 70, 70 - 60, 70, Math.PI * 1, Math.PI * 1.85);
+            ClassesBlumenwiese.ctx.arc(x, 50, y, Math.PI * 0.5, Math.PI * 1.5); //Circle drawing
+            ClassesBlumenwiese.ctx.arc(x + 70, 60, 70, Math.PI * 1, Math.PI * 1.85);
             ClassesBlumenwiese.ctx.arc(x + 152, 40 - 45, 50, Math.PI * 1.37, Math.PI * 1.91);
             ClassesBlumenwiese.ctx.arc(x + 200, 30, 60, Math.PI * 1.5, Math.PI * 0.5);
             ClassesBlumenwiese.ctx.moveTo(x + 200, 10 + 60);
-            ClassesBlumenwiese.ctx.lineTo(x, 40 + 60);
-            ClassesBlumenwiese.ctx.strokeStyle = "darkblue";
+            ClassesBlumenwiese.ctx.lineTo(x, y + 60);
+            ClassesBlumenwiese.ctx.strokeStyle = "0";
             ClassesBlumenwiese.ctx.stroke();
             ClassesBlumenwiese.ctx.fillStyle = "blue";
             ClassesBlumenwiese.ctx.fill();
         }
         var x = 0;
         setInterval(function () {
-            ClassesBlumenwiese.ctx.clearRect(0, 0, 0, 0);
-            drawCircle(x % 1300);
+            drawCircle(x % 1300, 70);
             x++;
         }, 25);
     }

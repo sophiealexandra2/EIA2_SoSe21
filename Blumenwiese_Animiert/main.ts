@@ -126,23 +126,22 @@ namespace ClassesBlumenwiese {
     ctx.beginPath();
     ctx.stroke();
   
-    function drawCircle (x: any): void {
+    function drawCircle (x: any, y): void {
     ctx.beginPath();
-    ctx.arc(x, 50, 60, Math.PI * 0.5, Math.PI * 1.5); //Circle drawing
-    ctx.arc(x + 70, 70 - 60, 70, Math.PI * 1, Math.PI * 1.85);
+    ctx.arc(x, 50, y, Math.PI * 0.5, Math.PI * 1.5); //Circle drawing
+    ctx.arc(x + 70, 60, 70, Math.PI * 1, Math.PI * 1.85);
     ctx.arc(x + 152, 40 - 45, 50, Math.PI * 1.37, Math.PI * 1.91);
     ctx.arc(x + 200, 30, 60, Math.PI * 1.5, Math.PI * 0.5);
     ctx.moveTo(x + 200, 10 + 60);
-    ctx.lineTo(x, 40 + 60);
-    ctx.strokeStyle = "darkblue";
+    ctx.lineTo(x, y + 60);
+    ctx.strokeStyle = "0";
     ctx.stroke();
     ctx.fillStyle = "blue";
     ctx.fill();
   }
     var x: number = 0;
     setInterval(function () { 
-    ctx.clearRect(0, 0, 0, 0);
-    drawCircle(x % 1300);
+    drawCircle(x % 1300, 70);
     x++;
   },            25);
 }
