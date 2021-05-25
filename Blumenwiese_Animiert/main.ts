@@ -1,43 +1,293 @@
 namespace ClassesBlumenwiese {
-    window.addEventListener("load", handleLoad);
-    export let ctx: CanvasRenderingContext2D;
+  
+  interface Vector {
+    x: number;
+    y: number;
+}
+  export let ctx: CanvasRenderingContext2D;
 
-    function handleLoad (_event: Event): void {
-console.log("Blumenwiese wird jetzt animiert und gestartet");
-let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
-if (!canvas)
+  export let canvas: HTMLCanvasElement = document.querySelector("canvas")!;
+  let mountainColors: any = ["#813945", "#7B3647", "#753146", "#663047"];
+  let windowWidth: number = window.innerWidth;
+  let windowHeight: number = window.innerHeight;
+  canvas.width = windowWidth;
+  canvas.height = windowHeight;
+  canvas.width = 1300;
+  canvas.height = 700;
+
+  let bees: Bee[] = [];
+
+  window.addEventListener("load", handleLoad);
+
+
+  function handleLoad(): void {
+
+    if (!canvas)
         return;
-ctx = <CanvasRenderingContext2D>canvas.getContext("2d");
-ctx.fillStyle = "beige";
-ctx.strokeStyle  = "black";
+    ctx = canvas.getContext("2d")!;
 
-createPaths();
-console.log("Biene paths: ", beePath);
+    
+    
+
+    drawBackground();
+
+    createPaths();
+
+    createBees(1);
+
+    console.log(bees.length);
+
+    window.setInterval(update, 20);
+}
+
+  function drawBackground(): void {
+    console.log("Background");
+
+    let gradient: CanvasGradient = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
+    gradient.addColorStop(0, "#303461");
+    gradient.addColorStop(0.3, "#85536E");
+    gradient.addColorStop(0.6, "darkgreen");
+    gradient.addColorStop(0.9, "green");
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+    let mountainsPosition: Vector = { x: 0, y: (ctx.canvas.height * 0.5) };
+
+    drawMountains();
+
+    drawMoon();
+
+    drawFlowers();
+    MovingCloud();
+}
+
+  function createBees(_nBees: number): void {
+    console.log("Create bees");
+    for (let i: number = 0; i < _nBees; i++) {
+        let bee: Bee = new Bee(1.0);
+        bees.push(bee);
+    }
+}
+
+  function update(): void {
+    console.log("Update");
+    //ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+    for (let bee of bees) {
+        bee.fly(1 / 50);
+        bee.draw();
+    }
+
+    // ship.draw();
+    // handleCollisions();
+}
+
+  function drawMountain(mountainColor): void {
+  let x: number = 0;
+  let y: number = windowHeight * ((Math.random() * -0.3) + 0.7);
+  ctx.strokeStyle = mountainColor;
+  
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  while (x < windowWidth) {
+    let dx: number = 20 + 50;
+    let dy: number = (Math.random() - 0.5) * 100;
+    x = x + dx;
+    y = y + dy;
+    if (y < 0 || y > windowHeight) {
+      y = y - 2 * dy;
+    }
+    if (x > windowWidth) {
+      x = windowWidth;
+    }
+    ctx.lineTo(x, y);
+  }
+  ctx.lineTo(windowWidth, y);
+  ctx.lineTo(windowWidth, windowHeight);
+  ctx.lineTo(0, windowHeight);
+  ctx.lineTo(0, windowHeight * 0.4);
+
+  // fill in the colors
+  ctx.stroke();
+  ctx.fillStyle = mountainColor;
+  ctx.fill();
+}
+  function drawMountains(): void {
+  for (let i: number = 0; i < mountainColors.length; i++) {
+    drawMountain(mountainColors[i]);
+  }
+}
+ 
+//Anfang Cloud Moving
+
+  function MovingCloud (): void {
+
+    ctx.beginPath();
+    ctx.stroke();
+  
+    function drawCircle (x: any): void {
+    ctx.beginPath();
+    ctx.arc(x, 50, 60, Math.PI * 0.5, Math.PI * 1.5); //Circle drawing
+    ctx.arc(x + 70, 70 - 60, 70, Math.PI * 1, Math.PI * 1.85);
+    ctx.arc(x + 152, 40 - 45, 50, Math.PI * 1.37, Math.PI * 1.91);
+    ctx.arc(x + 200, 30, 60, Math.PI * 1.5, Math.PI * 0.5);
+    ctx.moveTo(x + 200, 10 + 60);
+    ctx.lineTo(x, 40 + 60);
+    ctx.strokeStyle = "darkblue";
+    ctx.stroke();
+    ctx.fillStyle = "blue";
+    ctx.fill();
+  }
+    var x: number = 0;
+    setInterval(function () { 
+    ctx.clearRect(0, 0, 0, 0);
+    drawCircle(x % 1300);
+    x++;
+  },            25);
+}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //Mond - Jirkas Code, abgeändert also random weggemacht :)
+  function drawMoon(): void {
+    let r1: number = 30;
+    let r2: number = 180;
+    let gradientSun: CanvasGradient = ctx.createRadialGradient(0, 0, r1, 0, 0, r2);
+    gradientSun.addColorStop(0, "HSLA(60, 100%, 90%, 1)");
+    gradientSun.addColorStop(0.1, "HSLA(60, 100%, 90%, 0.5)");
+    gradientSun.addColorStop(1, "HSLA(60, 100%, 80%, 0)");
+
+    let X: number = ctx.canvas.width;
+    let Y: number = ctx.canvas.height / 2 - 100;
+
+    ctx.save();
+    if (X > 700) {
+      X = 700;
+    }
+    if (Y < 20) {
+      Y = 20;
+    } else if (Y > 100) {
+      Y = 100;
+    }
+    ctx.translate(X, Y);
+
+    ctx.fillStyle = gradientSun;
+    ctx.arc(0, 0, r2, 0, 2 * Math.PI);
+    ctx.fill();
+
+    ctx.restore();
+  }
+  //Ende Mond
+
+    //Anfang Blumen - in Zusammenarbeit mit Julia Dajcman
+  function drawDaisy(): void {
+    
+
+    let x: number = (Math.random() * canvas.width - 10);
+    let y: number = (Math.random() * (canvas.height - canvas.height * 0.5) + canvas.height * 0.5);
+
+    ctx.save();
+
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.translate(x, y);
+    ctx.quadraticCurveTo(10, 5, 10, 30);
+    ctx.strokeStyle = "green"; //Stängel
+
+    ctx.stroke();
+
+    ctx.beginPath();
+    moveTo(10, 20);
+    ctx.arc(0, 0, 6, 0, 2 * Math.PI);
+    ctx.fillStyle = "pink";
+    ctx.strokeStyle = "red";
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+
+    for (let blossoms: number = 50; blossoms > 5; blossoms -= 5) {
+
+        ctx.beginPath();
+        moveTo(10, 20);
+        ctx.rotate(45 * Math.PI / 20);
+        ctx.arc(10, 0, 5, 0, 2 * Math.PI);
+        ctx.fillStyle = "orange";
+        ctx.strokeStyle = "orange";
+        ctx.fill();
+
+        ctx.stroke();
+    }
+
+    ctx.restore();
+}
+
+  function drawTulip(): void {
+
+    let x: number = (Math.random() * canvas.width - 10);
+    let y: number = (Math.random() * (canvas.height - canvas.height * 0.5) + canvas.height * 0.5);
+
+    ctx.save();
+
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.translate(x, y);
+    ctx.lineTo(0, 30);
+    ctx.strokeStyle = "#358443";
+
+    ctx.stroke();
+
+    ctx.beginPath();
+    moveTo(10, 20);
+    ctx.arc(0, 0, 9, 0, 1 * Math.PI);
+
+    ctx.fillStyle = "#AD407D";
+    ctx.strokeStyle = "#AD407D";
+    ctx.fill();
+    ctx.stroke();
+    moveTo(0, 20);
+    ctx.lineTo(-10, -10);
+    ctx.lineTo(-3, 2);
+    ctx.lineTo(1, -10);
+    ctx.lineTo(4, 2);
+    ctx.lineTo(9, -10);
+    ctx.lineTo(9, 3);
+    ctx.closePath();
+    ctx.fillStyle = "#AD407D";
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+
+    ctx.restore();
+
+}
+
+  
+  function drawFlowers(): void {
+
+    for (let i: number = 0; i < 10; i++) {
+        drawDaisy(), drawTulip();
 
     }
 
+   
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 
 
