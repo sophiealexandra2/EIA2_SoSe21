@@ -1,7 +1,7 @@
 namespace ClassesBlumenwiese {
     //Anfang Biene
 
-  const circle = function (x, y, radius, fillCircle): void {
+const circle = function (x, y, radius, fillCircle): void {
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, Math.PI * 2, false);
     if (fillCircle) {
@@ -11,7 +11,7 @@ namespace ClassesBlumenwiese {
     }
   
   };
-  function drawBee (x, y) {
+function drawBee (x, y) {
     ctx.lineWidth = 2;
     ctx.strokeStyle = "black";
     ctx.fillStyle = "gold";
@@ -24,11 +24,11 @@ namespace ClassesBlumenwiese {
     circle(x + 2, y - 1, 2, false);
   }
   
-  function biene (coordinate) {
-    let offset: number = Math.random() * 4 - 2;
+function biene (coordinate) {
+    let offset: number = Math.random() * 3 - 2;
     coordinate += offset;
   
-    if (coordinate > 400) {
+    if (coordinate > 700) {
         coordinate = 400;
     }
     if (coordinate < 0) {
@@ -38,16 +38,16 @@ namespace ClassesBlumenwiese {
   }
   
   
-  let x: number = 400;
-  let y: number = 700;
+let x: number = 400;
+let y: number = 700;
   
-  setInterval(function (): void {
+setInterval(function (): void {
    
         drawBee(x, y);
         x = biene(x);
         y = biene(y);
   
-  },          40);
+  },          20);
 
 
 

@@ -1,5 +1,8 @@
 "use strict";
-//Mit Hilfe von und in Zusammenarbeit mit Julia Dajcman
+//Mit Hilfe von und in Zusammenarbeit mit Julia Dajcman.
+//Ich weiß ich hätte exportimgData korrekt verwenden sollen aber ich habs leider gar nicht hinbekommen...
+//Ich weiß auch dass es wahrscheinlich daran liegt, dass meine Cloud und die Biene sich selbst weiterzeichnen. Ich habs aber versucht :(
+//Hab mit classes gearbeitet wo ich konnte, aber immerhin bewegt sich die Wolke und die Biene irgendwie
 var ClassesBlumenwiese;
 (function (ClassesBlumenwiese) {
     class Vector {
@@ -83,6 +86,7 @@ var ClassesBlumenwiese;
         }, 25);
         console.log(ClassesBlumenwiese.ctx.getImageData(100, 200, 100, 100));
     }
+    //funkt nicht..
     ClassesBlumenwiese.ctx.putImageData(saveBackgroundData, 0, 0);
     //Mond - Jirkas Code, abgeändert also random weggemacht :)
     function drawMoon() {
@@ -173,6 +177,8 @@ var ClassesBlumenwiese;
         ClassesBlumenwiese.ctx.closePath();
         ClassesBlumenwiese.ctx.restore();
     }
+    //Funkt nicht..
+    ClassesBlumenwiese.ctx.putImageData(saveBackgroundData, 0, 0);
     function drawFlowers() {
         for (let i = 0; i < 10; i++) {
             drawDaisy(), drawTulip();

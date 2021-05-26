@@ -1,4 +1,7 @@
-//Mit Hilfe von und in Zusammenarbeit mit Julia Dajcman
+//Mit Hilfe von und in Zusammenarbeit mit Julia Dajcman.
+//Ich weiß ich hätte exportimgData korrekt verwenden sollen aber ich habs leider gar nicht hinbekommen...
+//Ich weiß auch dass es wahrscheinlich daran liegt, dass meine Cloud und die Biene sich selbst weiterzeichnen. Ich habs aber versucht :(
+//Hab mit classes gearbeitet wo ich konnte, aber immerhin bewegt sich die Wolke und die Biene irgendwie
 namespace ClassesBlumenwiese { 
   
   class Vector {
@@ -119,11 +122,8 @@ namespace ClassesBlumenwiese {
 
 
 
-
-ctx.putImageData(saveBackgroundData, 0, 0);
-
-
-
+//funkt nicht..
+  ctx.putImageData(saveBackgroundData, 0, 0);
 
 
 
@@ -239,8 +239,9 @@ ctx.putImageData(saveBackgroundData, 0, 0);
     ctx.restore();
 
 }
+//Funkt nicht..
+  ctx.putImageData(saveBackgroundData, 0, 0);
 
-  
   function drawFlowers(): void {
 
     for (let i: number = 0; i < 10; i++) {
@@ -249,6 +250,7 @@ ctx.putImageData(saveBackgroundData, 0, 0);
     }
 
    
+    
 
 
 

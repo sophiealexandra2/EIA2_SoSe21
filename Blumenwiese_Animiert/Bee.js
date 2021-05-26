@@ -24,9 +24,9 @@ var ClassesBlumenwiese;
         circle(x + 2, y - 1, 2, false);
     }
     function biene(coordinate) {
-        let offset = Math.random() * 4 - 2;
+        let offset = Math.random() * 3 - 2;
         coordinate += offset;
-        if (coordinate > 400) {
+        if (coordinate > 700) {
             coordinate = 400;
         }
         if (coordinate < 0) {
@@ -40,6 +40,6 @@ var ClassesBlumenwiese;
         drawBee(x, y);
         x = biene(x);
         y = biene(y);
-    }, 40);
+    }, 20);
 })(ClassesBlumenwiese || (ClassesBlumenwiese = {}));
 //# sourceMappingURL=Bee.js.map
