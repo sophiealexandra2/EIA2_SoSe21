@@ -2,6 +2,7 @@
 //Ich weiß ich hätte exportimgData korrekt verwenden sollen aber ich habs leider gar nicht hinbekommen...
 //Ich weiß auch dass es wahrscheinlich daran liegt, dass meine Cloud und die Biene sich selbst weiterzeichnen. Ich habs aber versucht :(
 //Hab mit classes gearbeitet wo ich konnte, aber immerhin bewegt sich die Wolke und die Biene irgendwie
+//Manche Sachen sind so halbfertig, machen manchmal bestimmt auch wenig Sinn... weil ich die Code-Schnippsel gerne von den Videos (Asteroiden) ausprobieren wollte. Aber habs leider nicht hinbekommen
 namespace ClassesBlumenwiese { 
   
   class Vector {
@@ -158,7 +159,7 @@ namespace ClassesBlumenwiese {
   }
   //Ende Mond
 
-    //Anfang Blumen - in Zusammenarbeit mit Julia Dajcman
+    //Anfang Blumen 
   function drawDaisy(): void {
     
 
@@ -249,16 +250,6 @@ namespace ClassesBlumenwiese {
 
     }
 
-   
-    
-
-
-
 }
-
-
-
-
-
 
 }

@@ -3,6 +3,7 @@
 //Ich weiß ich hätte exportimgData korrekt verwenden sollen aber ich habs leider gar nicht hinbekommen...
 //Ich weiß auch dass es wahrscheinlich daran liegt, dass meine Cloud und die Biene sich selbst weiterzeichnen. Ich habs aber versucht :(
 //Hab mit classes gearbeitet wo ich konnte, aber immerhin bewegt sich die Wolke und die Biene irgendwie
+//Manche Sachen sind so halbfertig, machen manchmal bestimmt auch wenig Sinn... weil ich die Code-Schnippsel gerne von den Videos (Asteroiden) ausprobieren wollte. Aber habs leider nicht hinbekommen
 var ClassesBlumenwiese;
 (function (ClassesBlumenwiese) {
     class Vector {
@@ -115,7 +116,7 @@ var ClassesBlumenwiese;
         ClassesBlumenwiese.ctx.restore();
     }
     //Ende Mond
-    //Anfang Blumen - in Zusammenarbeit mit Julia Dajcman
+    //Anfang Blumen 
     function drawDaisy() {
         let x = (Math.random() * ClassesBlumenwiese.canvas.width - 10);
         let y = (Math.random() * (ClassesBlumenwiese.canvas.height - ClassesBlumenwiese.canvas.height * 0.5) + ClassesBlumenwiese.canvas.height * 0.5);

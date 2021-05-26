@@ -1,6 +1,4 @@
 namespace ClassesBlumenwiese {
-    //Anfang Biene
-
 const circle = function (x, y, radius, fillCircle): void {
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, Math.PI * 2, false);

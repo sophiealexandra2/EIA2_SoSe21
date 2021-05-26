@@ -1,7 +1,6 @@
 "use strict";
 var ClassesBlumenwiese;
 (function (ClassesBlumenwiese) {
-    //Anfang Biene
     const circle = function (x, y, radius, fillCircle) {
         ClassesBlumenwiese.ctx.beginPath();
         ClassesBlumenwiese.ctx.arc(x, y, radius, 0, Math.PI * 2, false);
