@@ -1,78 +1,66 @@
 namespace ClassesBlumenwiese {
-    export class Bee {
-        position: Vector;
-        velocity: Vector;
-        size: number;
+    //Anfang Biene
 
-        constructor(_size: number, _position?: Vector) {
-            console.log("bee constructor");
-
-            if (_position)
-                this.position = _position;
-            else
-                this.position = new Vector(0, 0);
-                
-            this.velocity = new Vector(0, 0);
-            this.velocity.random(100, 200);
-
-            
-            this.size = _size;
-        }
-
-        fly(_timeslice: number): void {
-            // console.log("Asteroid move");
-            let offset: Vector = new Vector(this.velocity.x, this.velocity.y);
-            offset.scale(_timeslice);
-            this.position.add(offset);
-
-            if (this.position.x < 0)
-                this.position.x += ctx.canvas.width;
-            if (this.position.y < 0)
-                this.position.y += ctx.canvas.height;
-            if (this.position.x > ctx.canvas.width)
-                this.position.x -= ctx.canvas.width;
-            if (this.position.y > ctx.canvas.height)
-                this.position.y -= ctx.canvas.height;
-        }
-
-        draw(): void {
-            console.log("bee draw");
-            ctx.save();
-            ctx.translate(this.position.x, this.position.y);
-            ctx.scale(this.size, this.size);
-            ctx.translate(-50, -50);
-            ctx.stroke(beePath);
-            ctx.restore();
-        }
-
-       
+  const circle = function (x, y, radius, fillCircle): void {
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+    if (fillCircle) {
+        ctx.fill();
+    } else {
+        ctx.stroke();
     }
+  
+  };
+  function drawBee (x, y) {
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = "gold";
+  
+    circle(x, y, 8, true);
+    circle(x, y, 8, false);
+    circle(x - 5, y - 11, 5, false);
+    circle(x + 5, y - 11, 5, false);
+    circle(x - 2, y - 1, 2, false);
+    circle(x + 2, y - 1, 2, false);
+  }
+  
+  function biene (coordinate) {
+    let offset: number = Math.random() * 4 - 2;
+    coordinate += offset;
+  
+    if (coordinate > 400) {
+        coordinate = 400;
+    }
+    if (coordinate < 0) {
+        coordinate = 0;
+    }
+    return coordinate;
+  }
+  
+  
+  let x: number = 400;
+  let y: number = 700;
+  
+  setInterval(function (): void {
+   
+        drawBee(x, y);
+        x = biene(x);
+        y = biene(y);
+  
+  },          40);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

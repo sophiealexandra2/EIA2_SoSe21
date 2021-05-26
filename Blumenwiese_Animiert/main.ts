@@ -84,10 +84,15 @@ namespace ClassesBlumenwiese {
 
   function MovingCloud (): void {
 
+    class Clouds {
+      x: number;
+      y: number;
+    }
+
     ctx.beginPath();
     ctx.stroke();
   
-    function drawCircle (x: any, y): void {
+    function drawCircle (x, y): void {
     ctx.beginPath();
     ctx.arc(x, 50, y, Math.PI * 0.5, Math.PI * 1.5); //Circle drawing
     ctx.arc(x + 70, 60, 70, Math.PI * 1, Math.PI * 1.85);
@@ -100,7 +105,7 @@ namespace ClassesBlumenwiese {
     ctx.fillStyle = "blue";
     ctx.fill();
   }
-    var x: number = 0;
+    let x: number = 0;
     setInterval(function (): void { 
     drawCircle(x % 1300, 70);
     x++;
@@ -110,14 +115,12 @@ namespace ClassesBlumenwiese {
 }
 
 
-//Anfang Biene
 
 
 
 
 
-
-ctx.putImageData(saveBackgroundData, 100, 100);
+ctx.putImageData(saveBackgroundData, 0, 0);
 
 
 

@@ -59,6 +59,8 @@ var ClassesBlumenwiese;
     }
     //Anfang Cloud Moving
     function MovingCloud() {
+        class Clouds {
+        }
         ClassesBlumenwiese.ctx.beginPath();
         ClassesBlumenwiese.ctx.stroke();
         function drawCircle(x, y) {
@@ -74,15 +76,14 @@ var ClassesBlumenwiese;
             ClassesBlumenwiese.ctx.fillStyle = "blue";
             ClassesBlumenwiese.ctx.fill();
         }
-        var x = 0;
+        let x = 0;
         setInterval(function () {
             drawCircle(x % 1300, 70);
             x++;
         }, 25);
         console.log(ClassesBlumenwiese.ctx.getImageData(100, 200, 100, 100));
     }
-    //Anfang Biene
-    ClassesBlumenwiese.ctx.putImageData(saveBackgroundData, 100, 100);
+    ClassesBlumenwiese.ctx.putImageData(saveBackgroundData, 0, 0);
     //Mond - Jirkas Code, abgeändert also random weggemacht :)
     function drawMoon() {
         let r1 = 30;

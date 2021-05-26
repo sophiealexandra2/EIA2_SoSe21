@@ -1,41 +1,45 @@
 "use strict";
 var ClassesBlumenwiese;
 (function (ClassesBlumenwiese) {
-    class Bee {
-        constructor(_size, _position) {
-            console.log("bee constructor");
-            if (_position)
-                this.position = _position;
-            else
-                this.position = new ClassesBlumenwiese.Vector(0, 0);
-            this.velocity = new ClassesBlumenwiese.Vector(0, 0);
-            this.velocity.random(100, 200);
-            this.size = _size;
+    //Anfang Biene
+    const circle = function (x, y, radius, fillCircle) {
+        ClassesBlumenwiese.ctx.beginPath();
+        ClassesBlumenwiese.ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+        if (fillCircle) {
+            ClassesBlumenwiese.ctx.fill();
         }
-        fly(_timeslice) {
-            // console.log("Asteroid move");
-            let offset = new ClassesBlumenwiese.Vector(this.velocity.x, this.velocity.y);
-            offset.scale(_timeslice);
-            this.position.add(offset);
-            if (this.position.x < 0)
-                this.position.x += ClassesBlumenwiese.ctx.canvas.width;
-            if (this.position.y < 0)
-                this.position.y += ClassesBlumenwiese.ctx.canvas.height;
-            if (this.position.x > ClassesBlumenwiese.ctx.canvas.width)
-                this.position.x -= ClassesBlumenwiese.ctx.canvas.width;
-            if (this.position.y > ClassesBlumenwiese.ctx.canvas.height)
-                this.position.y -= ClassesBlumenwiese.ctx.canvas.height;
+        else {
+            ClassesBlumenwiese.ctx.stroke();
         }
-        draw() {
-            console.log("bee draw");
-            ClassesBlumenwiese.ctx.save();
-            ClassesBlumenwiese.ctx.translate(this.position.x, this.position.y);
-            ClassesBlumenwiese.ctx.scale(this.size, this.size);
-            ClassesBlumenwiese.ctx.translate(-50, -50);
-            ClassesBlumenwiese.ctx.stroke(ClassesBlumenwiese.beePath);
-            ClassesBlumenwiese.ctx.restore();
-        }
+    };
+    function drawBee(x, y) {
+        ClassesBlumenwiese.ctx.lineWidth = 2;
+        ClassesBlumenwiese.ctx.strokeStyle = "black";
+        ClassesBlumenwiese.ctx.fillStyle = "gold";
+        circle(x, y, 8, true);
+        circle(x, y, 8, false);
+        circle(x - 5, y - 11, 5, false);
+        circle(x + 5, y - 11, 5, false);
+        circle(x - 2, y - 1, 2, false);
+        circle(x + 2, y - 1, 2, false);
     }
-    ClassesBlumenwiese.Bee = Bee;
+    function biene(coordinate) {
+        let offset = Math.random() * 4 - 2;
+        coordinate += offset;
+        if (coordinate > 400) {
+            coordinate = 400;
+        }
+        if (coordinate < 0) {
+            coordinate = 0;
+        }
+        return coordinate;
+    }
+    let x = 400;
+    let y = 700;
+    setInterval(function () {
+        drawBee(x, y);
+        x = biene(x);
+        y = biene(y);
+    }, 40);
 })(ClassesBlumenwiese || (ClassesBlumenwiese = {}));
 //# sourceMappingURL=Bee.js.map
