@@ -59,6 +59,4 @@ setInterval(function (): void {
 
 
 
-
-
 }
