@@ -5,7 +5,7 @@
 //Manche Sachen sind so halbfertig, machen manchmal bestimmt auch wenig Sinn... weil ich die Code-Schnippsel gerne von den Videos (Asteroiden) ausprobieren wollte. Aber habs leider nicht hinbekommen
 namespace ClassesBlumenwiese { 
   
-  class Vector {
+  export class Vector {
     x: number;
     y: number;
 }

@@ -1,6 +1,6 @@
 namespace ClassesBlumenwiese {
     
-        export class Vector {
+        export class Vectors {
             x: number;
             y: number;
     
