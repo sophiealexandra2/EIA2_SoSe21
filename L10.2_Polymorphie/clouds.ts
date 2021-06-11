@@ -19,7 +19,7 @@ namespace L10_2 {
         }
 
         draw(): void {
-//Jirkas Code
+//Jirkas Code. Mit meinen alten Wolken hab ich die Bewegung irgendwie nicht hinbekommen. Aber so hat es eeeendlich geklappt
             let particleNumber: number = 40;
             let particleRadius: number = 50;
             let particle: Path2D = new Path2D();

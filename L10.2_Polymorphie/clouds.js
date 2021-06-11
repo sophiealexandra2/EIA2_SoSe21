@@ -9,7 +9,7 @@ var L10_2;
             this.y = _y;
         }
         draw() {
-            //Jirkas Code
+            //Jirkas Code. Mit meinen alten Wolken hab ich die Bewegung irgendwie nicht hinbekommen. Aber so hat es eeeendlich geklappt
             let particleNumber = 40;
             let particleRadius = 50;
             let particle = new Path2D();
