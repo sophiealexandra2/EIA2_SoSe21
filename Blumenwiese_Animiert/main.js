@@ -8,6 +8,7 @@ var ClassesBlumenwiese;
 (function (ClassesBlumenwiese) {
     class Vector {
     }
+    ClassesBlumenwiese.Vector = Vector;
     ClassesBlumenwiese.canvas = document.querySelector("canvas");
     let windowWidth = window.innerWidth;
     let windowHeight = window.innerHeight;

@@ -1,7 +1,7 @@
 "use strict";
 var ClassesBlumenwiese;
 (function (ClassesBlumenwiese) {
-    class Vector {
+    class Vectors {
         constructor(_x, _y) {
             this.set(_x, _y);
         }
@@ -24,6 +24,6 @@ var ClassesBlumenwiese;
             this.scale(length);
         }
     }
-    ClassesBlumenwiese.Vector = Vector;
+    ClassesBlumenwiese.Vectors = Vectors;
 })(ClassesBlumenwiese || (ClassesBlumenwiese = {}));
 //# sourceMappingURL=Vector.js.map
