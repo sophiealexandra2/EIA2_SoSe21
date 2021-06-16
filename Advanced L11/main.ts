@@ -62,7 +62,7 @@ namespace L11 {
         }
         
         drawMoon();
-        
+        drawBeehive();
 
     }
 
@@ -162,6 +162,34 @@ namespace L11 {
    
   }
   //Ende Mond
+
+  //Beehive
+    function drawBeehive(): void {
+    ctx.save();
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = "orange";
+    ctx.translate(120, 520);
+    ctx.scale(0.3, 0.3);
+    ctx.lineWidth = 18;
    
+    ctx.beginPath();
+    ctx.arc (-10, -80, 200, 170, 180);
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.rect(-110, 30, 220, 10);
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(0, 0, 30, 0, 2 * Math.PI);
+    ctx.closePath();
+    ctx.fillStyle = "black";
+    ctx.fill();
+    ctx.restore();
+
+    
+   }
 
 } //Ende Namespace

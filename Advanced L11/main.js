@@ -46,6 +46,7 @@ var L11;
             }
         }
         drawMoon();
+        drawBeehive();
     }
     function createBee() {
         for (let i = 0; i < 10; i++) {
@@ -122,5 +123,30 @@ var L11;
         L11.ctx.restore();
     }
     //Ende Mond
+    //Beehive
+    function drawBeehive() {
+        L11.ctx.save();
+        L11.ctx.strokeStyle = "black";
+        L11.ctx.fillStyle = "orange";
+        L11.ctx.translate(120, 520);
+        L11.ctx.scale(0.3, 0.3);
+        L11.ctx.lineWidth = 18;
+        L11.ctx.beginPath();
+        L11.ctx.arc(-10, -80, 200, 170, 180);
+        L11.ctx.stroke();
+        L11.ctx.fill();
+        L11.ctx.closePath();
+        L11.ctx.beginPath();
+        L11.ctx.rect(-110, 30, 220, 10);
+        L11.ctx.stroke();
+        L11.ctx.fill();
+        L11.ctx.closePath();
+        L11.ctx.beginPath();
+        L11.ctx.arc(0, 0, 30, 0, 2 * Math.PI);
+        L11.ctx.closePath();
+        L11.ctx.fillStyle = "black";
+        L11.ctx.fill();
+        L11.ctx.restore();
+    }
 })(L11 || (L11 = {})); //Ende Namespace
 //# sourceMappingURL=main.js.map
