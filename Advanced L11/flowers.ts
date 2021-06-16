@@ -2,8 +2,8 @@ namespace L11 {
 //Mit Julia Dacjman damals zusammen gemacht
     export class Flower {
         public position: vector;
-        public baseColor: string;
-        public quantity: number;
+        protected baseColor: string;
+        protected quantity: number;
 
         constructor(_position: vector, _baseColor: string, _quantity: number) {
             this.position = _position;

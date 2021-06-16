@@ -13,7 +13,7 @@ namespace L11{
 
         public abstract draw(): void;
 
-        public abstract move(_timeslice: number, _movePattern: boolean): void {
+        public move(_timeslice: number, _movePattern: boolean): void {
             let offset: vector = new vector(this.velocity.X, this.velocity.Y);
 
             offset.scale(_timeslice);

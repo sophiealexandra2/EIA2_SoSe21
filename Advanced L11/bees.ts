@@ -1,10 +1,10 @@
 namespace L11 {
 
     export class Bee extends Movable {
-        position: vector;
-        velocity: vector;
-        scaleX: number;
-        scaleY: number;
+        public position: vector;
+        public velocity: vector;
+        protected scaleX: number;
+        protected scaleY: number;
 
         constructor(_position: vector, _velocity: vector, _scaleX: number, _scaleY: number) {
             super (_position, _velocity);
@@ -14,7 +14,7 @@ namespace L11 {
         }
 
 
-        draw(): void {
+        public draw(): void {
 
             ctx.save();
             ctx.lineWidth = 2;

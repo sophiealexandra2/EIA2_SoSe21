@@ -1,12 +1,12 @@
 namespace L11 {
 
     export class Cloud extends Movable {
-
-        position: vector;
-        velocity: vector;
-        size: vector;
         x: number;
         y: number;
+        position: vector;
+        velocity: vector;
+        protected size: vector;
+        
 
         constructor(_position: vector, _size: vector, _velocity: vector, _x: number, _y: number) {
             super(_position, _velocity);
@@ -18,7 +18,7 @@ namespace L11 {
     
         }
 
-        draw(): void {
+        public draw(): void {
 //Jirkas Code. Mit meinen alten Wolken hab ich die Bewegung irgendwie nicht hinbekommen. Aber so hat es eeeendlich geklappt
             let particleNumber: number = 40;
             let particleRadius: number = 50;
