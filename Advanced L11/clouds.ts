@@ -1,10 +1,9 @@
 namespace L11 {
 
     export class Cloud extends Movable {
+        //Ersten zwei Attribute rausgenommen, da bereits gegeben
         x: number;
         y: number;
-        position: vector;
-        velocity: vector;
         protected size: vector;
         
 

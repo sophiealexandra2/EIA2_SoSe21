@@ -1,5 +1,6 @@
 namespace L11 {
 //Jirkas Code (Asteroids/vector.ts)
+    // tslint:disable-next-line: class-name
     export class vector {
         public X: number;
         public Y: number;

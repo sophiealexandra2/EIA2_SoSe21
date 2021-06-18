@@ -1,8 +1,6 @@
 namespace L11 {
 
     export class Bee extends Movable {
-        public position: vector;
-        public velocity: vector;
         protected scaleX: number;
         protected scaleY: number;
 

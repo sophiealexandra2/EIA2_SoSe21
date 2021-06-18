@@ -2,6 +2,7 @@
 var L11;
 (function (L11) {
     //Jirkas Code (Asteroids/vector.ts)
+    // tslint:disable-next-line: class-name
     class vector {
         constructor(_X, _Y) {
             this.X = _X;

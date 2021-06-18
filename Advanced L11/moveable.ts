@@ -1,6 +1,7 @@
-namespace L11{
+namespace L11 {
 
     export abstract class Movable {
+        //Ersten zwei Attribute rausgenommen, da bereits gegeben
 
         protected position: vector;
         protected velocity: vector;

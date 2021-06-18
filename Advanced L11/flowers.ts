@@ -10,6 +10,42 @@ namespace L11 {
             this.baseColor = _baseColor;
             this.quantity = _quantity;
         }
+        public draw2(): void {
+    
+            ctx.save();
+    
+            ctx.beginPath();
+            ctx.moveTo(this.position.X, this.position.Y);
+            ctx.translate(this.position.X, this.position.Y);
+            ctx.quadraticCurveTo(10, 5, 10, 30);
+            ctx.strokeStyle = "#358443";
+    
+            ctx.stroke();
+    
+            ctx.beginPath();
+            moveTo(10, 20);
+            ctx.arc(0, 0, 6, 0, 2 * Math.PI);
+            ctx.fillStyle = "#CED54A";
+            ctx.strokeStyle = "#CED54A";
+            ctx.fill();
+            ctx.stroke();
+            ctx.closePath();
+    
+            for (let blossoms: number = 80; blossoms > 8; blossoms -= 8) {
+    
+                ctx.beginPath();
+                moveTo(10, 20);
+                ctx.rotate(45 * Math.PI / 20);
+                ctx.arc(10, 0, 5, 0, 2 * Math.PI);
+                ctx.fillStyle = "white";
+                ctx.strokeStyle = "purple";
+                ctx.fill();
+    
+                ctx.stroke();
+            }
+    
+            ctx.restore();
+        }
 
         public draw(): void {
             ctx.save();
@@ -53,6 +89,10 @@ namespace L11 {
         }
 
             ctx.restore();
+        
         }
+        
+       
     }
+
 }

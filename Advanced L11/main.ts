@@ -10,10 +10,12 @@ namespace L11 {
     }
     let horizon: number;
     let flowerArray: Flower [] = [];
+    let flowerArray2: Flower [] = [];
     let xCloudArray: number [] = [];
     let yCloudArray: number [] = [];
     let movableArray: Movable [] = [];
     
+
 
 
     function handleload (): void {
@@ -23,22 +25,63 @@ namespace L11 {
         if (!canvas)
         return;
         ctx = canvas.getContext("2d")!;
-        
+       
+
 
         horizon = window.innerHeight * 0.6;
+        drawDaisy();
         drawTulip();
+        
         createBee();
+      
+        nectarAmount(), nectarAmount2();
+        window.setInterval(nectarAmount, 1500);
 
         let cloudSize: vector = new vector (250, 70);
         createCloudxy(20, cloudSize);
         createCloud();
-   
         
-        window.setInterval(drawBackground, 100);
+        
+        window.setInterval(updateAnimation, 100);
+        
+
         
     }
-    
-    function drawBackground(): void {
+    //Nectar Fill Bar
+    let fillNumber: number = Math.floor(Math.random() * 100);
+    let i: number = 0;
+    function nectarAmount(): void {
+        
+        let chart: HTMLElement = <HTMLElement>document.querySelector(".chart1");
+        let nectarNumber: HTMLElement = <HTMLElement>document.querySelector(".fillLevel1");
+        i++;
+        
+        chart.setAttribute("style", "width:" + (fillNumber + i + "%"));
+        nectarNumber.innerHTML = "Nectar Level for Daisy: " + (fillNumber + i) + " %";
+
+
+        
+        console.log("1.Nectar Amount funktioniert");
+    }
+
+
+    let fillNumber2: number = Math.floor(Math.random() * 100);
+    let x: number = 0;
+    function nectarAmount2(): void {
+        
+        let chart: HTMLElement = <HTMLElement>document.querySelector(".chart2");
+        let nectarNumber: HTMLElement = <HTMLElement>document.querySelector(".fillLevel2");
+        x++;
+        
+        chart.setAttribute("style", "width:" + (fillNumber2 + x + "%"));
+        nectarNumber.innerHTML = "Nectar Level for Tulips: " + (fillNumber2 + x) + " %";  
+        
+        console.log("2.Nectar Amount funktioniert");
+    }
+
+    //Ende Nectar Fill Bar
+    //Funktion umbenannt
+    function updateAnimation(): void {
         let gradient: CanvasGradient = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
         gradient.addColorStop(0, "#303461");
         gradient.addColorStop(0.3, "#85536E");
@@ -46,10 +89,6 @@ namespace L11 {
         gradient.addColorStop(0.9, "green");
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-
-        for (let i: number = 0; i < flowerArray.length; i++) {
-            flowerArray[i].draw();
-        }
 
         for (let movable of movableArray) {
             movable.draw();
@@ -60,12 +99,24 @@ namespace L11 {
             movable.move(1 / 60, false);   
             }
         }
+
+        for (let i: number = 0; i < flowerArray.length; i++) {
+            flowerArray[i].draw();
+        }
+        for (let o: number = 0; i < flowerArray2.length; o++) {
+            flowerArray2[o].draw2();
+        }
+
+       
         
         drawMoon();
+        
         drawBeehive();
+        drawDaisy();
+        
 
     }
-
+    
     function createBee(): void {
 
         for (let i: number = 0; i < 10; i++) {
@@ -90,6 +141,19 @@ namespace L11 {
             let flowerLeft: Flower = new Flower(flowerPosition, "#355233", 10);
             flowerLeft.draw();
             flowerArray.push(flowerLeft);
+        }
+    }
+
+//Mit Julia zusammen gemacht damals
+    function drawDaisy(): void {
+        
+        for (let o: number = 0; o < 10; o++) {
+            let randomX: number = Math.random() * window.innerWidth;
+            let randomY: number = Math.random() * (window.innerHeight * 0.8 - window.innerHeight) + window.innerHeight;
+            let flowerPosition: vector = new vector (randomX, randomY);
+            let flowerLeft2: Flower = new Flower(flowerPosition, "#355233", 10);
+            flowerLeft2.draw2();
+            flowerArray2.push(flowerLeft2);
         }
     }
 
@@ -191,5 +255,6 @@ namespace L11 {
 
     
    }
+
 
 } //Ende Namespace

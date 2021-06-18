@@ -8,6 +8,7 @@ var L11;
     L11.VectorMountains = VectorMountains;
     let horizon;
     let flowerArray = [];
+    let flowerArray2 = [];
     let xCloudArray = [];
     let yCloudArray = [];
     let movableArray = [];
@@ -18,14 +19,40 @@ var L11;
             return;
         L11.ctx = L11.canvas.getContext("2d");
         horizon = window.innerHeight * 0.6;
+        drawDaisy();
         drawTulip();
         createBee();
+        nectarAmount(), nectarAmount2();
+        window.setInterval(nectarAmount, 1500);
         let cloudSize = new L11.vector(250, 70);
         createCloudxy(20, cloudSize);
         createCloud();
-        window.setInterval(drawBackground, 100);
+        window.setInterval(updateAnimation, 100);
     }
-    function drawBackground() {
+    //Nectar Fill Bar
+    let fillNumber = Math.floor(Math.random() * 100);
+    let i = 0;
+    function nectarAmount() {
+        let chart = document.querySelector(".chart1");
+        let nectarNumber = document.querySelector(".fillLevel1");
+        i++;
+        chart.setAttribute("style", "width:" + (fillNumber + i + "%"));
+        nectarNumber.innerHTML = "Nectar Level for Daisy: " + (fillNumber + i) + " %";
+        console.log("1.Nectar Amount funktioniert");
+    }
+    let fillNumber2 = Math.floor(Math.random() * 100);
+    let x = 0;
+    function nectarAmount2() {
+        let chart = document.querySelector(".chart2");
+        let nectarNumber = document.querySelector(".fillLevel2");
+        x++;
+        chart.setAttribute("style", "width:" + (fillNumber2 + x + "%"));
+        nectarNumber.innerHTML = "Nectar Level for Tulips: " + (fillNumber2 + x) + " %";
+        console.log("2.Nectar Amount funktioniert");
+    }
+    //Ende Nectar Fill Bar
+    //Funktion umbenannt
+    function updateAnimation() {
         let gradient = L11.ctx.createLinearGradient(0, 0, 0, L11.ctx.canvas.height);
         gradient.addColorStop(0, "#303461");
         gradient.addColorStop(0.3, "#85536E");
@@ -33,9 +60,6 @@ var L11;
         gradient.addColorStop(0.9, "green");
         L11.ctx.fillStyle = gradient;
         L11.ctx.fillRect(0, 0, L11.ctx.canvas.width, L11.ctx.canvas.height);
-        for (let i = 0; i < flowerArray.length; i++) {
-            flowerArray[i].draw();
-        }
         for (let movable of movableArray) {
             movable.draw();
             if (movable instanceof L11.Bee) {
@@ -45,8 +69,15 @@ var L11;
                 movable.move(1 / 60, false);
             }
         }
+        for (let i = 0; i < flowerArray.length; i++) {
+            flowerArray[i].draw();
+        }
+        for (let o = 0; i < flowerArray2.length; o++) {
+            flowerArray2[o].draw2();
+        }
         drawMoon();
         drawBeehive();
+        drawDaisy();
     }
     function createBee() {
         for (let i = 0; i < 10; i++) {
@@ -67,6 +98,17 @@ var L11;
             let flowerLeft = new L11.Flower(flowerPosition, "#355233", 10);
             flowerLeft.draw();
             flowerArray.push(flowerLeft);
+        }
+    }
+    //Mit Julia zusammen gemacht damals
+    function drawDaisy() {
+        for (let o = 0; o < 10; o++) {
+            let randomX = Math.random() * window.innerWidth;
+            let randomY = Math.random() * (window.innerHeight * 0.8 - window.innerHeight) + window.innerHeight;
+            let flowerPosition = new L11.vector(randomX, randomY);
+            let flowerLeft2 = new L11.Flower(flowerPosition, "#355233", 10);
+            flowerLeft2.draw2();
+            flowerArray2.push(flowerLeft2);
         }
     }
     function createCloudxy(_particleNumber, _size) {
