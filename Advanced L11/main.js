@@ -77,7 +77,6 @@ var L11;
         }
         drawMoon();
         drawBeehive();
-        drawDaisy();
     }
     function createBee() {
         for (let i = 0; i < 10; i++) {

@@ -14,7 +14,7 @@ var L11;
             L11.ctx.moveTo(this.position.X, this.position.Y);
             L11.ctx.translate(this.position.X, this.position.Y);
             L11.ctx.quadraticCurveTo(10, 5, 10, 30);
-            L11.ctx.strokeStyle = "#358443";
+            L11.ctx.strokeStyle = "darkgreen";
             L11.ctx.stroke();
             L11.ctx.beginPath();
             moveTo(10, 20);

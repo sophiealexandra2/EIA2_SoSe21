@@ -18,7 +18,7 @@ namespace L11 {
             ctx.moveTo(this.position.X, this.position.Y);
             ctx.translate(this.position.X, this.position.Y);
             ctx.quadraticCurveTo(10, 5, 10, 30);
-            ctx.strokeStyle = "#358443";
+            ctx.strokeStyle = "darkgreen";
     
             ctx.stroke();
     

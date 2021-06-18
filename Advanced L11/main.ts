@@ -112,7 +112,6 @@ namespace L11 {
         drawMoon();
         
         drawBeehive();
-        drawDaisy();
         
 
     }
