@@ -6,7 +6,7 @@ var Endabgabe_SoSe21;
      */
     class UIHelper {
         /**
-         * kreiert span Element
+         * kreiert row span Element
          */
         static createSpan(id, text) {
             const s = document.createElement("span");
@@ -18,7 +18,7 @@ var Endabgabe_SoSe21;
             return s;
         }
         /**
-         * creates input element
+         * creates input element for the color input
          * id of the element
          * text: displayed text
          * cb: callback
@@ -46,6 +46,7 @@ var Endabgabe_SoSe21;
         /**
          * creates a row
          * {HTMLTableCellElement[]} cells list of cells
+         * tr = tablerow
          * returns HTMLTableRowElement
          */
         static createRow(...cells) {

@@ -3,8 +3,8 @@ namespace Endabgabe_SoSe21 {
      * options for cell
      */
     export interface ICellOptions {
-        rowspan?: number;
-        th?: boolean;
+        rowspan: number;
+        th: boolean;
     }
 
     /**
@@ -13,7 +13,7 @@ namespace Endabgabe_SoSe21 {
     export class UIHelper {
 
         /**
-         * kreiert span Element
+         * kreiert row span Element
          */
 
         
@@ -28,7 +28,7 @@ namespace Endabgabe_SoSe21 {
         }
 
         /**
-         * creates input element
+         * creates input element for the color input
          * id of the element
          * text: displayed text 
          * cb: callback
@@ -58,6 +58,7 @@ namespace Endabgabe_SoSe21 {
         /**
          * creates a row
          * {HTMLTableCellElement[]} cells list of cells
+         * tr = tablerow
          * returns HTMLTableRowElement
          */
         public static createRow(...cells: HTMLTableCellElement[]): HTMLTableRowElement {
