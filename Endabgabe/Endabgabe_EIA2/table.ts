@@ -3,8 +3,8 @@ namespace Endabgabe_SoSe21 {
      * options for cell
      */
     export interface ICellOptions {
-        rowspan: number;
-        th: boolean;
+        rowspan?: number;
+        th?: boolean;
     }
 
     /**
