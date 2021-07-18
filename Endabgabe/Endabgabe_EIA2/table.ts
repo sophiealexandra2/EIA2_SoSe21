@@ -1,6 +1,8 @@
 namespace Endabgabe_SoSe21 {
     /**
      * options for cell
+     * mark parameter rowspan and th as optional. Sonst ist es undefinded wenn es nicht benutzt wird. 
+     * Hätte auch rowspan: number | undefinded; schreiben können
      */
     export interface ICellOptions {
         rowspan?: number;
