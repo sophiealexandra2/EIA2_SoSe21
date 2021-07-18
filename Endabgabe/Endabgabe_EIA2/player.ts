@@ -1,8 +1,8 @@
 namespace Endabgabe_SoSe21 {
     //optionale Anzeige von Radien um den Spieler herum und die Original Position des Spielers
     export interface IPlayerDrawOptions {
-        showActionRadius?: boolean;
-        showPlayerOrigin?: boolean;
+        showActionRadius: boolean;
+        showPlayerOrigin: boolean;
     }
 
 

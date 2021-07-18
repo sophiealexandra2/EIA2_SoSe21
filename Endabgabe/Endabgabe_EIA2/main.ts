@@ -92,7 +92,7 @@ namespace Endabgabe_SoSe21 {
             playerDrawOptions.showActionRadius = el.checked;
         });
 
-        // togglesplayer origin lines
+        // toggle player origin lines
         //event:Event = Event das im Dom passiert
         document.getElementById("toggle-player-origin")?.addEventListener("change", (event: Event) => {
             //event.target ist nun als typ HTMLInputElement

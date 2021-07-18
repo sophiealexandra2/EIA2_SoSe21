@@ -71,7 +71,7 @@ var Endabgabe_SoSe21;
             const el = event.target;
             playerDrawOptions.showActionRadius = el.checked;
         });
-        // togglesplayer origin lines
+        // toggle player origin lines
         //event:Event = Event das im Dom passiert
         document.getElementById("toggle-player-origin")?.addEventListener("change", (event) => {
             //event.target ist nun als typ HTMLInputElement
