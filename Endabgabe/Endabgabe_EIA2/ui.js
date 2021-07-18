@@ -63,7 +63,7 @@ var Endabgabe_SoSe21;
         /**
          * creates clock
          * playerUi: ui of the player
-         * time: current time left
+         * time: current time
          */
         createTime(playerUi, time) {
             let timeElement = document.getElementById("time");
@@ -79,6 +79,7 @@ var Endabgabe_SoSe21;
             const minutes = Math.floor(time / (1000 * 60));
             const minuteRest = time % (1000 * 60);
             const seconds = Math.floor(minuteRest / 1000);
+            //Anpassbarer Teil für Zeitdarstellung
             timeElement.innerHTML = `Zeit: ${minutes.toString().length < 2 ? `0${minutes}` : minutes}:${seconds.toString().length < 2 ? `0${seconds}` : seconds}`;
         }
     }

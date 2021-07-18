@@ -74,7 +74,7 @@ namespace Endabgabe_SoSe21 {
         /**
          * creates clock
          * playerUi: ui of the player
-         * time: current time left 
+         * time: current time  
          */
         public createTime(playerUi: HTMLElement, time: number): void {
             let timeElement: HTMLSpanElement | null = document.getElementById("time");
@@ -90,7 +90,7 @@ namespace Endabgabe_SoSe21 {
             const minutes: number = Math.floor(time / (1000 * 60));
             const minuteRest: number = time % (1000 * 60);
             const seconds: number = Math.floor(minuteRest / 1000);
-
+            //Anpassbarer Teil für Zeitdarstellung
             timeElement.innerHTML = `Zeit: ${minutes.toString().length < 2 ? `0${minutes}` : minutes}:${seconds.toString().length < 2 ? `0${seconds}` : seconds}`;
         }
 
