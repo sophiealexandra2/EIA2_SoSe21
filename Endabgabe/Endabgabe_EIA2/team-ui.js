@@ -28,6 +28,7 @@ var Endabgabe_SoSe21;
             const row = Endabgabe_SoSe21.UIHelper.createRow(Endabgabe_SoSe21.UIHelper.createCell(Endabgabe_SoSe21.UIHelper.createSpan("l", "Farbe"), { th: true }), 
             // add listener to handle color changes on home team. Sobald Texteingabe
             Endabgabe_SoSe21.UIHelper.createCell(Endabgabe_SoSe21.UIHelper.createInput("color-home", "", (v) => {
+                //for each array (m) content
                 players.forEach((m) => {
                     if (m instanceof Endabgabe_SoSe21.Player && m.getTeam() === 1) {
                         m.setColor(v);

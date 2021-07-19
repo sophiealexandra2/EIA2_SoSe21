@@ -31,6 +31,7 @@ namespace Endabgabe_SoSe21 {
 
                 // add listener to handle color changes on home team. Sobald Texteingabe
                 UIHelper.createCell(UIHelper.createInput("color-home", "", (v: string) => {
+                    //for each array (m) content
                     players.forEach((m) => {
                         if (m instanceof Player && m.getTeam() === 1) {
                             m.setColor(v);

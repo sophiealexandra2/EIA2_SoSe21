@@ -259,8 +259,8 @@ var Endabgabe_SoSe21;
         //2 more players 
         const p9 = new Endabgabe_SoSe21.Player(`Player 9`, new Endabgabe_SoSe21.Vector(field.getPadding() + ((segmentX * 3) - (segmentX / 2)), field.getPadding() + ((segmentY * 2) / 2)), Endabgabe_SoSe21.randomInteger(30, 90), Endabgabe_SoSe21.randomInteger(30, 90), Endabgabe_SoSe21.randomInteger(30, 90), teamColor, teamnumber, 10);
         const p10 = new Endabgabe_SoSe21.Player(`Player 10`, new Endabgabe_SoSe21.Vector(field.getPadding() + ((segmentX * 3) - (segmentX / 2)), field.getPadding() + ((segmentY * 4) - (segmentY))), Endabgabe_SoSe21.randomInteger(30, 90), Endabgabe_SoSe21.randomInteger(30, 90), Endabgabe_SoSe21.randomInteger(30, 90), teamColor, teamnumber, 11);
-        // creates exaclty six substitutes
-        //Der Vorteil von $ ist, dass ich alles an einem Stück schreiben kann und die Konvertierung von Zahlen zu string automatisch passiert.
+        // creates exactly six substitutes
+        //Der Vorteil von $ ist, dass ich alles an einem Stück schreiben kann (wie vorher schonmal gemahct) und die Konvertierung von Zahlen zu string automatisch passiert.
         for (let i = 0; i < 6; i++) {
             const p = new Endabgabe_SoSe21.Player(`Substitute ${i + 1}`, new Endabgabe_SoSe21.Vector(0, 0), Endabgabe_SoSe21.randomInteger(30, 90), Endabgabe_SoSe21.randomInteger(30, 90), Endabgabe_SoSe21.randomInteger(30, 90), teamColor, teamnumber, 12 + i);
             p.setActive(false);

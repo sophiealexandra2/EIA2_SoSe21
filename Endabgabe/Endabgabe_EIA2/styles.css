@@ -49,3 +49,12 @@ body {
     text-align: center;
     background-color: red;
 }
+
+footer {
+    position: absolute;
+    text-align: center;
+    font-size: 10px;
+    color: rgb(0, 0, 0);
+    width: 140%;
+    bottom: 5;
+}
