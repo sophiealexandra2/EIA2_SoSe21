@@ -95,7 +95,6 @@ namespace Endabgabe_SoSe21 {
             this.active = active;
         }
         //Erinnerung für mich: getTeam hat Parameter von number und returned this.team (teamnumber), 
-        //Erinnerung Nr2: Return nur machbar wenn wir in einer Funktion sind. Sonst "illegal"
 
         public getTeam(): number {
             return this.team;
@@ -164,7 +163,7 @@ namespace Endabgabe_SoSe21 {
         public isHighlighted(): boolean {
             return this.highlighted;
         }
-        //Optionale Sache: Ob man den ActionRadius oder den Startplatz anzeigen lässt.
+        //Optionale Sache: Ob man den ActionRadius oder die Distanz zum Ausgangspunkt anzeigen lässt.
         public draw(options: IPlayerDrawOptions = {
             showActionRadius: true,
             showPlayerOrigin: true
@@ -186,6 +185,7 @@ namespace Endabgabe_SoSe21 {
 
 
             // Action Radius wird gemalt
+            //!== Ungleichheit: Liefert den Wert true, wenn die Werte auf der linken und rechten Seite unterschiedlich sind.
             if (typeof options.showActionRadius !== "boolean" || options.showActionRadius) {
                 //Returns true/false with typeof. Der typeof Operator gibt einen String zurück, der den Typ des unausgewerteten Operanden beschreibt.
                 ctx.beginPath();
@@ -197,7 +197,6 @@ namespace Endabgabe_SoSe21 {
 
             // Line zur Original/Startstelle
             if (typeof options.showPlayerOrigin !== "boolean" || options.showPlayerOrigin) {
-                //Returns true/false with typeof. Der typeof Operator gibt einen String zurück, der den Typ des unausgewerteten Operanden beschreibt.
                 //https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Operators/typeof
                 ctx.beginPath();
                 ctx.moveTo(this.position.X, this.position.Y);
