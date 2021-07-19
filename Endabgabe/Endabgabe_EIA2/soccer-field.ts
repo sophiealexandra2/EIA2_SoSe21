@@ -60,7 +60,7 @@ namespace Endabgabe_SoSe21 {
         }
 
         /**
-         * whether the ball is in away goal or no
+         * whether the ball is in away goal or not
          */
         public isAwayGoal(ball: Ball): boolean {
             if (ball.getPosition().X > this.getPadding() + this.getWidth() &&

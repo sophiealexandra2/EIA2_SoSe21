@@ -158,12 +158,14 @@ namespace Endabgabe_SoSe21 {
      */
     function startClock(): void {
         lastTime = new Date();
-        // updates clock every 250 milliseconds
+        //The addition assignment operator (+=) adds the value of the right operand to a variable and assigns the result to the variable. 
+        //The types of the two operands determine the behavior of the addition assignment operator.
         setInterval(() => {
             if (animationIsRunning) {
                 time += new Date().getTime() - (lastTime?.getTime());
             }
             lastTime = new Date();
+            // updates clock every 250 milliseconds
         },          250);
     }
 
@@ -177,12 +179,12 @@ namespace Endabgabe_SoSe21 {
         listOfMoveables.forEach((p: Movable) => {
             //p  Object = das zu prüfende Objekt, Player = Gegen die zu testende Funktion. 
             if (p instanceof Player) {
+                //Wenn der Ball an keiner randomBallPosition gesetzt wurde, wird er auf original position zurückgesetzt (Bei Goal)
                 if (!randomBallPosition) {
-                    // set player position to its origin
                     p.setPosition(new Vector(p.getOrigin().X, p.getOrigin().Y));
                 }
             } else if (p instanceof Ball) {
-                // sets ball position
+                // sets ball position to random position if it's out of bounds, gets thrown back into field by a player
                 p.setPosition(new Vector(
                     randomBallPosition ? randomInteger(field.getPadding(), field.getPadding() + field.getWidth()) : field.getPadding() + field.getWidth() / 2,
                     randomBallPosition ? randomInteger(field.getPadding(), field.getPadding() + field.getHeight()) : field.getPadding() + field.getHeight() / 2 
@@ -230,17 +232,17 @@ namespace Endabgabe_SoSe21 {
     }
 
     /**
-     * creates assitance
+     * creates assistance
      */
     function createAssistance(): void {
-        // creates arbitator/Schiedsrichter with random position
+        // kreiert Schiedsrichter with random position
         const arbit: Arbitrator = new Arbitrator(new Vector(
             randomInteger(field.getPadding(), field.getPadding() + field.getWidth()),
             randomInteger(field.getPadding(), field.getPadding() + field.getHeight())
         ));
         arbit.setColor("black");
 
-        // set low speed of arbitrator
+        // set lower speed of arbitrator compared to players in field
         arbit.setSpeed(60);
 
 
@@ -256,12 +258,13 @@ namespace Endabgabe_SoSe21 {
         linesmanTop.setTargetFn(() => {
             const x: number[] = listOfMoveables.filter((p) => p instanceof Player && p.isActive()).map((p) => p.getPosition().X);
             return new Vector(
+                //Math.min() gibt den Wert der kleinsten übergebenen Zahl zurück, von x array in diesem Fall
                 Math.min(...x),
                 linesmanTop.getPosition().Y
             );
         });
 
-        // creates bootom linesman
+        // creates bottom linesman
         const linesmanBottom: Linesman = new Linesman(new Vector(
             randomInteger(field.getPadding() + field.getWidth() / 2, field.getPadding() + field.getWidth()),
             field.getPadding() + field.getHeight()
@@ -273,6 +276,7 @@ namespace Endabgabe_SoSe21 {
         linesmanBottom.setTargetFn(() => {
             const x: number[] = listOfMoveables.filter((p) => p instanceof Player && p.isActive()).map((p) => p.getPosition().X);
             return new Vector(
+                //Gibt den Wert der größten übergebenen Zahl zurück
                 Math.max(...x),
                 linesmanBottom.getPosition().Y
             );
@@ -294,31 +298,38 @@ namespace Endabgabe_SoSe21 {
         // default player radius
         const defaultPlayerRadius: number = 2 * scale;
 
-        // set default team color
+        // set default team color, but can be changed later on
         const teamColor: string = "green";
 
-        // get segements for setting player positions by algorithm
+        // get segements for setting player positions and to position them across the field on their half
         const segmentY: number = (field.getHeight() / 4);
         const segmentX: number = (field.getWidth() / 3);
 
-        // creates goalkeeper
+        // creates 1 goalkeeper
+        //name, vector and attributes and assigns them the teams' color and number, radius
         const tw: Player = new Player(`Player TW`, new Vector(field.getPadding(), field.getPadding() + (field.getHeight() / 2)),
                                       randomInteger(30, 90), randomInteger(30, 90), randomInteger(30, 90), teamColor, teamnumber, 1);
 
-        // creates defence and midfield
+        // creates defence and midfield 
+        //for 3 players
         for (let i: number = 1; i <= 2; i++) {
+            //for 5 players
             for (let j: number = 1; j <= 4; j++) {
                 const player: Player = new Player(
+                    //String to number change
                     `Player ${i * j}`,
+                    //assign default player radius and other default stuff
                     new Vector(
                         field.getPadding() + ((segmentX * i) - (segmentX / 2)) - defaultPlayerRadius,
                         field.getPadding() + ((segmentY * j) - (segmentY / 2))
                 ),  randomInteger(30, 90), randomInteger(30, 90), randomInteger(30, 90), teamColor, teamnumber, i * j + 1);
+                //push into listofMoveables
                 listOfMoveables.push(player);
             }
         }
 
         // create offensive players
+        //2 more players 
         const p9: Player = new Player(`Player 9`, new Vector(field.getPadding() + ((segmentX * 3) - (segmentX / 2)),
                                                              field.getPadding() + ((segmentY * 2) / 2)), randomInteger(30, 90), randomInteger(30, 90), randomInteger(30, 90), teamColor, teamnumber, 10);
         const p10: Player = new Player(`Player 10`, new Vector(field.getPadding() + ((segmentX * 3) - (segmentX / 2)),
@@ -331,7 +342,7 @@ namespace Endabgabe_SoSe21 {
             p.setActive(false);
             listOfMoveables.push(p);
         }
-
+        //wieder in die listofMoveables pushen: goalkeeper und die zwei offensiv-spieler
         listOfMoveables.push(tw, p9, p10);
     }
 
