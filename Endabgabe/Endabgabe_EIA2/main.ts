@@ -1,5 +1,3 @@
-// import { GlobalUtils } from "./global";
-
 namespace Endabgabe_SoSe21 {
     // adds event listener which fires on page loaded
     window.addEventListener("load", handleload);
