@@ -83,14 +83,14 @@ namespace Endabgabe_SoSe21 {
             }
         });
 
-        // toggle player radius
+        // Check Button: toggle player radius
         document.getElementById("toggle-player-radius")?.addEventListener("change", (event: Event) => {
             //
             const el: HTMLInputElement = event.target as HTMLInputElement;
             playerDrawOptions.showActionRadius = el.checked;
         });
 
-        // toggle player origin lines
+        // Check button: toggle player origin lines
         //event:Event = Event das im Dom passiert
         document.getElementById("toggle-player-origin")?.addEventListener("change", (event: Event) => {
             //event.target ist nun als typ HTMLInputElement
@@ -127,10 +127,7 @@ namespace Endabgabe_SoSe21 {
 
         ctx = canvas.getContext("2d")!;
 
-        // creates instance of general ui:
-        //Eine Instanz ist auf der anderen Seite eine Instanz einer Klasse. Diese Instanz ist ein Mitglied der oben genannten Objektmenge. 
-        //Zum Beispiel kann Victoria eine Instanz der Employee Klasse sein und somit einen individuellen Mitarbeiter repräsentieren. 
-        //Eine Instanz hat genau die selben Eigenschaften wie die Elternklasse (keine mehr und keine weniger).
+        //neue Instanz der Klasse general UI
         ui = new UI();
 
         // set default score
@@ -152,6 +149,7 @@ namespace Endabgabe_SoSe21 {
         });
 
         // redraw team ui
+        //filter: Returns the elements of an array that meet the condition specified in a callback function.
         teamUi.draw(listOfMoveables.filter((l) => l instanceof Player) as Player[]);
     } //Ende handleLoad
 

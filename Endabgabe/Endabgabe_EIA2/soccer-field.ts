@@ -27,6 +27,7 @@ namespace Endabgabe_SoSe21 {
 
         //ball: current ball
         public isOutOfBounds(ball: Ball): boolean {
+            //oben/unten
             if (ball.getPosition().X < this.getPadding()) {
                 return true;
             }
@@ -34,7 +35,7 @@ namespace Endabgabe_SoSe21 {
             if (ball.getPosition().X > this.getPadding() + this.getWidth()) {
                 return true;
             }
-
+            //links/rechts
             if (ball.getPosition().Y < this.getPadding()) {
                 return true;
             }
