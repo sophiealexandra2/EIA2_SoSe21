@@ -46,6 +46,7 @@ namespace Endabgabe_SoSe21 {
         // Ob der Spieler gehighlighted ist oder nicht
         private highlighted: boolean;
 
+        //constructor für meine Spieler und alles was sie benötigen, um ordentlich zu spielen
         constructor(name: string, _position: Vector, shotPower: number = 70, precision: number = 70, speed: number = 80, color: string = "red", team: number = 0, trikotNumer: number = 0) {
             super(
                 new Vector(_position.X, _position.Y)
@@ -61,6 +62,7 @@ namespace Endabgabe_SoSe21 {
 
 
             this.setName(name);
+            //neue Instanz
             this.origin = new Vector(_position.X, _position.Y);
         }
 

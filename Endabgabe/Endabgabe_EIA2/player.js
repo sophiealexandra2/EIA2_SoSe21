@@ -3,6 +3,7 @@ var Endabgabe_SoSe21;
 (function (Endabgabe_SoSe21) {
     //Player: Kindklasse Movable: Elternklasse. Klasse to handle player
     class Player extends Endabgabe_SoSe21.Movable {
+        //constructor für meine Spieler und alles was sie benötigen, um ordentlich zu spielen
         constructor(name, _position, shotPower = 70, precision = 70, speed = 80, color = "red", team = 0, trikotNumer = 0) {
             super(new Endabgabe_SoSe21.Vector(_position.X, _position.Y));
             // default speed level welches mit speed skaliert wird
@@ -28,6 +29,7 @@ var Endabgabe_SoSe21;
             this.tricotNumber = trikotNumer;
             this.radius = 2;
             this.setName(name);
+            //neue Instanz
             this.origin = new Endabgabe_SoSe21.Vector(_position.X, _position.Y);
         }
         /**

@@ -19,6 +19,7 @@ namespace Endabgabe_SoSe21 {
             this.radius = 2;
         }
 
+
         public setColor(color: string): void {
             this.color = color;
         }
