@@ -15,7 +15,7 @@ namespace Endabgabe_SoSe21 {
     let time: number = 0;
     let lastTime: Date;
 
-    // Array welches alle beweglichen "movable" objects in der Szene listet, ins leere Array gepushed
+    // Array welches alle beweglichen "movable" objects in der Szene listet, diese werden dann in dieses Array gepushed
     let listOfMoveables: Movable[] = [];
 
     // instance of field
