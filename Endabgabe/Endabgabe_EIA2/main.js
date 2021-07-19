@@ -428,7 +428,7 @@ var Endabgabe_SoSe21;
         ui.draw(time);
         // requests next frame
         window.requestAnimationFrame(updateAnimation);
-        console.log("Update Animation hat funktioniert");
+        //console.log("Update Animation hat funktioniert");
     }
     /**
      * calculates precision radius

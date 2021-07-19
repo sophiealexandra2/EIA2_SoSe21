@@ -315,8 +315,8 @@ namespace Endabgabe_SoSe21 {
         const tw: Player = new Player(`Player TW`, new Vector(field.getPadding(), field.getPadding() + (field.getHeight() / 2)),
                                       randomInteger(30, 90), randomInteger(30, 90), randomInteger(30, 90), teamColor, teamnumber, 1);
 
-        // creates defence and midfield 
-        //for 3 players
+            // creates defence and midfield 
+            //for 3 players
         for (let i: number = 1; i <= 2; i++) {
             //for 5 players
             for (let j: number = 1; j <= 4; j++) {
@@ -527,7 +527,7 @@ namespace Endabgabe_SoSe21 {
 
         // requests next frame
         window.requestAnimationFrame(updateAnimation);
-        console.log("Update Animation hat funktioniert");
+        //console.log("Update Animation hat funktioniert");
     }
 
     /**

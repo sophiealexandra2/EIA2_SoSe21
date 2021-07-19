@@ -32,8 +32,11 @@ var Endabgabe_SoSe21;
             //neue Instanz
             this.origin = new Endabgabe_SoSe21.Vector(_position.X, _position.Y);
         }
+        //getters -> access properties in an object. A getter is also called an accessor.
+        //setters -> change them, updates the property’s value. A setter is also known as a mutator.
         /**
          * get tricot number
+         * Reminder für mich: this referenziert das globale Objekt, in diesem fall window da wir kein
          */
         getTricotNumber() {
             return this.tricotNumber;
@@ -155,4 +158,5 @@ var Endabgabe_SoSe21;
     }
     Endabgabe_SoSe21.Player = Player;
 })(Endabgabe_SoSe21 || (Endabgabe_SoSe21 = {}));
+console.log(this);
 //# sourceMappingURL=player.js.map

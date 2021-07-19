@@ -65,12 +65,15 @@ namespace Endabgabe_SoSe21 {
             //neue Instanz
             this.origin = new Vector(_position.X, _position.Y);
         }
-
+            //getters -> access properties in an object. A getter is also called an accessor.
+            //setters -> change them, updates the property’s value. A setter is also known as a mutator.
         /**
          * get tricot number
+         * Reminder für mich: this referenziert das globale Objekt, in diesem fall window da wir kein 
          */
         public getTricotNumber(): number {
             return this.tricotNumber;
+        
         }
 
         /**
@@ -163,6 +166,7 @@ namespace Endabgabe_SoSe21 {
         public isHighlighted(): boolean {
             return this.highlighted;
         }
+
         //Optionale Sache: Ob man den ActionRadius oder die Distanz zum Ausgangspunkt anzeigen lässt.
         public draw(options: IPlayerDrawOptions = {
             showActionRadius: true,
@@ -212,5 +216,7 @@ namespace Endabgabe_SoSe21 {
         getPosition(): Vector {
             return this.position;
         }
+    
     }
 }
+console.log(this);
