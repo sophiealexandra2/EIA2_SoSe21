@@ -17,12 +17,14 @@ var Endabgabe_SoSe21;
          */
         //ball: current ball
         isOutOfBounds(ball) {
+            //oben/unten
             if (ball.getPosition().X < this.getPadding()) {
                 return true;
             }
             if (ball.getPosition().X > this.getPadding() + this.getWidth()) {
                 return true;
             }
+            //links/rechts
             if (ball.getPosition().Y < this.getPadding()) {
                 return true;
             }
@@ -43,7 +45,7 @@ var Endabgabe_SoSe21;
             return false;
         }
         /**
-         * whether the ball is in away goal or no
+         * whether the ball is in away goal or not
          */
         isAwayGoal(ball) {
             if (ball.getPosition().X > this.getPadding() + this.getWidth() &&

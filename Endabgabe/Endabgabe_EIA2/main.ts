@@ -141,6 +141,11 @@ namespace Endabgabe_SoSe21 {
         createGame();
 
         // requests frame to update animation
+        //Quelle: https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+        //Vorteil gegenüber zu SetIntervall: requestAnimationFrame ruft vor jedem erneuten Rendern (»Refresh«) des Browserfensters die Animations-Funktion auf und erzeugt so einen 
+        //weichen Übergang von einem Frame zum nächsten. Mit requestAnimationFrame anstelle von setInterval oder setTimeout übernimmt der Browser 
+        //die Schnittstelle und optimiert das Verfahren, so dass Animationen runder, ohne Ruckeln und effizienter ablaufen. 
+        //requestAnimationFrame wird per Vorgabe 60 mal pro Sekunde aufgerufen, denn 60 Hz ist die Refresh-Rate der meisten Browser (oder Zeitrahmen von 16.7ms).
         window.requestAnimationFrame(updateAnimation);
 
         // handle click on start button to restart animation
@@ -347,8 +352,7 @@ namespace Endabgabe_SoSe21 {
     }
 
     /**
-     * creates away team
-     * randomize attributes between 30 and 90 as default
+     * Nun dasselbe für das AwayTeam
      */
     function createAwayTeam(): void {
         // set different team number than home
@@ -357,7 +361,7 @@ namespace Endabgabe_SoSe21 {
         // default player radius
         const defaultPlayerRadius: number = 2 * scale;
 
-        // get segements for setting player positions by algorithm
+        // get segements for setting player positions
         const segmentY: number = (field.getHeight() / 4);
         const segmentX: number = (field.getWidth() / 3);
         const teamColor: string = "red";
@@ -390,6 +394,7 @@ namespace Endabgabe_SoSe21 {
             p.setActive(false);
             listOfMoveables.push(p);
         }
+        //kann die Spieler dieselben Namen geben wie das Home-Team, weil ich die später durch die ID differenziere 
         listOfMoveables.push(tw, p9, p10);
     }
 
@@ -522,6 +527,7 @@ namespace Endabgabe_SoSe21 {
 
         // requests next frame
         window.requestAnimationFrame(updateAnimation);
+        console.log("Update Animation hat funktioniert");
     }
 
     /**

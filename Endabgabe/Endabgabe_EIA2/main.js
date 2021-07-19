@@ -1,5 +1,4 @@
 "use strict";
-// import { GlobalUtils } from "./global";
 var Endabgabe_SoSe21;
 (function (Endabgabe_SoSe21) {
     // adds event listener which fires on page loaded
@@ -12,7 +11,7 @@ var Endabgabe_SoSe21;
     // current time left
     let time = 0;
     let lastTime;
-    // Array welches alle beweglichen "movable" objects in der Szene listet, ins leere Array gepushed
+    // Array welches alle beweglichen "movable" objects in der Szene listet, diese werden dann in dieses Array gepushed
     let listOfMoveables = [];
     // instance of field
     let field;
@@ -65,13 +64,13 @@ var Endabgabe_SoSe21;
                 startAnimation();
             }
         });
-        // toggle player radius
+        // Check Button: toggle player radius
         document.getElementById("toggle-player-radius")?.addEventListener("change", (event) => {
             //
             const el = event.target;
             playerDrawOptions.showActionRadius = el.checked;
         });
-        // toggle player origin lines
+        // Check button: toggle player origin lines
         //event:Event = Event das im Dom passiert
         document.getElementById("toggle-player-origin")?.addEventListener("change", (event) => {
             //event.target ist nun als typ HTMLInputElement
@@ -102,10 +101,7 @@ var Endabgabe_SoSe21;
             startAnimation();
         });
         Endabgabe_SoSe21.ctx = Endabgabe_SoSe21.canvas.getContext("2d");
-        // creates instance of general ui:
-        //Eine Instanz ist auf der anderen Seite eine Instanz einer Klasse. Diese Instanz ist ein Mitglied der oben genannten Objektmenge. 
-        //Zum Beispiel kann Victoria eine Instanz der Employee Klasse sein und somit einen individuellen Mitarbeiter repräsentieren. 
-        //Eine Instanz hat genau die selben Eigenschaften wie die Elternklasse (keine mehr und keine weniger).
+        //neue Instanz der Klasse general UI
         ui = new Endabgabe_SoSe21.UI();
         // set default score
         ui.setHomeScore(0);
@@ -115,12 +111,18 @@ var Endabgabe_SoSe21;
         // creates game
         createGame();
         // requests frame to update animation
+        //Quelle: https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+        //Vorteil gegenüber zu SetIntervall: requestAnimationFrame ruft vor jedem erneuten Rendern (»Refresh«) des Browserfensters die Animations-Funktion auf und erzeugt so einen 
+        //weichen Übergang von einem Frame zum nächsten. Mit requestAnimationFrame anstelle von setInterval oder setTimeout übernimmt der Browser 
+        //die Schnittstelle und optimiert das Verfahren, so dass Animationen runder, ohne Ruckeln und effizienter ablaufen. 
+        //requestAnimationFrame wird per Vorgabe 60 mal pro Sekunde aufgerufen, denn 60 Hz ist die Refresh-Rate der meisten Browser (oder Zeitrahmen von 16.7ms).
         window.requestAnimationFrame(updateAnimation);
         // handle click on start button to restart animation
         document.getElementById("game-start")?.addEventListener("click", () => {
             startAnimation();
         });
         // redraw team ui
+        //filter: Returns the elements of an array that meet the condition specified in a callback function.
         teamUi.draw(listOfMoveables.filter((l) => l instanceof Endabgabe_SoSe21.Player));
     } //Ende handleLoad
     /**
@@ -128,12 +130,14 @@ var Endabgabe_SoSe21;
      */
     function startClock() {
         lastTime = new Date();
-        // updates clock every 250 milliseconds
+        //The addition assignment operator (+=) adds the value of the right operand to a variable and assigns the result to the variable. 
+        //The types of the two operands determine the behavior of the addition assignment operator.
         setInterval(() => {
             if (animationIsRunning) {
                 time += new Date().getTime() - (lastTime?.getTime());
             }
             lastTime = new Date();
+            // updates clock every 250 milliseconds
         }, 250);
     }
     /**
@@ -146,13 +150,13 @@ var Endabgabe_SoSe21;
         listOfMoveables.forEach((p) => {
             //p  Object = das zu prüfende Objekt, Player = Gegen die zu testende Funktion. 
             if (p instanceof Endabgabe_SoSe21.Player) {
+                //Wenn der Ball an keiner randomBallPosition gesetzt wurde, wird er auf original position zurückgesetzt (Bei Goal)
                 if (!randomBallPosition) {
-                    // set player position to its origin
                     p.setPosition(new Endabgabe_SoSe21.Vector(p.getOrigin().X, p.getOrigin().Y));
                 }
             }
             else if (p instanceof Endabgabe_SoSe21.Ball) {
-                // sets ball position
+                // sets ball position to random position if it's out of bounds, gets thrown back into field by a player
                 p.setPosition(new Endabgabe_SoSe21.Vector(randomBallPosition ? Endabgabe_SoSe21.randomInteger(field.getPadding(), field.getPadding() + field.getWidth()) : field.getPadding() + field.getWidth() / 2, randomBallPosition ? Endabgabe_SoSe21.randomInteger(field.getPadding(), field.getPadding() + field.getHeight()) : field.getPadding() + field.getHeight() / 2));
                 p.setTarget(new Endabgabe_SoSe21.Vector(p.getPosition().X, p.getPosition().Y));
             }
@@ -187,13 +191,13 @@ var Endabgabe_SoSe21;
         animationIsRunning = true;
     }
     /**
-     * creates assitance
+     * creates assistance
      */
     function createAssistance() {
-        // creates arbitator/Schiedsrichter with random position
+        // kreiert Schiedsrichter with random position
         const arbit = new Endabgabe_SoSe21.Arbitrator(new Endabgabe_SoSe21.Vector(Endabgabe_SoSe21.randomInteger(field.getPadding(), field.getPadding() + field.getWidth()), Endabgabe_SoSe21.randomInteger(field.getPadding(), field.getPadding() + field.getHeight())));
         arbit.setColor("black");
-        // set low speed of arbitrator
+        // set lower speed of arbitrator compared to players in field
         arbit.setSpeed(60);
         // creates upper linesman
         const linesmanTop = new Endabgabe_SoSe21.Linesman(new Endabgabe_SoSe21.Vector(Endabgabe_SoSe21.randomInteger(field.getPadding(), field.getPadding() + field.getWidth() / 2), field.getPadding()));
@@ -202,16 +206,20 @@ var Endabgabe_SoSe21;
         // set target relative to the most left player
         linesmanTop.setTargetFn(() => {
             const x = listOfMoveables.filter((p) => p instanceof Endabgabe_SoSe21.Player && p.isActive()).map((p) => p.getPosition().X);
-            return new Endabgabe_SoSe21.Vector(Math.min(...x), linesmanTop.getPosition().Y);
+            return new Endabgabe_SoSe21.Vector(
+            //Math.min() gibt den Wert der kleinsten übergebenen Zahl zurück, von x array in diesem Fall
+            Math.min(...x), linesmanTop.getPosition().Y);
         });
-        // creates bootom linesman
+        // creates bottom linesman
         const linesmanBottom = new Endabgabe_SoSe21.Linesman(new Endabgabe_SoSe21.Vector(Endabgabe_SoSe21.randomInteger(field.getPadding() + field.getWidth() / 2, field.getPadding() + field.getWidth()), field.getPadding() + field.getHeight()));
         linesmanBottom.setColor("pink");
         linesmanBottom.setSpeed(80);
         // set target relative to the most right player
         linesmanBottom.setTargetFn(() => {
             const x = listOfMoveables.filter((p) => p instanceof Endabgabe_SoSe21.Player && p.isActive()).map((p) => p.getPosition().X);
-            return new Endabgabe_SoSe21.Vector(Math.max(...x), linesmanBottom.getPosition().Y);
+            return new Endabgabe_SoSe21.Vector(
+            //Gibt den Wert der größten übergebenen Zahl zurück
+            Math.max(...x), linesmanBottom.getPosition().Y);
         });
         // add assistance to list of movable objects
         listOfMoveables.push(arbit, linesmanBottom, linesmanTop);
@@ -225,21 +233,30 @@ var Endabgabe_SoSe21;
         const teamnumber = 1;
         // default player radius
         const defaultPlayerRadius = 2 * Endabgabe_SoSe21.scale;
-        // set default team color
+        // set default team color, but can be changed later on
         const teamColor = "green";
-        // get segements for setting player positions by algorithm
+        // get segements for setting player positions and to position them across the field on their half
         const segmentY = (field.getHeight() / 4);
         const segmentX = (field.getWidth() / 3);
-        // creates goalkeeper
+        // creates 1 goalkeeper
+        //name, vector and attributes and assigns them the teams' color and number, radius
         const tw = new Endabgabe_SoSe21.Player(`Player TW`, new Endabgabe_SoSe21.Vector(field.getPadding(), field.getPadding() + (field.getHeight() / 2)), Endabgabe_SoSe21.randomInteger(30, 90), Endabgabe_SoSe21.randomInteger(30, 90), Endabgabe_SoSe21.randomInteger(30, 90), teamColor, teamnumber, 1);
-        // creates defence and midfield
+        // creates defence and midfield 
+        //for 3 players
         for (let i = 1; i <= 2; i++) {
+            //for 5 players
             for (let j = 1; j <= 4; j++) {
-                const player = new Endabgabe_SoSe21.Player(`Player ${i * j}`, new Endabgabe_SoSe21.Vector(field.getPadding() + ((segmentX * i) - (segmentX / 2)) - defaultPlayerRadius, field.getPadding() + ((segmentY * j) - (segmentY / 2))), Endabgabe_SoSe21.randomInteger(30, 90), Endabgabe_SoSe21.randomInteger(30, 90), Endabgabe_SoSe21.randomInteger(30, 90), teamColor, teamnumber, i * j + 1);
+                const player = new Endabgabe_SoSe21.Player(
+                //String to number change
+                `Player ${i * j}`, 
+                //assign default player radius and other default stuff
+                new Endabgabe_SoSe21.Vector(field.getPadding() + ((segmentX * i) - (segmentX / 2)) - defaultPlayerRadius, field.getPadding() + ((segmentY * j) - (segmentY / 2))), Endabgabe_SoSe21.randomInteger(30, 90), Endabgabe_SoSe21.randomInteger(30, 90), Endabgabe_SoSe21.randomInteger(30, 90), teamColor, teamnumber, i * j + 1);
+                //push into listofMoveables
                 listOfMoveables.push(player);
             }
         }
         // create offensive players
+        //2 more players 
         const p9 = new Endabgabe_SoSe21.Player(`Player 9`, new Endabgabe_SoSe21.Vector(field.getPadding() + ((segmentX * 3) - (segmentX / 2)), field.getPadding() + ((segmentY * 2) / 2)), Endabgabe_SoSe21.randomInteger(30, 90), Endabgabe_SoSe21.randomInteger(30, 90), Endabgabe_SoSe21.randomInteger(30, 90), teamColor, teamnumber, 10);
         const p10 = new Endabgabe_SoSe21.Player(`Player 10`, new Endabgabe_SoSe21.Vector(field.getPadding() + ((segmentX * 3) - (segmentX / 2)), field.getPadding() + ((segmentY * 4) - (segmentY))), Endabgabe_SoSe21.randomInteger(30, 90), Endabgabe_SoSe21.randomInteger(30, 90), Endabgabe_SoSe21.randomInteger(30, 90), teamColor, teamnumber, 11);
         // creates exaclty six substitutes
@@ -249,18 +266,18 @@ var Endabgabe_SoSe21;
             p.setActive(false);
             listOfMoveables.push(p);
         }
+        //wieder in die listofMoveables pushen: goalkeeper und die zwei offensiv-spieler
         listOfMoveables.push(tw, p9, p10);
     }
     /**
-     * creates away team
-     * randomize attributes between 30 and 90 as default
+     * Nun dasselbe für das AwayTeam
      */
     function createAwayTeam() {
         // set different team number than home
         const teamnumber = 2;
         // default player radius
         const defaultPlayerRadius = 2 * Endabgabe_SoSe21.scale;
-        // get segements for setting player positions by algorithm
+        // get segements for setting player positions
         const segmentY = (field.getHeight() / 4);
         const segmentX = (field.getWidth() / 3);
         const teamColor = "red";
@@ -282,6 +299,7 @@ var Endabgabe_SoSe21;
             p.setActive(false);
             listOfMoveables.push(p);
         }
+        //kann die Spieler dieselben Namen geben wie das Home-Team, weil ich die später durch die ID differenziere 
         listOfMoveables.push(tw, p9, p10);
     }
     /**
@@ -410,6 +428,7 @@ var Endabgabe_SoSe21;
         ui.draw(time);
         // requests next frame
         window.requestAnimationFrame(updateAnimation);
+        console.log("Update Animation hat funktioniert");
     }
     /**
      * calculates precision radius
