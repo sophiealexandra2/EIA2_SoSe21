@@ -4,8 +4,7 @@ namespace vegandoenerSimulator {
         Happy = "happy",
         Angry = "angry",
         AlotAngry = "alotangry",
-        Tired = "tired"
-
-       // Chef = "chef"
+        Tired = "tired",
+        Chef = "chef"
     }
 }
