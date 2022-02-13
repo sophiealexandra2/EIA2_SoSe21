@@ -140,6 +140,11 @@ namespace vegandoenerSimulator {
             let tiredSeconds = Number (tirField.value);
             let storageAmount = Number (stoField.value);
 
+            if (!this.validateNr(employees)|| !this.validateNr (customerSecond) || !this.validateNr(tiredSeconds) || !this.validateNr(storageAmount)) {
+                console.error ("starting game error");
+                return
+            }
+
         
 
             this.entities = [];
@@ -158,7 +163,15 @@ namespace vegandoenerSimulator {
             setInterval(this.update.bind(this));
         }
 
+        //Spawn funktion für später
+        private spawnPeople () {
+            this.spawnEmployees();
+            this.spawnCustomers();
+        }
 
+        private validNr (nr: number) {
+            return !isNaN (nr) && nr > 0;
+        }
 
     }
 }
