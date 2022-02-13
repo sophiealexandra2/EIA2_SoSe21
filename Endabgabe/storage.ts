@@ -5,6 +5,14 @@ namespace vegandoenerSimulator {
             super (initPos);
             this.contains = contains;
         }
+        //check if taking an element is okay and valid
+        take () {
+            if (this.amount - 1 < 0) {
+                return false;
+            }
+            //otherwise remove an element and return true
+            this.amount -= 1;
+            return true; 
+        }
     }
-    //Hier muss noch rein, dass überprüft wird ob der genommene Gegenstand bzw Zutat ok ist zunehmen (Ingredient == neededIngredient)
 }

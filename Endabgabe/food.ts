@@ -19,15 +19,17 @@ namespace vegandoenerSimulator {
             return false;
         }
         //ingredient already existing
-        if(this.has.indexOf(ing.name) !== -1) {
+        if (this.has.indexOf(ing.name) !== -1) {
             return false;
         }
         //if both fail, add ingredient: success
         this.has.push(ing.name);
-        if(this.requires.length === this.has.length) {
+        if (this.requires.length === this.has.length) {
             this.finished = true;
         }
         return true;
+    }
 
     }
-}}
+
+}
