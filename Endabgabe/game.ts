@@ -469,6 +469,70 @@ namespace vegandoenerSimulator {
 
         private updateUi () {
             let container = document.getElementById ("selected") as HTMLDivElement;
+            container.innerHTML = "";
+            let fieldset = document.createElement ("fieldset") as HTMLFieldSetElement;
+            let legend = document.createElement ("legend");
+            fieldset.appendChild (legend);
+
+            if (this.selected instanceof Customer) {
+                legend.innerText = "Customer";
+                this.updatedSelectedCustomerUi (fieldset);
+            }
+
+            if (this.selected instanceof Employee) {
+                legend.innerText = "Employee";
+                this.updateSelectedEmployeeUi (fieldset);
+            }
+
+            if (this.selected instanceof Workplace) {
+                legend.innerText = "Workplace";
+                this.updateSelectedWorkplaceUi (fieldset);
+            }
+
+            if (this.selected instanceof Storage) {
+                legend.innerText = "Storage";
+                this.updateSelectedStorageUi (fieldset);
+            }
+
+            container.appendChild (fieldset);
+        }
+
+
+
+        private updatedSelectedCustomerUi (con: HTMLFieldSetElement) {
+            const p = document.createElement("p");
+            const sel = this.selected as Customer;
+            p.innerText = `Customer wants: ${sel.wants.name }`;
+            const p2 = document.createElement ("p");
+            p2.innerText = `Customer mood: ${sel.mood}`;
+            con.appendChild(p);
+            con.appendChild(p2);
+        }
+        private updateSelectedEmployeeUi (con: HTMLFieldSetElement) {
+        }
+
+        private updateSelectedWorkplaceUi (con: HTMLFieldSetElement) {
+        }
+
+        private updateSelectedStorageUi (con: HTMLFieldSetElement) {
+        }
+
+        private startProduction (workplace: Workplace, elem: HTMLSelectElement, evt: MouseEvent) {
+            let selected = elem.value;
+            switch (selected) {
+                case "Doener":
+                    workplace.food = new Doener();
+                    break;
+                
+                case "Yufka":
+                    workplace.food = new Yufka();
+                    break;
+
+                case "Lahmacun":
+                    workplace.food = new Lahmacun();
+                    break;
+            }
+            this.updateUi();
         }
 
         private actionTo() {
@@ -483,13 +547,30 @@ namespace vegandoenerSimulator {
             
         }
 
+        private initHouse () {
+
+            
+        }
         private initMap () {
+            this.initHouse();
+            this.initCustomerArea;
+            this.initEmployeeArea
             
         }
 
         private initImages () {
             
         }
+
+        private initCustomerArea () {
+            
+        }
+
+
+        private initEmployeeArea () {
+            
+        }
+
     }
 }
 
