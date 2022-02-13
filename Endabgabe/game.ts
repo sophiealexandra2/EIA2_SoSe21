@@ -6,6 +6,7 @@ Matrikel: 266237
 Datum: 01.02.2022
 */
 
+
 namespace vegandoenerSimulator {
     const width: number = 1200; 
     const height: number = 800; 
@@ -31,8 +32,7 @@ namespace vegandoenerSimulator {
         private customerTargetX: number = 270;
         private customerFromY: number = 111;
         private customerToY: number = 200;  
-        private customerCount: number = 0;
-        private customerSuccessCount: number = 0; 
+  
 
         constructor () {
             console.log("Game loaded");
@@ -64,7 +64,7 @@ namespace vegandoenerSimulator {
             this.canvas.addEventListener("contectmenu", this.rightClick.bind(this));
          }
 
-        private getClickEntitiy(x: number, y: number) {
+        private getClickEntity(x: number, y: number) {
             //finde entität die geklickt wurde
             let vec = new Vector2 (x, y);
             let distFound = null;
@@ -84,7 +84,7 @@ namespace vegandoenerSimulator {
 
         private leftClick (evt: MouseEvent) {
             evt.preventDefault ();
-            let ent = this.getClickEntitiy(evt.offsetX, evt.offsetY);
+            let ent = this.getClickEntity(evt.offsetX, evt.offsetY);
             console.log("left", ent, evt);
          
 
@@ -273,15 +273,132 @@ namespace vegandoenerSimulator {
                     emp.carries = null;
 
                 }
-
-                if (emp.carries && emp.carries.name == cus.wants.name) {
-                     
+                //wenn employee das richtige und fertige essen zum customer bringt
+                if (emp.carries && emp.carries.name === cus.wants.name && emp.carries.finished) {
+                    cus.mood = Moods.Happy;
+                    emp.carries = null;
+                    //increase score stat
+                    this.customerSuccessCount++;
                 }
+                //wenn employee zwar das richtige Essen bring aber es nicht fertig ist
+                if (emp.carries && emp.carries.name === cus.wants.name && !emp.carries.finished) {
+                    cus.mood = Moods.AlotAngry; 
+                    emp.carries = null;
+                }
+                //customer geht zurück zur Tür, dort wo er gespawned wurde (statischer Vektor)
+                cus.status = customerStatus.Leaving;
+                cus.targetPos = this.customerSpawn;
 
             }
         }
 
+        private employeeReachedTarget (emp: Employee) {
 
+            //wenn employee das Storage erreicht/das Lager war
+            if (emp.target instanceof Storage) {
+                this.employeeReachedStorage(emp, emp.target);
+            }
+
+            if (emp.target instanceof Workplace) {
+                this.employeeReachedWorkplace (emp, emp.target);
+            }
+
+            if (emp.target instanceof Customer) {
+                this.employeeReachedCustomer (emp, emp.target);
+            }
+            //wenn er irgendwas davon erreicht, remove target
+            emp.target = null;
+        }
+
+        private updateEmployee (ent: Employee) {
+            if (ent.target) {
+                let dir = ent.position.direction (ent.target.position);
+                ent.position.add(dir, ent.speed);
+                ent.lastMove = new Date();
+                let dist = ent.position.distanceTo (ent.target.position);
+                if (dist <= 15) {
+                    this.employeeReachedTarget(ent);
+                }
+            }
+
+            if (ent.lastMove.getTime() + 10*1000 < new Date().getTime()) {
+                ent.mood  = Moods.Tired;
+            }
+
+            else {
+                ent.mood = Moods.Chef;
+            }
+
+            let img = this.imageMap.get(ent.mood);
+            this.map.fillStyle = "lightgrey";
+            this.map.drawImage (img, ent.position.x, ent.position.y, 45, 45);
+            if (ent.carries) {
+                let img = this.imageMap.get (ent.carries.name);
+                this.map.drawImage(img, ent.position.x + 25, ent.position.y, 20, 20); 
+            }
+        }
+
+        private customerReachedTarget (cus: Customer) {
+            cus.targetPos = null;
+            if (cus.status === customerStatus.ComingIn) {
+                cus.status = customerStatus.Waiting;
+                cus.waitingSince = new Date();
+            }
+
+            else if (cus.status === customerStatus.Leaving) {
+                let idx = this.entities.findIndex((val: Entity) => val === cus);
+
+                if (idx === -1) {
+                    return;
+                }
+                this.entities.splice(idx, 1);
+            }
+        }
+
+        private updateCustomer (ent: Customer) {
+            if (ent.targetPos) {
+                let dir = ent.position.direction(ent.targetPos);
+                ent.position.add (dir, ent.speed);
+                let dist = ent.position.distanceTo (ent.targetPos);
+                if (dist <= 3) {
+                    this.customerReachedTarget(ent);
+                }
+            }
+
+            if (ent.status === customerStatus.Waiting && ent.waitingSince && ent.waitingSince.getTime() + (CUSTOMER_WAITING_TIME_MAX * 1000) * 2 < new Date().getTime()) {
+                ent.mood = Moods.AlotAngry;
+            } 
+
+            else if (ent.status === customerStatus.Waiting && ent.waitingSince && ent.waitingSince.getTime() + CUSTOMER_WAITING_TIME_MAX * 1000 < new Date().getTime()) {
+                ent.mood = Moods.Angry;
+            }
+            //draw customer, mood = img
+            this.map.fillStyle = "lightgrey";
+            let img = this.imageMap.get (ent.mood);
+            this.map.drawImage(img, ent.position.x, ent.position.y, 45, 45);
+            if (ent.wants) {
+                let img = this.imageMap.get (ent.wants.name);
+                this.map.drawImage (img, ent.position.x + 25, ent.position.y, 20, 20);
+                
+            }
+        }
+
+        private drawScore() {
+            let elem = document.getElementById("score");
+            elem.innerHTML = "";
+            let p = document.createElement ("p");
+            p.innerText = `Customer Count: ${this.customerCount}, Customer success count: ${this.customerSuccessCount}`;
+            elem.appendChild(p);
+        }
+
+
+        private update () {
+            this.map.clearRect(0, 0, width, height);
+            this.initMap();
+            this.drawScore();
+
+
+        }
     }
 
 

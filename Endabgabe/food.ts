@@ -12,7 +12,7 @@ namespace vegandoenerSimulator {
     //add ingredients, returns true if successful, otherwise its false.
     //checks if ingredinet is needed, random ingredient is being added 
 
-    addIngredient (ing: Ingredient) {
+    public addIngredient (ing: Ingredient) {
         let idx: number = this.requires.indexOf(ing.name);
         //ingredient not required
         if (idx === -1) {
