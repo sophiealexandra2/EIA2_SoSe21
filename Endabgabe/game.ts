@@ -8,8 +8,8 @@ Datum: 01.02.2022
 
 
 namespace vegandoenerSimulator {
-    const width: number = 1200; 
-    const height: number = 800; 
+    const width = 1200; 
+    const height = 800; 
     const CUSTOMER_WAITING_TIME_MAX: number = 10; 
 
     export class Game {
@@ -508,13 +508,56 @@ namespace vegandoenerSimulator {
             con.appendChild(p);
             con.appendChild(p2);
         }
+
         private updateSelectedEmployeeUi (con: HTMLFieldSetElement) {
+            //on click: show this ui of employee that is selected
+            const sel = this.selected as Employee;
+            if (sel.carries) {
+                const p = document.createElement ("p");
+                p.innerText = `Employee carries: ${sel.carries.name }`;
+                con.appendChild(p);
+
+            }
+
+            const p2 = document.createElement("p");
+            p2.innerText = `Employee mood: ${sel.mood }`;
+            con.appendChild(p2);
         }
 
         private updateSelectedWorkplaceUi (con: HTMLFieldSetElement) {
+            const sel = this.selected as Workplace;
+            if (!sel.food) {
+                const select = document.createElement ("select");
+                for (let a in FoodNames) {
+                    const opt = document.createElement ("option");
+                    opt.value = a;
+                    opt.innerText = a; 
+                    select.appendChild(opt);
+
+                }
+
+                const btn = document.createElement ("button");
+                btn.addEventListener ("click", this.startProduction.bind(this, sel, select));
+                btn.innerText = "Start production";
+                con.appendChild(select);
+                con.appendChild (btn);
+            }
+
+            if (sel.food) {
+                const p = document.createElement ("p");
+                p.innerText = "Requires:" + sel.food.requires.join (",");
+                con.appendChild(p);
+            }
         }
 
         private updateSelectedStorageUi (con: HTMLFieldSetElement) {
+            const sel = this.selected as Storage;
+            const p = document.createElement ("p");
+            const p2 = document.createElement ("p");
+            p.innerText = `Storage contains: ${sel.contains }`; 
+            p2.innerText = `Storage amount left: ${sel.amount }`;
+            con.appendChild (p);
+            con.appendChild (p2);
         }
 
         private startProduction (workplace: Workplace, elem: HTMLSelectElement, evt: MouseEvent) {
@@ -535,23 +578,70 @@ namespace vegandoenerSimulator {
             this.updateUi();
         }
 
-        private actionTo() {
+        private actionTo( from: Employee, to: Customer | Storage | Workplace ) { 
+            if (to instanceof Customer || to instanceof Storage || to instanceof Workplace) {
+                this.empToAny(from, to);
+            }
 
         }
 
+        private empToAny (from: Employee, to: Customer | Storage | Workplace) {
+            if (from.target) {
+                return;
+            }
+            from.target = to; 
+        }
+
         private initWorkplace () {
+            if (!this.map) {
+                return
+            }
+
+            this.map.fillStyle = "lightgrey";
+            for (let i = 0; i < 13; i ++) {
+                let x: number = 355 + (i * 55);
+                let y: number = 100;
+                let workplace = new Workplace (null, new Vector2 (x,y));
+                this.entities.push(workplace);
+            }
 
         }
 
         private initStorage () {
+            if (!this.map || !this.storageMax) {
+                return;
+            }
+
+            this.map.fillStyle = "brown";
+            let i: number = 0; 
+            for (let a in IngredientNames) {
+                let x: number = 355 + (i * 55);
+                let y: number = 650;
+                i++;
+                let stor = new Storage ((<{[key:string]: IngredientNames}> IngredientNames)[a], this.storageMax, new Vector2(x, y));
+                this.entities.push(stor);
+            }
+
             
         }
 
         private initHouse () {
+            if (!this.map) {
+                return;
+            }
 
-            
+            this.map.strokeStyle = "brown";
+            this.map.lineWidth = 3;
+            this.map.beginPath();
+            this.map.rect (50, 100, width - 50 * 2, height - 100 * 2);
+            this.map.stroke();
+            this.map.fillStyle = "#ffffff";
+    
         }
+
+
         private initMap () {
+            //hier male ich die statischen Dinge/map Elements
             this.initHouse();
             this.initCustomerArea;
             this.initEmployeeArea
@@ -559,17 +649,61 @@ namespace vegandoenerSimulator {
         }
 
         private initImages () {
+            for (let a in IngredientNames) {
+                let img = new Image ();
+                img.src = "images/" + (<{ [key: string]: string }> IngredientNames [a] + ".png");
+                this.imageMap.set ((<{ [key: string]: string }> IngredientNames) [a], img);
+            }
+            for (let a in FoodNames) {
+                let img = new Image ();
+                img.src = "images/" + (<{ [key: string]: string }> FoodNames [a] + ".png");
+                this.imageMap.set ((<{ [key: string]: string }> FoodNames) [a], img);
+            }
+
+            for (let a in Moods) {
+                let img = new Image ();
+                img.src = "images/" + (<{ [key: string]: string }> Moods [a] + ".png");
+                this.imageMap.set ((<{ [key: string]: string }> Moods) [a], img);
+            }
             
         }
 
         private initCustomerArea () {
+            if (!this.map) {
+                return;
+            }
+
+            //draw door
+            this.map.fillRect (45, height / 2 - 100, 20, 200);
+            //theke
+            this.map.fillStyle = "pink";
+            this.map.fillRect (300, 100, 30, height - 100 * 2);
+
+            //table
+            this.map.beginPath ();
+            this.map.arc(150, 250, 50, 0, 2 * Math.PI);
+            this.map.fill();
+
+            //table 2
+            this.map.beginPath ();
+            this.map.arc(130, 600, 50, 0, 2 * Math.PI);
+            this.map.fill();
+
             
         }
 
 
         private initEmployeeArea () {
+            if (!this.map) {
+                return;
+            }
+            this.map.fillStyle = "grey";
+            this.map.fillRect (350, 100, 715, 50);
+
             
         }
+
+
 
     }
 }

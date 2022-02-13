@@ -1,5 +1,5 @@
 namespace vegandoenerSimulator {
-    document.addEventListener ("DomContentLoaded", function() {
+    document.addEventListener ("DomContentLoaded", function () {
         new Game (); 
     });
 }

@@ -1,1 +1,1 @@
-{"version":3,"file":"ingredientNames.js","sourceRoot":"","sources":["ingredientNames.ts"],"names":[],"mappings":""}
+{"version":3,"file":"ingredientNames.js","sourceRoot":"","sources":["ingredientNames.ts"],"names":[],"mappings":";AAAA,IAAU,oBAAoB,CAU7B;AAVD,WAAU,oBAAoB;IAC1B,IAAY,eAQX;IARD,WAAY,eAAe;QACvB,sCAAmB,CAAA;QACnB,kCAAe,CAAA;QACf,qDAAkC,CAAA;QAClC,kCAAe,CAAA;QACf,gCAAa,CAAA;QACb,4CAAyB,CAAA;QACzB,oCAAiB,CAAA;IACrB,CAAC,EARW,eAAe,GAAf,oCAAe,KAAf,oCAAe,QAQ1B;AACL,CAAC,EAVS,oBAAoB,KAApB,oBAAoB,QAU7B"}
