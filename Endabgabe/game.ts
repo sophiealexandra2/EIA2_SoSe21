@@ -10,7 +10,7 @@ Datum: 01.02.2022
 namespace vegandoenerSimulator {
     const width: number = 1200; 
     const height: number = 800; 
-    const CUSTOMER_WAITING_TIME_MAX = 10; 
+    const CUSTOMER_WAITING_TIME_MAX: number = 10; 
 
     export class Game {
         private readonly canvas: HTMLCanvasElement;
@@ -101,7 +101,7 @@ namespace vegandoenerSimulator {
     
         private rightClick (evt: MouseEvent) {
             evt.preventDefault ();
-            let ent = this.getClickEntitiy(evt.offsetX, evt.offsetY);
+            let ent = this.getClickEntity(evt.offsetX, evt.offsetY);
             console.log("left", ent, evt);
             
 
@@ -122,19 +122,19 @@ namespace vegandoenerSimulator {
                 return;
             }
 
-            let employeeField = document.createElement("input");
+            let employeeField: HTMLInputElement = document.createElement("input");
             employeeField.placeholder = "Employee count";
 
-            let customerSpawn = document.createElement("input");
+            let customerSpawn: HTMLInputElement = document.createElement("input");
             customerSpawn.placeholder = "Spawn customer every x seconds";
 
-            let tiredSeconds = document.createElement("input");
+            let tiredSeconds: HTMLInputElement = document.createElement("input");
             tiredSeconds.placeholder = "Employees tired after x seconds without action";
 
-            let storageAmount = document.createElement("input");
+            let storageAmount: HTMLInputElement = document.createElement("input");
             storageAmount.placeholder = "Storage Capacity";
 
-            let startBtn = document.createElement("button");
+            let startBtn: HTMLButtonElement = document.createElement("button");
 
             //create button and connect to listener
             startBtn.innerText = "Start Game";
@@ -393,16 +393,108 @@ namespace vegandoenerSimulator {
 
 
         private update () {
+
+            if (!this.map) {
+                return;
+            }
             this.map.clearRect(0, 0, width, height);
             this.initMap();
             this.drawScore();
+            
+            for (let ent of this.entities) {
+               if (ent instanceof Workplace) {
+                this.updateWorkplace(ent);
+            }
+        
+               if (ent instanceof Storage) {
+                this.updateStorage(ent);
+            }
+            
+               if (ent instanceof Employee) {
+                this.updateEmployee(ent);
+            }
 
+               if (ent instanceof Customer ) {
+                    this.updateCustomer(ent);
+                    
+                }
+                
+               if (this.selected && ent === this.selected) {
+                    this.drawSelectedRect(ent);
+                }
+           
+        }
+            requestAnimationFrame (this.update.bind(this));
+             }
+
+
+        private drawSelectedRect (ent: Entity) {
+            this.map.strokeStyle = "black";
+            this.map.lineWidth = 6;
+            this.map.beginPath();
+            this.map.rect (ent.position.x - 5, ent.position.y - 5, 55, 55);
+            this.map.stroke();
 
         }
+
+        private updateWorkplace (ent: Workplace) {
+            this.map.fillStyle = "lightgrey";
+            this.map.fillRect (ent.position.x, ent.position.y, 45, 45);
+            if (ent.food) {
+                let img = this.imageMap.get (ent.food.name);
+                if (!img) {
+                    return;
+                }
+                this.map.drawImage(img, ent.position.x + 5, ent.position.y + 5, 30, 30);
+                let percentEndArc = (ent.food.has.length / ent.food.requires.length) * Math.PI * 2; 
+                this.map.strokeStyle = "darkred";
+                this.map.lineWidth = 15;
+                this.map.beginPath ();
+                this.map.arc (ent.position.x + 25, ent.position.y + 25, 15, percentEndArc === 0 ? 0.1: 0, percentEndArc === 0 ? 0.15: percentEndArc);
+                this.map.stroke();
+            }
+        }
+
+        private updateStorage (ent: Storage) {
+            this.map.fillStyle = "brown";
+            this.map.strokeStyle = "brown";
+            this.map.beginPath();
+            this.map.rect (ent.position.x, ent.position.y, 45, 45);
+            let img = this.imageMap.get (ent.contains);
+            this.map.drawImage (img, ent.position.x + 5, ent.position.y + 5, 30, 30);
+            this.map.lineWidth = 5;
+            this.map.stroke();
+
+        }
+
+        private updateUi () {
+            let container = document.getElementById ("selected") as HTMLDivElement;
+        }
+
+        private actionTo() {
+
+        }
+
+        private initWorkplace () {
+
+        }
+
+        private initStorage () {
+            
+        }
+
+        private initMap () {
+            
+        }
+
+        private initImages () {
+            
+        }
     }
-
-
 }
+
+
+
 
     
 
