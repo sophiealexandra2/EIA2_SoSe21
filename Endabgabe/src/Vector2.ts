@@ -1,4 +1,4 @@
-namespace YufkaSimulator {
+namespace veganDoenerSimulator {
     export class Vector2 {
         public x: number;
         public y: number;
@@ -21,7 +21,7 @@ namespace YufkaSimulator {
         }
 
         //adds vector onto current vector (ideally direction vector)
-        add(dir: Vector2, speed: number) {
+        add (dir: Vector2, speed: number) {
             this.x += dir.x * speed;
             this.y += dir.y * speed;
             return this;

@@ -1,4 +1,4 @@
-namespace YufkaSimulator{
+namespace veganDoenerSimulator {
     export enum Moods{
         Hungry = "hungry",
         Happy = "happy",

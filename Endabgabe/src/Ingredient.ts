@@ -1,5 +1,5 @@
-namespace YufkaSimulator{
-    export class Ingredient{
+namespace veganDoenerSimulator {
+    export class Ingredient {
         public readonly name: IngredientNames;
 
         constructor(itemName: IngredientNames) {

@@ -1,4 +1,4 @@
-namespace YufkaSimulator {
+namespace veganDoenerSimulator {
     export class Employee extends Entity {
         public readonly speed: number = 2;
         public carries: Ingredient | Food | null = null;

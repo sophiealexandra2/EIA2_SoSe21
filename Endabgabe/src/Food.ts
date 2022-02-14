@@ -1,4 +1,4 @@
-namespace YufkaSimulator {
+namespace veganDoenerSimulator {
     export class Food {
         public readonly name: FoodNames;
         public requires: IngredientNames[] = [];

@@ -1,4 +1,4 @@
-namespace YufkaSimulator {
+namespace veganDoenerSimulator {
     export class Yufka extends Food {
         constructor() {
             super(FoodNames.Yufka);

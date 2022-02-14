@@ -1,4 +1,4 @@
-namespace YufkaSimulator {
+namespace veganDoenerSimulator {
     export class Customer extends Entity {
         public mood: Moods = Moods.Hungry;
         public wants: Food;

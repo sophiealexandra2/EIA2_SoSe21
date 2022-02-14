@@ -1,4 +1,4 @@
-namespace YufkaSimulator {
+namespace veganDoenerSimulator {
     export enum FoodNames {
         Yufka = "yufka",
         Lahmacun = "lahmacun",

@@ -1,5 +1,5 @@
-namespace YufkaSimulator{
-    export enum IngredientNames{
+namespace veganDoenerSimulator {
+    export enum IngredientNames {
         Zwiebel = "zwiebel",
         Salat = "salat",
         Fleisch = "fleisch",
