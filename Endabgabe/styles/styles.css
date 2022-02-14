@@ -14,6 +14,7 @@ body {
 
 #input {
     display: block; 
+    width: 300px; 
 }
 
 #selected {
