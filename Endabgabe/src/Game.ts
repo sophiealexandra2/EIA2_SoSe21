@@ -68,19 +68,19 @@ namespace YufkaSimulator {
 
         private initClick(){
             //bind left and right click to specific functions
-            this.canvas.addEventListener('click', this.leftClick.bind(this));
-            this.canvas.addEventListener('contextmenu', this.rightClick.bind(this));
+            this.canvas.addEventListener("click", this.leftClick.bind(this));
+            this.canvas.addEventListener("contextmenu", this.rightClick.bind(this));
         }
 
         private getClickEntity(x: number, y: number){
             //find entity that is being clicked on
-            let vec = new Vector2(x, y);
+            let vec = new Vector2 (x, y);
             let found = null;
             let distFound = null;
-            for(let e of this.entities){
+            for (let e of this.entities){
                 let dist = vec.distanceTo(e.position);
                 //console.log(dist);
-                if((!found && dist <= 50) || (found && distFound && dist <= distFound)){
+                if ((!found && dist <= 50) || (found && distFound && dist <= distFound)) {
                     found = e;
                     distFound = dist;
                 }
@@ -89,25 +89,25 @@ namespace YufkaSimulator {
             return found;
         }
 
-        private leftClick(evt: MouseEvent){
+        private leftClick (evt: MouseEvent) {
             evt.preventDefault();
             //get entity that is clicked on
             let ent = this.getClickEntity(evt.offsetX, evt.offsetY);
             //console.log("left", ent, evt);
 
             //select entity
-            if(ent){
+            if (ent) {
                 this.selected = ent;
             }
             //unselect entity if nothing is hit
-            else{
+            else {
                 this.selected = null;
             }
             //update UI because selection changed
             this.updateUi();
         }
 
-        private rightClick(evt: MouseEvent){
+        private rightClick(evt: MouseEvent) {
             evt.preventDefault();
             //find entity that is clicked on
             let ent = this.getClickEntity(evt.offsetX, evt.offsetY);
@@ -129,8 +129,8 @@ namespace YufkaSimulator {
             }
         }
 
-        private empToAny(from: Employee, to: Customer | Storage | Workplace){
-            if(from.target){
+        private empToAny (from: Employee, to: Customer | Storage | Workplace){
+            if (from.target) {
                 return;
             }
             //set target property to target element
@@ -141,18 +141,18 @@ namespace YufkaSimulator {
             //init images to image map so they can be accessed by string
             for (let a in IngredientNames) {
                 let img = new Image();
-                img.src = "images/" + (<{ [key: string]: string }>IngredientNames)[a] + ".png"
-                this.imageMap.set((<{ [key: string]: string }>IngredientNames)[a], img)
+                img.src = "images/" + (<{ [key: string]: string }>IngredientNames)[a] + ".png";
+                this.imageMap.set((<{ [key: string]: string }>IngredientNames)[a], img);
             }
             for (let a in FoodNames) {
                 let img = new Image();
                 img.src = "images/" + (<{ [key: string]: string }>FoodNames)[a] + ".png"
-                this.imageMap.set((<{ [key: string]: string }>FoodNames)[a], img)
+                this.imageMap.set((<{ [key: string]: string }>FoodNames)[a], img);
             }
             for (let a in Moods) {
                 let img = new Image();
-                img.src = "images/" + (<{ [key: string]: string }>Moods)[a] + ".png"
-                this.imageMap.set((<{ [key: string]: string }>Moods)[a], img)
+                img.src = "images/" + (<{ [key: string]: string }>Moods)[a] + ".png";
+                this.imageMap.set((<{ [key: string]: string }>Moods)[a], img);
             }
         }
 
@@ -176,7 +176,7 @@ namespace YufkaSimulator {
 
             //create button and connect to listener
             startBtn.innerText = "Start Game";
-            startBtn.addEventListener('click', this.startGame.bind(this, employeeField, customerSpawn, tiredSeconds, storageAmount));
+            startBtn.addEventListener("click", this.startGame.bind(this, employeeField, customerSpawn, tiredSeconds, storageAmount));
 
             //append all created elements to existing parent element
             parent.appendChild(employeeField);
@@ -223,14 +223,14 @@ namespace YufkaSimulator {
         }
 
         private spawnEmployees() {
-            if(!this.employees){
+            if (!this.employees) {
                 return;
             }
             //spawn as many employees as defined
-            for(let i = 0; i<this.employees; i++){
+            for (let i: number = 0; i  < this.employees; i++) {
                 //create initial x with offset
-                let x = 350+(i*60);
-                let y = 400;
+                let x: number = 350 + (i * 60);
+                let y: number = 400;
                 //create entity
                 let emp = new Employee(new Vector2(x, y));
                 this.entities.push(emp);
@@ -238,7 +238,7 @@ namespace YufkaSimulator {
         }
 
         private spawnCustomers() {
-            if(this.customerSecond){
+            if (this.customerSecond) {
                 //spawn first customer
                 this.spawnCust();
                 //register spawn timer
@@ -264,24 +264,24 @@ namespace YufkaSimulator {
 
         private employeeReachedStorage(emp: Employee, stor: Storage){
             //employee carries wrong item
-            if(emp.carries && emp.carries.name !== stor.contains){
+            if (emp.carries && emp.carries.name !== stor.contains){
                 console.error("item doesnt belong in here")
                 return;
             }
             //employee brings back item
-            if(emp.carries && emp.carries.name === stor.contains){
+            if (emp.carries && emp.carries.name === stor.contains){
                 stor.amount += 1;
                 emp.carries = null;
                 return;
             }
             //employee takes item from storage
-            if(!emp.carries){
+            if (!emp.carries){
                 let success = stor.take();
-                if(success){
+                if (success) {
                     emp.carries = new Ingredient(stor.contains);
                 }
                 //no success: storage is empty
-                else{
+                else {
                     console.error("nothing in storage anymore");
                 }
             }
@@ -289,12 +289,12 @@ namespace YufkaSimulator {
 
         private employeeReachedWorkplace(emp: Employee, wp: Workplace){
             //employee takes food from workplace
-            if(!emp.carries && wp.food){
+            if (!emp.carries && wp.food ) {
                 emp.carries = wp.food;
                 wp.food = null;
             }
             //employee brings ingredient to workplace
-            if(emp.carries && wp.food && emp.carries instanceof Ingredient){
+            if (emp.carries && wp.food && emp.carries instanceof Ingredient) {
                 let success = wp.food.addIngredient(emp.carries);
                 //success: ingredient could be added
                 if(success){
@@ -304,23 +304,23 @@ namespace YufkaSimulator {
             }
         }
 
-        private employeeReachedCustomer(emp: Employee, cus: Customer){
+        private employeeReachedCustomer(emp: Employee, cus: Customer) {
             //only allow employee to reach customer when he carries Food
-            if(emp.carries && emp.carries instanceof Food){
+            if (emp.carries && emp.carries instanceof Food){
                 //employee brings wrong food to customer: alotangry
                 if(emp.carries.name !== cus.wants.name){
                     cus.mood = Moods.AlotAngry;
                     emp.carries = null;
                 }
                 //employee brings right and finished food to customer: happy
-                if(emp.carries && emp.carries.name === cus.wants.name && emp.carries.finished){
+                if (emp.carries && emp.carries.name === cus.wants.name && emp.carries.finished) {
                     cus.mood = Moods.Happy;
                     emp.carries = null;
                     //increase score
                     this.customerSuccessCount++;
                 }
                 //employee brings right food to customer, but food is not finished: alotangry
-                if(emp.carries && emp.carries.name === cus.wants.name && !emp.carries.finished){
+                if (emp.carries && emp.carries.name === cus.wants.name && !emp.carries.finished) {
                     cus.mood = Moods.AlotAngry;
                     emp.carries = null;
                 }
@@ -331,17 +331,17 @@ namespace YufkaSimulator {
             }
         }
 
-        private employeeReachedTarget(emp: Employee){
+        private employeeReachedTarget(emp: Employee) {
             //emplyoee reaches Storage
-            if(emp.target instanceof Storage){
+            if (emp.target instanceof Storage) {
                 this.employeeReachedStorage(emp, emp.target);
             }
             //employee reaches Workplace
-            if(emp.target instanceof Workplace){
+            if (emp.target instanceof Workplace) {
                 this.employeeReachedWorkplace(emp, emp.target);
             }
             //employee reaches Customer
-            if(emp.target instanceof Customer){
+            if (emp.target instanceof Customer ) {
                 this.employeeReachedCustomer(emp, emp.target);
             }
             //when employee reached something, remove target
@@ -353,17 +353,17 @@ namespace YufkaSimulator {
                 return;
             }
             //update position by target position
-            if(ent.target){
+            if (ent.target) {
                 let dir = ent.position.direction(ent.target.position);
                 ent.position.add(dir, ent.speed);
                 ent.lastMove = new Date();
                 let dist = ent.position.distanceTo(ent.target.position);
-                if(dist <= 15){
+                if (dist <= 15) {
                     this.employeeReachedTarget(ent);
                 }
             }
             //update mood depending on lastMove time
-            if(ent.lastMove.getTime() + 10*1000 < new Date().getTime()){
+            if (ent.lastMove.getTime() + 10 * 1000 < new Date().getTime() ) {
                 ent.mood = Moods.Tired;
             }
             else{
@@ -387,18 +387,18 @@ namespace YufkaSimulator {
             }
         }
 
-        private customerReachedTarget(cus: Customer){
+        private customerReachedTarget(cus: Customer) {
             //when customer reached his target, remove targetPos
             cus.targetPos = null;
             //transition from ComingIn to "Waiting"
-            if(cus.status === CustomerStatus.ComingIn){
+            if (cus.status === CustomerStatus.ComingIn) {
                 cus.status = CustomerStatus.Waiting;
                 cus.waitingSince = new Date();
             }
             //remove customer when he reaches spawn again when Leaving
-            else if(cus.status === CustomerStatus.Leaving){
+            else if (cus.status === CustomerStatus.Leaving) {
                 let idx = this.entities.findIndex((val: Entity) => val === cus);
-                if(idx === -1){
+                if (idx === -1) {
                     return;
                 }
                 this.entities.splice(idx, 1);
@@ -410,32 +410,32 @@ namespace YufkaSimulator {
                 return;
             }
             //update position
-            if(ent.targetPos){
+            if (ent.targetPos) {
                 let dir = ent.position.direction(ent.targetPos);
                 ent.position.add(dir, ent.speed);
                 let dist = ent.position.distanceTo(ent.targetPos);
-                if(dist <= 3){
+                if (dist <= 3){
                     this.customerReachedTarget(ent);
                 }
             }
             //calculate mood depending on waitingSince time
-            if(ent.status === CustomerStatus.Waiting && ent.waitingSince && ent.waitingSince.getTime() + (CUSTOMER_WAITING_TIME_MAX*1000)*2 < new Date().getTime()){
+            if (ent.status === CustomerStatus.Waiting && ent.waitingSince && ent.waitingSince.getTime() + (CUSTOMER_WAITING_TIME_MAX*1000)*2 < new Date().getTime()){
                 ent.mood = Moods.AlotAngry;
             }
-            else if(ent.status === CustomerStatus.Waiting && ent.waitingSince && ent.waitingSince.getTime() + CUSTOMER_WAITING_TIME_MAX*1000 < new Date().getTime()){
+            else if (ent.status === CustomerStatus.Waiting && ent.waitingSince && ent.waitingSince.getTime() + CUSTOMER_WAITING_TIME_MAX*1000 < new Date().getTime()){
                 ent.mood = Moods.Angry;
             }
 
             //draw customer
             this.map.fillStyle = "lightgrey";
-            let img = this.imageMap.get(ent.mood);
+            let img: HTMLImageElement = this.imageMap.get(ent.mood);
             if (!img) {
                 return;
             }
             this.map.drawImage(img, ent.position.x, ent.position.y, 45, 45);
             //add customer food image
             if (ent.wants) {
-                let img = this.imageMap.get(ent.wants.name);
+                let img: HTMLImageElement = this.imageMap.get(ent.wants.name);
                 if (!img) {
                     return;
                 }
@@ -446,7 +446,7 @@ namespace YufkaSimulator {
         private drawScore(){
             //get element to write in
             let elem = document.getElementById("score");
-            if(!elem){
+            if (!elem)  {
                 return;
             }
             elem.innerHTML = "";
@@ -470,37 +470,37 @@ namespace YufkaSimulator {
             this.drawScore();
             //console.log("render");
             //loop every entity and call specific update function
-            for(let ent of this.entities){
-                if(ent instanceof Workplace){
+            for (let ent of this.entities){
+                if (ent instanceof Workplace) {
                     this.updateWorkplace(ent);
                 }
-                if(ent instanceof Storage){
+                if (ent instanceof Storage ) {
                     this.updateStorage(ent);
                 }
-                if(ent instanceof Employee ){
+                if (ent instanceof Employee ) {
                     this.updateEmployee(ent);
                 }
-                if(ent instanceof Customer ){
+                if (ent instanceof Customer ) {
                     this.updateCustomer(ent);
                 }
                 //draw rectangle around currently selected entity
-                if(this.selected && ent === this.selected){
-                    this.drawSelectedRect(ent);
+                if (this.selected && ent === this.selected){
+                    this.drawSelectedRect(ent );
                 }
             }
             //update loop recursion
             requestAnimationFrame(this.update.bind(this));
         }
 
-        private drawSelectedRect(ent: Entity){
-            if(!this.map){
+        private drawSelectedRect (ent: Entity ) {
+            if (!this.map) {
                 return;
             }
             //draws rectangle around current selected entity
             this.map.strokeStyle = "black";
             this.map.lineWidth = 6;
-            this.map.beginPath()
-            this.map.rect(ent.position.x-5, ent.position.y-5, 55, 55);
+            this.map.beginPath();
+            this.map.rect(ent.position.x - 5, ent.position.y - 5, 55, 55);
             this.map.stroke();
         }
 
@@ -513,7 +513,7 @@ namespace YufkaSimulator {
             this.map.fillRect(ent.position.x, ent.position.y, 45, 45);
             //when workplace has food in progress, add image and percent status
             if (ent.food) {
-                let img = this.imageMap.get(ent.food.name);
+                let img: HTMLImageElement = this.imageMap.get(ent.food.name);
                 if (!img) {
                     return;
                 }
@@ -524,8 +524,8 @@ namespace YufkaSimulator {
                 //console.log("arc",percentEndArc);
                 this.map.strokeStyle = "darkgreen";
                 this.map.lineWidth = 15;
-                this.map.beginPath()
-                this.map.arc(ent.position.x+25, ent.position.y+25, 15, percentEndArc === 0 ? 0.1: 0, percentEndArc === 0 ? 0.15: percentEndArc);
+                this.map.beginPath();
+                this.map.arc(ent.position.x + 25, ent.position.y + 25, 15, percentEndArc === 0 ? 0.1 : 0, percentEndArc === 0 ? 0.15 : percentEndArc);
                 this.map.stroke();
             }
         }
@@ -539,7 +539,7 @@ namespace YufkaSimulator {
             this.map.strokeStyle = "brown";
             this.map.beginPath();
             this.map.rect(ent.position.x, ent.position.y, 45, 45);
-            let img = this.imageMap.get(ent.contains);
+            let img: HTMLImageElement = this.imageMap.get(ent.contains);
             if (!img) {
                 return;
             }
@@ -550,16 +550,16 @@ namespace YufkaSimulator {
 
         private updateUi() {
             //update selection window
-            let container = document.getElementById("selected") as HTMLDivElement;
+            let container: HTMLDivElement = document.getElementById("selected") as HTMLDivElement;
             container.innerHTML = "";
-            if(!this.selected){
+            if (!this.selected) {
                 return;
             }
-            let fieldset = document.createElement("fieldset") as HTMLFieldSetElement;
-            let legend = document.createElement("legend");
+            let fieldset: HTMLFieldSetElement = document.createElement("fieldset") as HTMLFieldSetElement;
+            let legend: HTMLLegendElement = document.createElement("legend");
             fieldset.appendChild(legend);
             //update selection window depending on current selected element
-            if(this.selected instanceof Customer){
+            if (this.selected instanceof Customer ) {
                 legend.innerText = "Customer";
                 this.updateSelectedCustomerUi(fieldset);
             }

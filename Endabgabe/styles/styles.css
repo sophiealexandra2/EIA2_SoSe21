@@ -8,8 +8,8 @@ body {
 
 #ui {
     display: flex;
-    width: 400px; 
-    
+    width: 100%; 
+
 }
 
 #input {
