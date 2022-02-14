@@ -1,5 +1,5 @@
-namespace YufkaSimulator{
-    export class Customer extends Entity{
+namespace YufkaSimulator {
+    export class Customer extends Entity {
         public mood: Moods = Moods.Hungry;
         public wants: Food;
         public readonly speed: number = 0.5;
@@ -14,9 +14,9 @@ namespace YufkaSimulator{
         }
 
         //set random food when customer is created
-        private setRandomFood(){
+        private setRandomFood () {
             let foods = [FoodNames.Lahmacun, FoodNames.Doener, FoodNames.Yufka];
-            let idx = Math.floor(Math.random()*3);
+            let idx: number = Math.floor(Math.random() * 3);
             this.wants = new Food(foods[idx]);
         }
 

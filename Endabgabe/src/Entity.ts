@@ -1,5 +1,5 @@
-namespace YufkaSimulator{
-    export class Entity{
+namespace YufkaSimulator {
+    export class Entity {
         public position: Vector2;
 
         constructor(initPos: Vector2) {

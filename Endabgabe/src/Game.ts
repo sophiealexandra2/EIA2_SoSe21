@@ -29,7 +29,7 @@ namespace YufkaSimulator {
         private custInt: number | null = null;
 
         //customer spawn location (static)
-        private customerSpawn: Vector2 = new Vector2(20,345);
+        private customerSpawn: Vector2 = new Vector2(20, 345);
         //most left coordinate of customer spawn target walk
         private customerTargetX: number = 270;
         //x and y borders
@@ -66,18 +66,18 @@ namespace YufkaSimulator {
             this.initClick();
         }
 
-        private initClick(){
+        private initClick() {
             //bind left and right click to specific functions
             this.canvas.addEventListener("click", this.leftClick.bind(this));
             this.canvas.addEventListener("contextmenu", this.rightClick.bind(this));
         }
 
-        private getClickEntity(x: number, y: number){
+        private getClickEntity(x: number, y: number ) {
             //find entity that is being clicked on
             let vec = new Vector2 (x, y);
             let found = null;
             let distFound = null;
-            for (let e of this.entities){
+            for (let e of this.entities) {
                 let dist = vec.distanceTo(e.position);
                 //console.log(dist);
                 if ((!found && dist <= 50) || (found && distFound && dist <= distFound)) {
@@ -107,29 +107,29 @@ namespace YufkaSimulator {
             this.updateUi();
         }
 
-        private rightClick(evt: MouseEvent) {
+        private rightClick (evt: MouseEvent) {
             evt.preventDefault();
             //find entity that is clicked on
             let ent = this.getClickEntity(evt.offsetX, evt.offsetY);
             //console.log("right", ent, evt);
             //nothing was hit, do nothing
-            if(!ent){
+            if (!ent) {
                 return;
             }
             //only dispatch action when selected entity is employee and target is not same entity or not Customer/Storage/Workplace
-            if(this.selected instanceof Employee && this.selected !== ent && (ent instanceof Customer || ent instanceof Storage || ent instanceof Workplace)){
+            if (this.selected instanceof Employee && this.selected !== ent && (ent instanceof Customer || ent instanceof Storage || ent instanceof Workplace)) {
                 this.actionTo(this.selected, ent);
             }
         }
 
-        private actionTo(from: Employee, to: Customer | Storage | Workplace){
+        private actionTo (from: Employee, to: Customer | Storage | Workplace) {
             //employee to customer right click action
-            if(to instanceof Customer || to instanceof Storage || to instanceof Workplace){
+            if (to instanceof Customer || to instanceof Storage || to instanceof Workplace) {
                 this.empToAny(from, to);
             }
         }
 
-        private empToAny (from: Employee, to: Customer | Storage | Workplace){
+        private empToAny (from: Employee, to: Customer | Storage | Workplace) {
             if (from.target) {
                 return;
             }
@@ -146,8 +146,7 @@ namespace YufkaSimulator {
             }
             for (let a in FoodNames) {
                 let img = new Image();
-                img.src = "images/" + (<{ [key: string]: string }>FoodNames)[a] + ".png"
-                this.imageMap.set((<{ [key: string]: string }>FoodNames)[a], img);
+                img.src = "images/" + (<{ [key: string]: string }>FoodNames)[a] + ".png";
             }
             for (let a in Moods) {
                 let img = new Image();
@@ -158,7 +157,7 @@ namespace YufkaSimulator {
 
         private initUi() {
             //initialize UI, so game can be started
-            let parent = document.getElementById("start");
+            let parent: HTMLElement = document.getElementById("start");
             if (!parent) {
                 console.error("UI NOT FOUND");
                 return;
@@ -167,7 +166,7 @@ namespace YufkaSimulator {
             let employeeField = document.createElement("input");
             employeeField.placeholder = "Employee count";
             let customerSpawn = document.createElement("input");
-            customerSpawn.placeholder = "Spawn customer every x seconds"
+            customerSpawn.placeholder = "Spawn customer every x seconds";
             let tiredSeconds = document.createElement("input");
             tiredSeconds.placeholder = "Employees tired after x seconds without action";
             let storageAmount = document.createElement("input");
@@ -237,7 +236,7 @@ namespace YufkaSimulator {
             }
         }
 
-        private spawnCustomers() {
+        private spawnCustomers () {
             if (this.customerSecond) {
                 //spawn first customer
                 this.spawnCust();
@@ -246,15 +245,15 @@ namespace YufkaSimulator {
             }
         }
 
-        private rand(from: number, to: number){
-            return Math.floor(Math.random() * (to-from) + from);
+        private rand (from: number, to: number) {
+            return Math.floor(Math.random() * (to - from) + from);
         }
 
-        private spawnCust(){
+        private spawnCust() {
             //set customer target location x
             let targetX = this.customerTargetX;
             //set customer random target location y
-            let targetY = this.rand(this.customerFromY, this.customerToY)
+            let targetY = this.rand(this.customerFromY, this.customerToY);
             //create entity
             let cust = new Customer(this.customerSpawn, new Vector2(targetX, targetY));
             this.entities.push(cust);
@@ -262,20 +261,20 @@ namespace YufkaSimulator {
             this.customerCount++;
         }
 
-        private employeeReachedStorage(emp: Employee, stor: Storage){
+        private employeeReachedStorage (emp: Employee, stor: Storage) {
             //employee carries wrong item
-            if (emp.carries && emp.carries.name !== stor.contains){
-                console.error("item doesnt belong in here")
+            if (emp.carries && emp.carries.name !== stor.contains) {
+                console.error("item doesnt belong in here");
                 return;
             }
             //employee brings back item
-            if (emp.carries && emp.carries.name === stor.contains){
+            if (emp.carries && emp.carries.name === stor.contains) {
                 stor.amount += 1;
                 emp.carries = null;
                 return;
             }
             //employee takes item from storage
-            if (!emp.carries){
+            if (!emp.carries) {
                 let success = stor.take();
                 if (success) {
                     emp.carries = new Ingredient(stor.contains);
@@ -287,7 +286,7 @@ namespace YufkaSimulator {
             }
         }
 
-        private employeeReachedWorkplace(emp: Employee, wp: Workplace){
+        private employeeReachedWorkplace(emp: Employee, wp: Workplace) {
             //employee takes food from workplace
             if (!emp.carries && wp.food ) {
                 emp.carries = wp.food;
@@ -297,7 +296,7 @@ namespace YufkaSimulator {
             if (emp.carries && wp.food && emp.carries instanceof Ingredient) {
                 let success = wp.food.addIngredient(emp.carries);
                 //success: ingredient could be added
-                if(success){
+                if (success) {
                     emp.carries = null;
                 }
                 //no success: do nothing
@@ -306,9 +305,9 @@ namespace YufkaSimulator {
 
         private employeeReachedCustomer(emp: Employee, cus: Customer) {
             //only allow employee to reach customer when he carries Food
-            if (emp.carries && emp.carries instanceof Food){
+            if (emp.carries && emp.carries instanceof Food) {
                 //employee brings wrong food to customer: alotangry
-                if(emp.carries.name !== cus.wants.name){
+                if (emp.carries.name !== cus.wants.name) {
                     cus.mood = Moods.AlotAngry;
                     emp.carries = null;
                 }
@@ -366,7 +365,7 @@ namespace YufkaSimulator {
             if (ent.lastMove.getTime() + 10 * 1000 < new Date().getTime() ) {
                 ent.mood = Moods.Tired;
             }
-            else{
+            else {
                 ent.mood = Moods.Chef;
             }
             //get image by current mood
@@ -405,7 +404,7 @@ namespace YufkaSimulator {
             }
         }
 
-        private updateCustomer(ent: Customer) {
+        private updateCustomer (ent: Customer) {
             if (!this.map) {
                 return;
             }
@@ -414,15 +413,15 @@ namespace YufkaSimulator {
                 let dir = ent.position.direction(ent.targetPos);
                 ent.position.add(dir, ent.speed);
                 let dist = ent.position.distanceTo(ent.targetPos);
-                if (dist <= 3){
+                if (dist <= 3) {
                     this.customerReachedTarget(ent);
                 }
             }
             //calculate mood depending on waitingSince time
-            if (ent.status === CustomerStatus.Waiting && ent.waitingSince && ent.waitingSince.getTime() + (CUSTOMER_WAITING_TIME_MAX*1000)*2 < new Date().getTime()){
+            if (ent.status === CustomerStatus.Waiting && ent.waitingSince && ent.waitingSince.getTime() + (CUSTOMER_WAITING_TIME_MAX * 1000) * 2 < new Date().getTime()) {
                 ent.mood = Moods.AlotAngry;
             }
-            else if (ent.status === CustomerStatus.Waiting && ent.waitingSince && ent.waitingSince.getTime() + CUSTOMER_WAITING_TIME_MAX*1000 < new Date().getTime()){
+            else if (ent.status === CustomerStatus.Waiting && ent.waitingSince && ent.waitingSince.getTime() + CUSTOMER_WAITING_TIME_MAX * 1000 < new Date().getTime()) {
                 ent.mood = Moods.Angry;
             }
 
@@ -443,7 +442,7 @@ namespace YufkaSimulator {
             }
         }
 
-        private drawScore(){
+        private drawScore() {
             //get element to write in
             let elem = document.getElementById("score");
             if (!elem)  {
@@ -470,7 +469,7 @@ namespace YufkaSimulator {
             this.drawScore();
             //console.log("render");
             //loop every entity and call specific update function
-            for (let ent of this.entities){
+            for (let ent of this.entities) {
                 if (ent instanceof Workplace) {
                     this.updateWorkplace(ent);
                 }
@@ -484,7 +483,7 @@ namespace YufkaSimulator {
                     this.updateCustomer(ent);
                 }
                 //draw rectangle around currently selected entity
-                if (this.selected && ent === this.selected){
+                if (this.selected && ent === this.selected) {
                     this.drawSelectedRect(ent );
                 }
             }
@@ -543,7 +542,7 @@ namespace YufkaSimulator {
             if (!img) {
                 return;
             }
-            this.map.drawImage(img, ent.position.x + 5, ent.position.y + 5, 30, 30)
+            this.map.drawImage(img, ent.position.x + 5, ent.position.y + 5, 30, 30);
             this.map.lineWidth = 5;
             this.map.stroke();
         }
@@ -563,36 +562,36 @@ namespace YufkaSimulator {
                 legend.innerText = "Customer";
                 this.updateSelectedCustomerUi(fieldset);
             }
-            if(this.selected instanceof Employee){
+            if (this.selected instanceof Employee) {
                 legend.innerText = "Employee";
                 this.updateSelectedEmployeeUi(fieldset);
             }
-            if(this.selected instanceof Workplace){
+            if (this.selected instanceof Workplace ) {
                 legend.innerText = "Workplace";
                 this.updateSelectedWorkplaceUi(fieldset);
             }
-            if(this.selected instanceof Storage){
+            if (this.selected instanceof Storage) {
                 legend.innerText = "Storage";
                 this.updateSelectedStorageUi(fieldset);
             }
             container.appendChild(fieldset);
         }
 
-        private updateSelectedCustomerUi(con: HTMLFieldSetElement){
+        private updateSelectedCustomerUi(con: HTMLFieldSetElement) {
             //set ui when customer is selected
-            const p = document.createElement("p");
+            const p: HTMLParagraphElement = document.createElement("p");
             const sel = this.selected as Customer;
             p.innerText = `Customer wants: ${sel.wants.name}`;
-            const p2 = document.createElement("p");
+            const p2: HTMLParagraphElement = document.createElement("p");
             p2.innerText = `Customer mood: ${sel.mood}`;
             con.appendChild(p);
             con.appendChild(p2);
         }
 
-        private updateSelectedEmployeeUi(con: HTMLFieldSetElement){
+        private updateSelectedEmployeeUi(con: HTMLFieldSetElement) {
             //set ui when employee is selected
             const sel = this.selected as Employee;
-            if(sel.carries){
+            if (sel.carries) {
                 const p = document.createElement("p");
                 p.innerText = `Employee carries: ${sel.carries.name}`;
                 con.appendChild(p);
@@ -602,13 +601,13 @@ namespace YufkaSimulator {
             con.appendChild(p2);
         }
 
-        private updateSelectedWorkplaceUi(con: HTMLFieldSetElement){
+        private updateSelectedWorkplaceUi(con: HTMLFieldSetElement) {
             //set ui when workplace is selected
             const sel = this.selected as Workplace;
             //when workplace has no food, generate select element with every Food
-            if(!sel.food){
+            if (!sel.food) {
                 const select = document.createElement("select");
-                for(let a in FoodNames){
+                for (let a in FoodNames) {
                     //console.log("a");
                     const opt = document.createElement("option");
                     opt.value = a;
@@ -622,17 +621,17 @@ namespace YufkaSimulator {
                 con.appendChild(btn);
             }
             //if production is running, just display required ingredients
-            if(sel.food){
-                const p = document.createElement("p");
+            if (sel.food) {
+                const p: HTMLParagraphElement = document.createElement("p");
                 p.innerText = "Requires:" + sel.food.requires.join(",");
                 con.appendChild(p);
             }
         }
 
-        private startProduction(workplace: Workplace, elem: HTMLSelectElement, evt: MouseEvent){
+        private startProduction(workplace: Workplace, elem: HTMLSelectElement, evt: MouseEvent) {
             let selected = elem.value;
             //create food depending on selected value in select element
-            switch(selected){
+            switch (selected) {
                 case "Doener":
                     workplace.food = new Doener();
                     break;
@@ -647,7 +646,7 @@ namespace YufkaSimulator {
             this.updateUi();
         }
 
-        private updateSelectedStorageUi(con: HTMLFieldSetElement){
+        private updateSelectedStorageUi(con: HTMLFieldSetElement ) {
             //set ui when storage is selected
             const sel = this.selected as Storage;
             const p = document.createElement("p");
@@ -659,7 +658,7 @@ namespace YufkaSimulator {
         }
 
         //validate number, returns true when number is valid, otherwise false
-        private validateNr(nr: number) {
+        private validateNr (nr: number) {
             return !isNaN(nr) && nr > 0;
         }
 
@@ -722,11 +721,11 @@ namespace YufkaSimulator {
             }
             //create 13 workspaces in kitchen
             this.map.fillStyle = "lightgrey";
-            for (let i = 0; i < 13; i++) {
-                let x = 355 + (i * 55);
-                let y = 100;
+            for (let i: number = 0; i < 13; i++) {
+                let x: number = 355 + (i * 55);
+                let y: number = 100;
                 //let workplace = new Workplace(null, new Vector2(x, y));
-                let workplace = new Workplace(null, new Vector2(x, y));
+                let workplace = new Workplace (null, new Vector2 (x, y));
                 this.entities.push(workplace);
             }
         }
@@ -737,12 +736,12 @@ namespace YufkaSimulator {
             }
             //create storage for every possible Ingredient
             this.map.fillStyle = "brown";
-            let i = 0;
+            let i: number = 0;
             for (let a in IngredientNames) {
-                let x = 355 + (i * 55);
-                let y = 650;
+                let x: number = 355 + (i * 55);
+                let y: number = 650;
                 i++;
-                let stor = new Storage((<{ [key: string]: IngredientNames }>IngredientNames)[a], this.storageMax, new Vector2(x, y));
+                let stor: Storage = new Storage((<{ [key: string]: IngredientNames }>IngredientNames)[a], this.storageMax, new Vector2(x, y));
                 this.entities.push(stor);
             }
         }

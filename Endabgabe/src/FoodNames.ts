@@ -1,5 +1,5 @@
-namespace YufkaSimulator{
-    export enum FoodNames{
+namespace YufkaSimulator {
+    export enum FoodNames {
         Yufka = "yufka",
         Lahmacun = "lahmacun",
         Doener = "doener"
