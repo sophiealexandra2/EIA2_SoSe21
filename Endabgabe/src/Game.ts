@@ -123,12 +123,13 @@ namespace veganDoenerSimulator {
             //a for key then --> Typecast, da wir mehr wissen als "er"
             for (let a in IngredientNames) {
                 let img = new Image();
-                img.src = "images/" + (<{ [key: string]: string }>IngredientNames)[a] + ".png";
-                this.imageMap.set((<{ [key: string]: string }>IngredientNames)[a], img);
+                img.src = "images/" + (<{ [key: string]: string }>IngredientNames)[a] + ".png"
+                this.imageMap.set((<{ [key: string]: string }>IngredientNames)[a], img)
             }
             for (let a in FoodNames) {
                 let img = new Image();
-                img.src = "images/" + (<{ [key: string]: string }>FoodNames)[a] + ".png";
+                img.src = "images/" + (<{ [key: string]: string }>FoodNames)[a] + ".png"
+                this.imageMap.set ((<{ [key: string]: string }>FoodNames)[a], img)
             }
             for (let a in Moods) {
                 let img = new Image();

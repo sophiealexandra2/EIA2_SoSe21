@@ -118,6 +118,7 @@ var veganDoenerSimulator;
             for (let a in veganDoenerSimulator.FoodNames) {
                 let img = new Image();
                 img.src = "images/" + veganDoenerSimulator.FoodNames[a] + ".png";
+                this.imageMap.set(veganDoenerSimulator.FoodNames[a], img);
             }
             for (let a in veganDoenerSimulator.Moods) {
                 let img = new Image();
