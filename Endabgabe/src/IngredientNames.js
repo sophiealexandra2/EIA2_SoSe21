@@ -1,6 +1,6 @@
 "use strict";
-var YufkaSimulator;
-(function (YufkaSimulator) {
+var veganDoenerSimulator;
+(function (veganDoenerSimulator) {
     let IngredientNames;
     (function (IngredientNames) {
         IngredientNames["Zwiebel"] = "zwiebel";
@@ -10,6 +10,6 @@ var YufkaSimulator;
         IngredientNames["Brot"] = "brot";
         IngredientNames["Fladenbrot"] = "fladenbrot";
         IngredientNames["Tomate"] = "tomaten";
-    })(IngredientNames = YufkaSimulator.IngredientNames || (YufkaSimulator.IngredientNames = {}));
-})(YufkaSimulator || (YufkaSimulator = {}));
+    })(IngredientNames = veganDoenerSimulator.IngredientNames || (veganDoenerSimulator.IngredientNames = {}));
+})(veganDoenerSimulator || (veganDoenerSimulator = {}));
 //# sourceMappingURL=IngredientNames.js.map

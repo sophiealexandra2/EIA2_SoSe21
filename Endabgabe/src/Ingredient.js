@@ -1,11 +1,11 @@
 "use strict";
-var YufkaSimulator;
-(function (YufkaSimulator) {
+var veganDoenerSimulator;
+(function (veganDoenerSimulator) {
     class Ingredient {
         constructor(itemName) {
             this.name = itemName;
         }
     }
-    YufkaSimulator.Ingredient = Ingredient;
-})(YufkaSimulator || (YufkaSimulator = {}));
+    veganDoenerSimulator.Ingredient = Ingredient;
+})(veganDoenerSimulator || (veganDoenerSimulator = {}));
 //# sourceMappingURL=Ingredient.js.map

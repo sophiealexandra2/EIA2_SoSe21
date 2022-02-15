@@ -1,11 +1,11 @@
 "use strict";
-var YufkaSimulator;
-(function (YufkaSimulator) {
+var veganDoenerSimulator;
+(function (veganDoenerSimulator) {
     class Entity {
         constructor(initPos) {
-            this.position = new YufkaSimulator.Vector2(initPos.x, initPos.y);
+            this.position = new veganDoenerSimulator.Vector2(initPos.x, initPos.y);
         }
     }
-    YufkaSimulator.Entity = Entity;
-})(YufkaSimulator || (YufkaSimulator = {}));
+    veganDoenerSimulator.Entity = Entity;
+})(veganDoenerSimulator || (veganDoenerSimulator = {}));
 //# sourceMappingURL=Entity.js.map

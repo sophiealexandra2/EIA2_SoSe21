@@ -1,11 +1,11 @@
 "use strict";
-var YufkaSimulator;
-(function (YufkaSimulator) {
+var veganDoenerSimulator;
+(function (veganDoenerSimulator) {
     let FoodNames;
     (function (FoodNames) {
         FoodNames["Yufka"] = "yufka";
         FoodNames["Lahmacun"] = "lahmacun";
         FoodNames["Doener"] = "doener";
-    })(FoodNames = YufkaSimulator.FoodNames || (YufkaSimulator.FoodNames = {}));
-})(YufkaSimulator || (YufkaSimulator = {}));
+    })(FoodNames = veganDoenerSimulator.FoodNames || (veganDoenerSimulator.FoodNames = {}));
+})(veganDoenerSimulator || (veganDoenerSimulator = {}));
 //# sourceMappingURL=FoodNames.js.map

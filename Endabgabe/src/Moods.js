@@ -1,6 +1,6 @@
 "use strict";
-var YufkaSimulator;
-(function (YufkaSimulator) {
+var veganDoenerSimulator;
+(function (veganDoenerSimulator) {
     let Moods;
     (function (Moods) {
         Moods["Hungry"] = "hungry";
@@ -9,6 +9,6 @@ var YufkaSimulator;
         Moods["AlotAngry"] = "alotangry";
         Moods["Tired"] = "tired";
         Moods["Chef"] = "chef";
-    })(Moods = YufkaSimulator.Moods || (YufkaSimulator.Moods = {}));
-})(YufkaSimulator || (YufkaSimulator = {}));
+    })(Moods = veganDoenerSimulator.Moods || (veganDoenerSimulator.Moods = {}));
+})(veganDoenerSimulator || (veganDoenerSimulator = {}));
 //# sourceMappingURL=Moods.js.map

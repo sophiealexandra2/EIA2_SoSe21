@@ -1,11 +1,11 @@
 "use strict";
-var YufkaSimulator;
-(function (YufkaSimulator) {
+var veganDoenerSimulator;
+(function (veganDoenerSimulator) {
     let CustomerStatus;
     (function (CustomerStatus) {
         CustomerStatus["ComingIn"] = "comingin";
         CustomerStatus["Waiting"] = "waiting";
         CustomerStatus["Leaving"] = "leaving";
-    })(CustomerStatus = YufkaSimulator.CustomerStatus || (YufkaSimulator.CustomerStatus = {}));
-})(YufkaSimulator || (YufkaSimulator = {}));
+    })(CustomerStatus = veganDoenerSimulator.CustomerStatus || (veganDoenerSimulator.CustomerStatus = {}));
+})(veganDoenerSimulator || (veganDoenerSimulator = {}));
 //# sourceMappingURL=CustomerStatus.js.map

@@ -1,5 +1,5 @@
 namespace veganDoenerSimulator {
-    export enum Moods{
+    export enum Moods {
         Hungry = "hungry",
         Happy = "happy",
         Angry = "angry",

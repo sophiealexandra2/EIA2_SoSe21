@@ -1,9 +1,9 @@
 "use strict";
-var YufkaSimulator;
-(function (YufkaSimulator) {
-    document.addEventListener('DOMContentLoaded', function () {
+var veganDoenerSimulator;
+(function (veganDoenerSimulator) {
+    document.addEventListener("DOMContentLoaded", function () {
         //create game entrypoint
-        new YufkaSimulator.Game();
+        new veganDoenerSimulator.Game();
     });
-})(YufkaSimulator || (YufkaSimulator = {}));
+})(veganDoenerSimulator || (veganDoenerSimulator = {}));
 //# sourceMappingURL=index.js.map

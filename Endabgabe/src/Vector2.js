@@ -1,6 +1,6 @@
 "use strict";
-var YufkaSimulator;
-(function (YufkaSimulator) {
+var veganDoenerSimulator;
+(function (veganDoenerSimulator) {
     class Vector2 {
         constructor(x, y) {
             this.x = x;
@@ -23,6 +23,6 @@ var YufkaSimulator;
             return this;
         }
     }
-    YufkaSimulator.Vector2 = Vector2;
-})(YufkaSimulator || (YufkaSimulator = {}));
+    veganDoenerSimulator.Vector2 = Vector2;
+})(veganDoenerSimulator || (veganDoenerSimulator = {}));
 //# sourceMappingURL=Vector2.js.map

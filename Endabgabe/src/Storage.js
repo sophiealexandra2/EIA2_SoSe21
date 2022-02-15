@@ -1,7 +1,7 @@
 "use strict";
-var YufkaSimulator;
-(function (YufkaSimulator) {
-    class Storage extends YufkaSimulator.Entity {
+var veganDoenerSimulator;
+(function (veganDoenerSimulator) {
+    class Storage extends veganDoenerSimulator.Entity {
         constructor(contains, amount, initPos) {
             super(initPos);
             this.amount = amount;
@@ -18,6 +18,6 @@ var YufkaSimulator;
             return true;
         }
     }
-    YufkaSimulator.Storage = Storage;
-})(YufkaSimulator || (YufkaSimulator = {}));
+    veganDoenerSimulator.Storage = Storage;
+})(veganDoenerSimulator || (veganDoenerSimulator = {}));
 //# sourceMappingURL=Storage.js.map

@@ -1,6 +1,6 @@
 "use strict";
-var YufkaSimulator;
-(function (YufkaSimulator) {
+var veganDoenerSimulator;
+(function (veganDoenerSimulator) {
     class Food {
         constructor(itemName) {
             this.requires = [];
@@ -28,6 +28,6 @@ var YufkaSimulator;
             return true;
         }
     }
-    YufkaSimulator.Food = Food;
-})(YufkaSimulator || (YufkaSimulator = {}));
+    veganDoenerSimulator.Food = Food;
+})(veganDoenerSimulator || (veganDoenerSimulator = {}));
 //# sourceMappingURL=Food.js.map

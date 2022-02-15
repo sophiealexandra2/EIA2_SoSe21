@@ -1,12 +1,12 @@
 "use strict";
-var YufkaSimulator;
-(function (YufkaSimulator) {
-    class Lahmacun extends YufkaSimulator.Food {
+var veganDoenerSimulator;
+(function (veganDoenerSimulator) {
+    class Lahmacun extends veganDoenerSimulator.Food {
         constructor() {
-            super(YufkaSimulator.FoodNames.Lahmacun);
-            this.requires = [YufkaSimulator.IngredientNames.Fladenbrot, YufkaSimulator.IngredientNames.Salat, YufkaSimulator.IngredientNames.Tomate, YufkaSimulator.IngredientNames.Zwiebel, YufkaSimulator.IngredientNames.Fleisch];
+            super(veganDoenerSimulator.FoodNames.Lahmacun);
+            this.requires = [veganDoenerSimulator.IngredientNames.Fladenbrot, veganDoenerSimulator.IngredientNames.Salat, veganDoenerSimulator.IngredientNames.Tomate, veganDoenerSimulator.IngredientNames.Zwiebel, veganDoenerSimulator.IngredientNames.Fleisch];
         }
     }
-    YufkaSimulator.Lahmacun = Lahmacun;
-})(YufkaSimulator || (YufkaSimulator = {}));
+    veganDoenerSimulator.Lahmacun = Lahmacun;
+})(veganDoenerSimulator || (veganDoenerSimulator = {}));
 //# sourceMappingURL=Lahmacun.js.map

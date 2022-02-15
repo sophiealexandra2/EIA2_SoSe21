@@ -138,7 +138,7 @@ namespace veganDoenerSimulator {
         }
         
         private initUi() {
-            let parent: HTMLElement = document.getElementById("start");
+            let parent = document.getElementById("start");
             if (!parent) {
                 console.error("UI NOT FOUND");
                 return;
@@ -377,13 +377,13 @@ namespace veganDoenerSimulator {
 
             //draw customer
             this.map.fillStyle = "lightgrey";
-            let img: HTMLImageElement = this.imageMap.get(ent.mood);
+            let img = this.imageMap.get(ent.mood);
             if (!img) {
                 return;
             }
             this.map.drawImage(img, ent.position.x, ent.position.y, 45, 45);
             if (ent.wants) {
-                let img: HTMLImageElement = this.imageMap.get(ent.wants.name);
+                let img = this.imageMap.get(ent.wants.name);
                 if (!img) {
                     return;
                 }
@@ -392,7 +392,7 @@ namespace veganDoenerSimulator {
         }
 
         private drawScore() {
-            let elem: HTMLElement = document.getElementById("score");
+            let elem = document.getElementById("score");
             if (!elem)  {
                 return;
             }
@@ -453,7 +453,7 @@ namespace veganDoenerSimulator {
             this.map.fillRect(ent.position.x, ent.position.y, 45, 45);
             //when workplace has food in progress, add image and percent status
             if (ent.food) {
-                let img: HTMLImageElement = this.imageMap.get(ent.food.name);
+                let img = this.imageMap.get(ent.food.name);
                 if (!img) {
                     return;
                 }
@@ -476,7 +476,7 @@ namespace veganDoenerSimulator {
             this.map.strokeStyle = "brown";
             this.map.beginPath();
             this.map.rect(ent.position.x, ent.position.y, 45, 45);
-            let img: HTMLImageElement = this.imageMap.get(ent.contains);
+            let img = this.imageMap.get(ent.contains);
             if (!img) {
                 return;
             }

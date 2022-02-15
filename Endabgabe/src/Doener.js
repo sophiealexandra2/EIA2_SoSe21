@@ -1,12 +1,12 @@
 "use strict";
-var YufkaSimulator;
-(function (YufkaSimulator) {
-    class Doener extends YufkaSimulator.Food {
+var veganDoenerSimulator;
+(function (veganDoenerSimulator) {
+    class Doener extends veganDoenerSimulator.Food {
         constructor() {
-            super(YufkaSimulator.FoodNames.Doener);
-            this.requires = [YufkaSimulator.IngredientNames.Fladenbrot, YufkaSimulator.IngredientNames.Salat, YufkaSimulator.IngredientNames.Zwiebel, YufkaSimulator.IngredientNames.Fleisch, YufkaSimulator.IngredientNames.Sauce];
+            super(veganDoenerSimulator.FoodNames.Doener);
+            this.requires = [veganDoenerSimulator.IngredientNames.Fladenbrot, veganDoenerSimulator.IngredientNames.Salat, veganDoenerSimulator.IngredientNames.Zwiebel, veganDoenerSimulator.IngredientNames.Fleisch, veganDoenerSimulator.IngredientNames.Sauce];
         }
     }
-    YufkaSimulator.Doener = Doener;
-})(YufkaSimulator || (YufkaSimulator = {}));
+    veganDoenerSimulator.Doener = Doener;
+})(veganDoenerSimulator || (veganDoenerSimulator = {}));
 //# sourceMappingURL=Doener.js.map
