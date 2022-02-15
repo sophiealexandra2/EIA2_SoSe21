@@ -1,4 +1,4 @@
-namespace YufkaSimulator {
+namespace veganDoenerSimulator {
     export class Entity {
         public position: Vector2;
 
